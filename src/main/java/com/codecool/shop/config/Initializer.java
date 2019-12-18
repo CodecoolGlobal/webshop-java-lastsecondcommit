@@ -24,8 +24,8 @@ public class Initializer implements ServletContextListener {
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
 
         //setting up a new supplier
-        Supplier superFlowers = new Supplier("Super Flowers kft", "Small family business with quality plants");
-        supplierDataStore.add(superFlowers);
+        Supplier superFlower = new Supplier("Super Flowers kft", "Small family business with quality plants");
+        supplierDataStore.add(superFlower);
         Supplier kingOfCactus = new Supplier("King Of Cactus kft", "Main priority is cacti, but also sell other plants");
         supplierDataStore.add(kingOfCactus);
         Supplier bigFlowerBusiness = new Supplier("Big Flower Business Zrt", "Industry leader big company");
@@ -51,11 +51,11 @@ public class Initializer implements ServletContextListener {
         productDataStore.add(new Product("Mandarin Cactus", 20, "USD", "Pair of mandarin cacti. They together almost make an orange.", cactus, kingOfCactus));
         productDataStore.add(new Product("Pink Mr. Lincoln", 5, "USD", "Pink rose.", flower, superFlower));
         productDataStore.add(new Product("Colourful bunch Daisies", 15, "USD", "Spring flower.", flower, superFlower));
-        productDataStore.add(new Product("Red Pat Austin", 10, "USD", "Red rose. Even Zorro would be jealous.", flower, superFlowers));
-        productDataStore.add(new Product("Pink Leucadendron", 10, "USD", "Purple?.", flower, superFlowers));
-        productDataStore.add(new Product("Yellow Daffodil", 10, "USD", "Yellow flower!", flower, superFlowers));
-        productDataStore.add(new Product("White Lily", 5, "USD", "Snow White.", flower, superFlowers));
-        productDataStore.add(new Product("Pink Cinquefoil", 20, "USD", "Three head flower. If you ever try to cut one head off, it will grow back three instead! But only after it cuts your hair.", flower, superFlowers));
+        productDataStore.add(new Product("Red Pat Austin", 10, "USD", "Red rose. Even Zorro would be jealous.", flower, superFlower));
+        productDataStore.add(new Product("Pink Leucadendron", 10, "USD", "Purple?.", flower, superFlower));
+        productDataStore.add(new Product("Yellow Daffodil", 10, "USD", "Yellow flower!", flower, superFlower));
+        productDataStore.add(new Product("White Lily", 5, "USD", "Snow White.", flower, superFlower));
+        productDataStore.add(new Product("Pink Cinquefoil", 20, "USD", "Three head flower. If you ever try to cut one head off, it will grow back three instead! But only after it cuts your hair.", flower, superFlower));
         productDataStore.add(new Product("Green Leaflet", 15, "USD", "The greenest of them all", littlePlant, bigFlowerBusiness));
         productDataStore.add(new Product("Home Plant", 15, "USD", "This is the best choice if you, like most people forgets to water the plant time to time. It can live for a month without watering!", littlePlant, bigFlowerBusiness));
         productDataStore.add(new Product("Elephant Grass", 20, "USD", "Very nice for a bedroom.", littlePlant, bigFlowerBusiness));
