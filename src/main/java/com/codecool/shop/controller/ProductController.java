@@ -5,6 +5,7 @@ import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -15,6 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 //import java.util.HashMap;
 //import java.util.Map;
 
@@ -27,12 +30,32 @@ public class ProductController extends HttpServlet {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
 
-        ProductCategory defaultProductCategory = productCategoryDataStore.find(DEFAULT_CATEGORY_INDEX);
-
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        context.setVariable("category", defaultProductCategory);
-        context.setVariable("products", productDataStore.getBy(defaultProductCategory));
+
+        List<ProductCategory> allProductCategory = productCategoryDataStore.getAll();
+        ProductCategory defaultProductCategory = productCategoryDataStore.find(DEFAULT_CATEGORY_INDEX);
+
+        String[] selectedCategoryIds = req.getParameterValues("categoryId");
+        List<ProductCategory> selectedCategories = new ArrayList<>();
+        List<Product> selectedProducts = new ArrayList<>();
+
+        if (selectedCategoryIds == null) {
+            selectedCategories.add(defaultProductCategory);
+            selectedProducts.add(productDataStore.find(DEFAULT_CATEGORY_INDEX));
+        } else {
+            for (String id : selectedCategoryIds) {
+                int categoryId = Integer.valueOf(id);
+                ProductCategory selectedCategory = productCategoryDataStore.find(categoryId);
+                selectedCategories.add(selectedCategory);
+                selectedProducts.add(productDataStore.find(categoryId));
+            }
+        }
+
+        context.setVariable("products", selectedProducts);
+        context.setVariable("selectedCategories", selectedCategories);
+        context.setVariable("allCategories", allProductCategory);
+
         // // Alternative setting of the template context
         // Map<String, Object> params = new HashMap<>();
         // params.put("category", productCategoryDataStore.find(1));
