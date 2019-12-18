@@ -42,13 +42,13 @@ public class ProductController extends HttpServlet {
 
         if (selectedCategoryIds == null) {
             selectedCategories.add(defaultProductCategory);
-            selectedProducts.add(productDataStore.find(DEFAULT_CATEGORY_INDEX));
+            selectedProducts = productDataStore.getBy(defaultProductCategory);
         } else {
             for (String id : selectedCategoryIds) {
                 int categoryId = Integer.valueOf(id);
                 ProductCategory selectedCategory = productCategoryDataStore.find(categoryId);
                 selectedCategories.add(selectedCategory);
-                selectedProducts.add(productDataStore.find(categoryId));
+                productDataStore.getBy(selectedCategory).stream().forEach(selectedProducts::add);
             }
         }
 
