@@ -20,7 +20,7 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends HttpServlet {
-    private int DEFAULT_CATEGORY_INDEX = 1;
+    private int DEFAULT_CATEGORY_INDEX = 4;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
