@@ -2,11 +2,14 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.model.Supplier;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -18,50 +21,36 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-//import java.util.HashMap;
-//import java.util.Map;
 
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends HttpServlet {
-    private int DEFAULT_CATEGORY_INDEX = 1;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int DEFAULT_CATEGORY_INDEX = 1;
+
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
-        List<ProductCategory> allProductCategory = productCategoryDataStore.getAll();
+        List<ProductCategory> allCategory = productCategoryDataStore.getAll();
+        List<Supplier> allSupplier = supplierDataStore.getAll();
         ProductCategory defaultProductCategory = productCategoryDataStore.find(DEFAULT_CATEGORY_INDEX);
-
-        String[] selectedCategoryIds = req.getParameterValues("categoryId");
         List<ProductCategory> selectedCategories = new ArrayList<>();
-        List<Product> selectedProducts = new ArrayList<>();
+        selectedCategories.add(defaultProductCategory);
+        List<Product> selectedProducts = productDataStore.getBy(defaultProductCategory);
 
-        if (selectedCategoryIds == null) {
-            selectedCategories.add(defaultProductCategory);
-            selectedProducts = productDataStore.getBy(defaultProductCategory);
-        } else {
-            for (String id : selectedCategoryIds) {
-                int categoryId = Integer.valueOf(id);
-                ProductCategory selectedCategory = productCategoryDataStore.find(categoryId);
-                selectedCategories.add(selectedCategory);
-                productDataStore.getBy(selectedCategory).stream().forEach(selectedProducts::add);
-            }
-        }
-
+        context.setVariable("allCategories", allCategory);
+        context.setVariable("allSuppliers", allSupplier);
         context.setVariable("products", selectedProducts);
         context.setVariable("selectedCategories", selectedCategories);
-        context.setVariable("allCategories", allProductCategory);
+        context.setVariable("selectedSuppliers", new ArrayList<>());
 
-        // // Alternative setting of the template context
-        // Map<String, Object> params = new HashMap<>();
-        // params.put("category", productCategoryDataStore.find(1));
-        // params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
-        // context.setVariables(params);
         engine.process("product/index.html", context, resp.getWriter());
     }
 
 }
+
