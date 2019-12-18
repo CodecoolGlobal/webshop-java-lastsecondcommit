@@ -24,11 +24,11 @@ public class Initializer implements ServletContextListener {
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
 
         //setting up a new supplier
-        Supplier superFlower = new Supplier("Super Flowers kft", "Small family business with quality plants");
+        Supplier superFlower = new Supplier("Super Flowers Kft.", "Small family business with quality plants");
         supplierDataStore.add(superFlower);
-        Supplier kingOfCactus = new Supplier("King Of Cactus kft", "Main priority is cacti, but also sell other plants");
+        Supplier kingOfCactus = new Supplier("King Of Cactus Kft.", "Main priority is cacti, but also sell other plants");
         supplierDataStore.add(kingOfCactus);
-        Supplier bigFlowerBusiness = new Supplier("Big Flower Business Zrt", "Industry leader big company");
+        Supplier bigFlowerBusiness = new Supplier("Big Flower Business Zrt.", "Industry leader big company");
         supplierDataStore.add(bigFlowerBusiness);
 
         //setting up a new product category
