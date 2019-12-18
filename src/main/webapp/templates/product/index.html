@@ -28,7 +28,7 @@
     <!-- End of Bootstrap components -->
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
-    <script th:src="|/static/js/reload_filter.js|"></script>
+    <script th:src="|/static/js/reload_filter.js|" defer></script>
 </head>
 
 <body>
@@ -41,14 +41,23 @@
     <div class="row">
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 filters-container">
             <h3>Categories</h3>
-            <form id="filter" method="get" action="/" th:each="category: ${allCategories}">
-                <input type="checkbox" name="categoryId" th:attr="value=${category.id}" th:text="${category.name}"
-                       th:checked="${selectedCategories.contains(category)}"><br>
+            <form id="filter" method="get" action="/">
+                <div th:each="category: ${allCategories}">
+                    <input type="checkbox" name="categoryId" th:attr="value=${category.id}" th:text="${category.name}"
+                           th:checked="${selectedCategories.contains(category)}">
+                </div>
             </form>
         </div>
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 container">
-            <div class="card" th:each="category, iterStat : ${selectedCategories}">
-                <strong th:text="${iterStat.index}==0 ? ${category.name} : ', ' + ${category.name}">Category Title</strong>
+            <div class="card">
+                <div>
+                    <h5>Filter conditions</h5>
+                    <strong th:text="${iterStat.index}==0 ? ${category.name} : ', ' + ${category.name}"
+                            th:each="category, iterStat : ${selectedCategories}">Category Title</strong>
+                </div>
+                <div>
+
+                </div>
             </div>
 
             <div id="products" class="row">
