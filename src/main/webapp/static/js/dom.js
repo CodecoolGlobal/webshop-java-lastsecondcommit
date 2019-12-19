@@ -6,9 +6,9 @@ export let dom = {
         dom.addEventListenerToFilterCheckbox();
         dom.addEventListenerToCartButtons();
     },
+
     addEventListenerToCartButtons: function () {
         let addToCartButtons = document.querySelectorAll(".btn-success");
-
 
         addToCartButtons.forEach((button) => {
             let productId = button.dataset.productId;
@@ -17,11 +17,13 @@ export let dom = {
             });
         });
     },
+
     increaseNumOfItemsInCart: function () {
         let itemsInCart = parseInt(document.querySelector("#cart-info").innerHTML);
         itemsInCart += 1;
         document.querySelector("#cart-info").innerHTML = itemsInCart.toString();
     },
+
     addEventListenerToFilterCheckbox :function () {
 
         let filterForm = document.querySelector('#filter');
