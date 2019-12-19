@@ -1,77 +1,37 @@
 package com.codecool.shop.controller;
 
-import com.codecool.shop.config.TemplateEngineUtil;
-import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.ShoppingCartDao;
-import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
-import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
-import com.codecool.shop.dao.implementation.SupplierDaoMem;
-import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
-import com.codecool.shop.model.ShoppingCart;
 import com.codecool.shop.model.Supplier;
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.WebContext;
-
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.*;
 
 @WebServlet(urlPatterns = {"/search"})
-public class ProductSearcherController extends HttpServlet {
+public class ProductSearcherController extends FirstPageController {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int CART_ID = 1;
+     protected void broadenDoGet(HttpServletRequest req) {
 
-        ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+        String[] selectedCategoryIds = Optional.ofNullable(req.getParameterValues("categoryId")).orElseGet(() -> new String[0]);
+        String[] selectedSupplierIds = Optional.ofNullable(req.getParameterValues("supplierId")).orElseGet(() -> new String[0]);
 
-        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
-        WebContext context = new WebContext(req, resp, req.getServletContext());
-
-        String[] selectedCategoryIds = req.getParameterValues("categoryId") != null ? req.getParameterValues("categoryId") : new String[0];
-       String[] selectedSupplierIds = req.getParameterValues("supplierId") != null ? req.getParameterValues("supplierId") : new String[0];
-
-        ShoppingCart shoppingCart = shoppingCartDataStore.find(CART_ID);
-        List<ProductCategory> selectedCategories = new ArrayList<>();
-        List<Supplier> selectedSuppliers = new ArrayList<>();
-        List<ProductCategory> allCategory = productCategoryDataStore.getAll();
-        List<Supplier> allSupplier = supplierDataStore.getAll();
-        List<Product> selectedProducts = new ArrayList<>();
+        selectedSuppliers = new ArrayList<>();
+        selectedProducts = new ArrayList<>();
+        selectedCategories = new ArrayList<>();
 
         for (String id : selectedSupplierIds) {
-            int supplierId = Integer.valueOf(id);
+            int supplierId = Integer.parseInt(id);
             Supplier supplier = supplierDataStore.find(supplierId);
             selectedSuppliers.add(supplier);
         }
 
         for (String id : selectedCategoryIds) {
-            int categoryId = Integer.valueOf(id);
+            int categoryId = Integer.parseInt(id);
             ProductCategory selectedCategory = productCategoryDataStore.find(categoryId);
             selectedCategories.add(selectedCategory);
             productDataStore.getBy(selectedCategory).stream().filter(x -> selectedSuppliers.contains(x.getSupplier())).forEach(selectedProducts::add);
         }
 
-         Map<String, Object> params = new HashMap<>();
-         params.put("allCategories", allCategory);
-         params.put("allSuppliers", allSupplier);
-         params.put("products", selectedProducts);
-         params.put("selectedCategories", selectedCategories);
-         params.put("selectedSuppliers", selectedSuppliers);
-         params.put("shoppingCart", shoppingCart);
-         context.setVariables(params);
-
-        engine.process("product/index.html", context, resp.getWriter());
     }
 
 
