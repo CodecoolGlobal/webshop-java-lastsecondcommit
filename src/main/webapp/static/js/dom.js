@@ -22,11 +22,14 @@ export let dom = {
         });
     },
     increaseNumOfItemsInCart: function () {
-        //let itemsInCart = parseInt(document.querySelector("nav #cart-info"));
-        let itemsInCart = 0;
+        console.log("in callback");
+        let itemsInCart = parseInt(document.querySelector("#cart-info").innerHTML);
+        console.log("itemsInCart:");
+        console.log(itemsInCart);
         itemsInCart += 1;
         console.log(itemsInCart);
-        //document.querySelector("nav #cart-info").innerHTML = itemsInCart.toString();
+
+        document.querySelector("#cart-info").innerHTML = itemsInCart.toString();
     },
     addEventListenerToFilterCheckbox :function () {
 

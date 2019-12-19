@@ -1,7 +1,9 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
+import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ShoppingCart;
 import com.google.gson.*;
@@ -34,6 +36,9 @@ public class CartController extends HttpServlet {
         System.out.println("work");
 
         ProductDao productDataStore = ProductDaoMem.getInstance();
+        ShoppingCartDao cartDataStore = ShoppingCartDaoMem.getInstance();
+
+        ShoppingCart shoppingCart = cartDataStore.find(1);
 
         WebContext context = new WebContext(req, resp, req.getServletContext());
         HttpSession session = req.getSession();
@@ -63,14 +68,14 @@ public class CartController extends HttpServlet {
 
         System.out.println(data.getClass());
 
-        final ShoppingCart shoppingCart = Optional
+        /*final ShoppingCart shoppingCart = Optional
                 .ofNullable(session.getAttribute("cart"))
                 .map(ShoppingCart.class::cast)
                 .orElseGet(() -> {
                     ShoppingCart cart = new ShoppingCart();
                     session.setAttribute("cart", cart);
                     return cart;
-                });
+                });*/
         // TODO: try/catch  (client error)
         Product product = productDataStore.find(Integer.parseInt(id));
         shoppingCart.add(product);
