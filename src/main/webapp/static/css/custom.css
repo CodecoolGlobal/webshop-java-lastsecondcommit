@@ -60,3 +60,11 @@
 {
     margin: 0 0 11px;
 }
+
+#products {
+    padding: 2% 0;
+}
+
+.product {
+    padding: 2%;
+}

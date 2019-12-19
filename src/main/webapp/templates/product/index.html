@@ -40,31 +40,40 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 filters-container">
-            <h3>Categories</h3>
-            <form id="filter" method="get" action="/">
+            <form id="filter" method="get" action="/search">
+                <h3>Categories</h3>
                 <div th:each="category: ${allCategories}">
                     <input type="checkbox" name="categoryId" th:attr="value=${category.id}" th:text="${category.name}"
                            th:checked="${selectedCategories.contains(category)}">
+                </div>
+                <h3>Suppliers</h3>
+                <div th:each="supplier: ${allSuppliers}">
+                    <input type="checkbox" name="supplierId" th:attr="value=${supplier.id}" th:text="${supplier.name}"
+                           th:checked="${selectedSuppliers.contains(supplier)}">
                 </div>
             </form>
         </div>
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 container">
             <div class="card">
-                <div>
-                    <h5>Filter conditions</h5>
-                    <strong th:text="${iterStat.index}==0 ? ${category.name} : ', ' + ${category.name}"
-                            th:each="category, iterStat : ${selectedCategories}">Category Title</strong>
-                </div>
-                <div>
+                <div class="card-body">
+                    <div class="card-text">Category:
+                        <strong th:text="${iterStat.index}==0 ? ${category.name} : ', ' + ${category.name}"
+                                th:each="category, iterStat : ${selectedCategories}">Category Title</strong>
+                    </div>
+                    <div class="card-text">Supplier:
+                        <strong th:text="${iterStat.index}==0 ? ${supplier.name} : ', ' + ${supplier.name}"
+                                th:each="supplier, iterStat : ${selectedSuppliers}">Category Title</strong>
+                    </div>
+                    <div class="card-text" th:text="${products.size()} + ' products'">Product number</div>
 
                 </div>
             </div>
 
             <div id="products" class="row">
-                <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
+                <div class="col col-sm-12 col-md-6 col-lg-4 product" th:each="prod,iterStat : ${products}">
                     <div class="card">
                         <img class="" src="http://placehold.it/400x250/000/fff"
-                             th:attr="src='/static/img/'+ ${prod.id} + '.jpg'" alt="" height="300"/>
+                             th:attr="src='/static/img/'+ ${prod.id} + '.jpg'" alt="" height="250"/>
                         <div class="card-header">
                             <h4 class="card-title" th:text="${prod.name}">Product name</h4>
                             <p class="card-text" th:text="${prod.description}">Product description... </p>
