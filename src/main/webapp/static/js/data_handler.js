@@ -13,7 +13,6 @@ export let dataHandler = {
     },
     _api_post: function (url, data, callback) {
 
-        console.log(JSON.stringify(data));
 
         fetch(url, {
             method: 'POST',
@@ -24,15 +23,12 @@ export let dataHandler = {
             },
             body: JSON.stringify(data)
         })
-            .then(response => response.json())  // parse the response as JSON
-    .then(json_response => callback(json_response));  // Call the `callback` with the returned object
+    .then(callback);  // Call the `callback` with the returned object
     },
 
     addToCart : function (id, callback) {
 
         let data = {'product_id': id};
-        this._api_post(`/api/cart`, data, (response) => {
-            callback(response)
-        })
+        this._api_post(`/api/cart`, data, callback);
     }
 };
