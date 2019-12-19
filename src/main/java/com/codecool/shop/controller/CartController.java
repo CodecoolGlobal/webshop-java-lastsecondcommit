@@ -23,7 +23,6 @@ import java.util.Optional;
 @WebServlet(urlPatterns = {"/api/cart"})
 public class CartController extends HttpServlet {
 
-
     public static final String ID_NAME = "product_id";
 
     @Override
@@ -33,15 +32,10 @@ public class CartController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        System.out.println("work");
-
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ShoppingCartDao cartDataStore = ShoppingCartDaoMem.getInstance();
 
         ShoppingCart shoppingCart = cartDataStore.find(1);
-
-        WebContext context = new WebContext(req, resp, req.getServletContext());
-        HttpSession session = req.getSession();
 
         StringBuilder buffer = new StringBuilder();
         BufferedReader reader = req.getReader();
@@ -64,22 +58,9 @@ public class CartController extends HttpServlet {
         } else {
             // TODO client error
         }
-        System.out.println(id);
-
-        System.out.println(data.getClass());
-
-        /*final ShoppingCart shoppingCart = Optional
-                .ofNullable(session.getAttribute("cart"))
-                .map(ShoppingCart.class::cast)
-                .orElseGet(() -> {
-                    ShoppingCart cart = new ShoppingCart();
-                    session.setAttribute("cart", cart);
-                    return cart;
-                });*/
         // TODO: try/catch  (client error)
         Product product = productDataStore.find(Integer.parseInt(id));
         shoppingCart.add(product);
-        System.out.println("working");
     }
 }
 
