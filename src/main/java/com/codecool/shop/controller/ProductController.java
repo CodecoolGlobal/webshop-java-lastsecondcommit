@@ -18,8 +18,6 @@ public class ProductController extends FirstPageController {
         selectedCategories.add(defaultProductCategory);
         selectedProducts = productDataStore.getBy(defaultProductCategory);
         selectedSuppliers = supplierDataStore.getAll();
-
-
     }
 
 }
