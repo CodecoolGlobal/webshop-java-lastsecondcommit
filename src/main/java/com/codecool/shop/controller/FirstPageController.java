@@ -21,22 +21,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class FirstPageController extends HttpServlet {
-    protected int CART_ID = 1;
-
+    private int CART_ID = 1;
     protected ProductDao productDataStore = ProductDaoMem.getInstance();
     protected ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
     protected SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
-
     private ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
     private ShoppingCart shoppingCart = shoppingCartDataStore.find(CART_ID);
-
     private List<ProductCategory> allCategory = productCategoryDataStore.getAll();
     private List<Supplier> allSupplier = supplierDataStore.getAll();
-
     protected List<ProductCategory> selectedCategories;
     protected List<Product> selectedProducts;
     protected List<Supplier> selectedSuppliers;
