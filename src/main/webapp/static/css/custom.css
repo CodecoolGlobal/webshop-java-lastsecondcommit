@@ -123,6 +123,10 @@ body {
     object-fit: contain;
 }
 
+.container {
+    min-height: 290px;
+}
+
 .cart-table {
     background: white;
     font-size: 14px;
