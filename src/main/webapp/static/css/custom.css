@@ -92,7 +92,6 @@ body {
     margin-bottom: 20px;
 }
 
-
 #header-pic {
     width: 100%;
 }
@@ -105,5 +104,12 @@ body {
     height: 30px;
     object-fit: contain;
     padding: 0 5px;
+}
 
+.filters-container {
+    margin-bottom: 10px;
+}
+
+.filter {
+    margin-bottom: 20px;
 }
