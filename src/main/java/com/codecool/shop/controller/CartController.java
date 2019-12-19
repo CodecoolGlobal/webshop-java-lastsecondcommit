@@ -42,6 +42,7 @@ public class CartController extends HttpServlet {
 
         Product product = productDataStore.find(Integer.parseInt(req.getParameterValues("prod-id")[0]));
         shoppingCart.add(product);
+        System.out.println(shoppingCart.getCart());
     }
 }
 
