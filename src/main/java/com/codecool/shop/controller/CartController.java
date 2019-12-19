@@ -21,7 +21,6 @@ public class CartController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("Cart works");;
     }
 
     @Override
@@ -43,7 +42,6 @@ public class CartController extends HttpServlet {
 
         Product product = productDataStore.find(Integer.parseInt(req.getParameterValues("prod-id")[0]));
         shoppingCart.add(product);
-        System.out.println(shoppingCart.getCart());
     }
 }
 
