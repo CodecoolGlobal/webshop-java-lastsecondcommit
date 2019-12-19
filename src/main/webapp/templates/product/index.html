@@ -39,22 +39,22 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 filters-container">
+        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 filters-container">
             <form id="filter" method="get" action="/search">
-                <h3>Categories</h3>
+                <h4>Categories</h4>
                 <div th:each="category: ${allCategories}">
                     <input type="checkbox" name="categoryId" th:attr="value=${category.id}" th:text="${category.name}"
                            th:checked="${selectedCategories.contains(category)}">
                 </div>
-                <h3>Suppliers</h3>
+                <h4>Suppliers</h4>
                 <div th:each="supplier: ${allSuppliers}">
                     <input type="checkbox" name="supplierId" th:attr="value=${supplier.id}" th:text="${supplier.name}"
                            th:checked="${selectedSuppliers.contains(supplier)}">
                 </div>
             </form>
         </div>
-        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 container">
-            <div class="card">
+        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 container">
+            <div class="card shadow-sm">
                 <div class="card-body">
                     <div class="card-text">Category:
                         <strong th:text="${iterStat.index}==0 ? ${category.name} : ', ' + ${category.name}"
@@ -71,9 +71,9 @@
 
             <div id="products" class="row">
                 <div class="col col-sm-12 col-md-6 col-lg-4 product" th:each="prod,iterStat : ${products}">
-                    <div class="card">
+                    <div class="card product-card shadow-sm">
                         <img class="" src="http://placehold.it/400x250/000/fff"
-                             th:attr="src='/static/img/'+ ${prod.id} + '.jpg'" alt="" height="250"/>
+                             th:attr="src='/static/img/'+ ${prod.id} + '.jpg'" alt=""/>
                         <div class="card-header">
                             <h4 class="card-title" th:text="${prod.name}">Product name</h4>
                             <p class="card-text" th:text="${prod.description}">Product description... </p>

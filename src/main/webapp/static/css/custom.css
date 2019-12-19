@@ -68,3 +68,20 @@
 .product {
     padding: 2%;
 }
+
+body {
+    font-size: 14px;
+}
+
+.product-card {
+    height: 550px;
+}
+
+.product-card img {
+    height: 260px;
+}
+
+.product-card .card-header {
+    height: 220px;
+}
+
