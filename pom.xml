@@ -14,7 +14,10 @@
       <jetty.version>9.4.12.v20180830</jetty.version>
     </properties>
 
+
+
     <build>
+
         <finalName>codecoolshop</finalName>
         <sourceDirectory>src/main/java</sourceDirectory>
 
@@ -69,5 +72,18 @@
             <artifactId>thymeleaf</artifactId>
             <version>3.0.9.RELEASE</version>
         </dependency>
+
+
+
+
+        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>1.7.1</version>
+        </dependency>
+
+
+
     </dependencies>
 </project>

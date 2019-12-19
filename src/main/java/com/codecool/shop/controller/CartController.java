@@ -4,6 +4,7 @@ import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ShoppingCart;
+import com.google.gson.*;
 import org.thymeleaf.context.WebContext;
 
 import javax.servlet.ServletException;
@@ -14,11 +15,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Optional;
 
 @WebServlet(urlPatterns = {"/api/cart"})
 public class CartController extends HttpServlet {
 
+
+    public static final String ID_NAME = "product_id";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -42,6 +46,20 @@ public class CartController extends HttpServlet {
         }
 
         String data = buffer.toString();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement jsonElement = jsonParser.parse(data);
+        String id = "invalid";
+        if (jsonElement.isJsonObject()) {
+            JsonObject partialProduct = jsonElement.getAsJsonObject();
+            if (partialProduct.has(ID_NAME)) {
+                id = partialProduct.get(ID_NAME).getAsString();
+            } else {
+                // TODO client error
+            }
+        } else {
+            // TODO client error
+        }
+        System.out.println(id);
 
         System.out.println(data.getClass());
 
@@ -53,8 +71,8 @@ public class CartController extends HttpServlet {
                     session.setAttribute("cart", cart);
                     return cart;
                 });
-
-        Product product = productDataStore.find(Integer.parseInt(data));
+        // TODO: try/catch  (client error)
+        Product product = productDataStore.find(Integer.parseInt(id));
         shoppingCart.add(product);
         System.out.println("working");
     }
