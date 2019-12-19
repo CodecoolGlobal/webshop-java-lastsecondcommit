@@ -100,10 +100,10 @@ body {
     color: #53a053;
 }
 
-#shopping-cart {
+#shopping-cart-img {
     height: 30px;
     object-fit: contain;
-    padding: 0 5px;
+    padding: 0 10px;
 }
 
 .filters-container {

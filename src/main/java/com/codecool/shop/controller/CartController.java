@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -26,10 +27,12 @@ public class CartController extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-
-        Map<Product, Long> productsInCart = shoppingCart.getProducts().stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+        List<Product> products = shoppingCart.getProducts();
+        int numberOfProducts = products.size();
+        Map<Product, Long> productsInCart = products.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
 
         context.setVariable("productsInCart", productsInCart);
+        context.setVariable("numberOfProducts", numberOfProducts);
 
         engine.process("product/cart.html", context, resp.getWriter());
 

@@ -43,12 +43,12 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/cart">My Cart</a>
+                    <a class="nav-link" href="/cart">Shopping Cart</a>
                 </li>
             </ul>
             <span class="navbar-text">Products in your cart: <strong id="cart-info"
                                                                      th:text="${shoppingCart.getProducts().size()}"></strong><img
-                    id="shopping-cart" th:src="|static/img/extra_items/shopping_cart.png|" alt="Shopping cart icon">
+                    id="shopping-cart-img" th:src="|static/img/extra_items/shopping_cart.png|" alt="Shopping cart icon">
             </span>
         </div>
     </nav>
