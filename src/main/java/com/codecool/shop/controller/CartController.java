@@ -47,11 +47,11 @@ public class CartController extends HttpServlet {
         String data = buffer.toString();
         JsonParser jsonParser = new JsonParser();
         JsonElement jsonElement = jsonParser.parse(data);
-        String id = "invalid";
+        String productId = "invalid";
         if (jsonElement.isJsonObject()) {
             JsonObject partialProduct = jsonElement.getAsJsonObject();
             if (partialProduct.has(ID_NAME)) {
-                id = partialProduct.get(ID_NAME).getAsString();
+                productId = partialProduct.get(ID_NAME).getAsString();
             } else {
                 // TODO client error
             }
@@ -59,7 +59,7 @@ public class CartController extends HttpServlet {
             // TODO client error
         }
         // TODO: try/catch  (client error)
-        Product product = productDataStore.find(Integer.parseInt(id));
+        Product product = productDataStore.find(Integer.parseInt(productId));
         shoppingCart.add(product);
     }
 }
