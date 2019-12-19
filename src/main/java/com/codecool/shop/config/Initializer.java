@@ -36,7 +36,7 @@ public class Initializer implements ServletContextListener {
         productCategoryDataStore.add(cactus);
         ProductCategory flower = new ProductCategory("Flower", "Plant", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.");
         productCategoryDataStore.add(flower);
-        ProductCategory littlePlant = new ProductCategory("Little_Plant", "Plant", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.");
+        ProductCategory littlePlant = new ProductCategory("Little plant", "Plant", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.");
         productCategoryDataStore.add(littlePlant);
         ProductCategory palm = new ProductCategory("Palm", "Plant", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.");
         productCategoryDataStore.add(palm);
