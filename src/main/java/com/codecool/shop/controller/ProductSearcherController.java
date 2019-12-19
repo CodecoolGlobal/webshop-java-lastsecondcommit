@@ -3,12 +3,15 @@ package com.codecool.shop.controller;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
+import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.model.ShoppingCart;
 import com.codecool.shop.model.Supplier;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -19,17 +22,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @WebServlet(urlPatterns = {"/search"})
-public class ProductSearcher extends HttpServlet {
+public class ProductSearcherController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int CART_ID = 1;
 
+        ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
@@ -38,8 +40,9 @@ public class ProductSearcher extends HttpServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
         String[] selectedCategoryIds = req.getParameterValues("categoryId") != null ? req.getParameterValues("categoryId") : new String[0];
-        String[] selectedSupplierIds = req.getParameterValues("supplierId") != null ? req.getParameterValues("supplierId") : new String[0];
+       String[] selectedSupplierIds = req.getParameterValues("supplierId") != null ? req.getParameterValues("supplierId") : new String[0];
 
+        ShoppingCart shoppingCart = shoppingCartDataStore.find(CART_ID);
         List<ProductCategory> selectedCategories = new ArrayList<>();
         List<Supplier> selectedSuppliers = new ArrayList<>();
         List<ProductCategory> allCategory = productCategoryDataStore.getAll();
@@ -65,6 +68,7 @@ public class ProductSearcher extends HttpServlet {
          params.put("products", selectedProducts);
          params.put("selectedCategories", selectedCategories);
          params.put("selectedSuppliers", selectedSuppliers);
+         params.put("shoppingCart", shoppingCart);
          context.setVariables(params);
 
         engine.process("product/index.html", context, resp.getWriter());

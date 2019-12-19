@@ -2,13 +2,16 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.model.ShoppingCart;
 import com.codecool.shop.model.Supplier;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -27,8 +30,10 @@ public class ProductController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int DEFAULT_CATEGORY_INDEX = 1;
+        int DEFAULT_CATEGORY_ID = 1;
+        int CART_ID = 1;
 
+        ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
@@ -36,9 +41,10 @@ public class ProductController extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
+        ShoppingCart shoppingCart = shoppingCartDataStore.find(CART_ID);
         List<ProductCategory> allCategory = productCategoryDataStore.getAll();
         List<Supplier> allSupplier = supplierDataStore.getAll();
-        ProductCategory defaultProductCategory = productCategoryDataStore.find(DEFAULT_CATEGORY_INDEX);
+        ProductCategory defaultProductCategory = productCategoryDataStore.find(DEFAULT_CATEGORY_ID);
         List<ProductCategory> selectedCategories = new ArrayList<>();
         selectedCategories.add(defaultProductCategory);
         List<Product> selectedProducts = productDataStore.getBy(defaultProductCategory);
@@ -48,6 +54,7 @@ public class ProductController extends HttpServlet {
         context.setVariable("products", selectedProducts);
         context.setVariable("selectedCategories", selectedCategories);
         context.setVariable("selectedSuppliers", supplierDataStore.getAll());
+        context.setVariable("shoppingCart", shoppingCart);
 
         engine.process("product/index.html", context, resp.getWriter());
     }
