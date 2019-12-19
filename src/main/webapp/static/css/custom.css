@@ -78,7 +78,7 @@ body {
     height: 550px;
 }
 
-.product-card img {
+.product-card-img {
     height: 250px;
     object-fit: contain;
 
@@ -116,4 +116,15 @@ body {
 
 .filter-conditions strong {
     color: #53a053;
+}
+
+.image-in-cart {
+    height: 100px;
+    object-fit: contain;
+}
+
+.cart-table {
+    background: white;
+    font-size: 14px;
+    text-align: center;
 }
