@@ -77,7 +77,7 @@
             </form>
         </div>
         <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 container">
-            <div class="card shadow-sm">
+            <div class="card filter-conditions shadow-sm">
                 <div class="card-body">
                     <div class="card-text">Category:
                         <strong th:text="${iterStat.index}==0 ? ${category.name} : ', ' + ${category.name}"
@@ -87,7 +87,7 @@
                         <strong th:text="${iterStat.index}==0 ? ${supplier.name} : ', ' + ${supplier.name}"
                                 th:each="supplier, iterStat : ${selectedSuppliers}">Category Title</strong>
                     </div>
-                    <div class="card-text" th:text="${products.size()} + ' products'">Product number</div>
+                    <div class="card-text" th:text="${products.size()} + ' products found'">Product number</div>
 
                 </div>
             </div>

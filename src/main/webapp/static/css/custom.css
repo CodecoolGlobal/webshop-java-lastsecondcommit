@@ -71,7 +71,7 @@
 
 body {
     font-size: 14px;
-    background:  #53a053;
+    background: #73a873;
 }
 
 .product-card {
@@ -112,4 +112,8 @@ body {
 
 .filter {
     margin-bottom: 20px;
+}
+
+.filter-conditions strong {
+    color: #53a053;
 }
