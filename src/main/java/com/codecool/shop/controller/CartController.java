@@ -12,10 +12,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebServlet(urlPatterns = {"/cart"})
+@WebServlet(urlPatterns = {"/api/cart"})
 public class CartController extends HttpServlet {
 
 
@@ -26,10 +27,23 @@ public class CartController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        System.out.println("work");
+
         ProductDao productDataStore = ProductDaoMem.getInstance();
 
         WebContext context = new WebContext(req, resp, req.getServletContext());
         HttpSession session = req.getSession();
+
+        StringBuilder buffer = new StringBuilder();
+        BufferedReader reader = req.getReader();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            buffer.append(line);
+        }
+
+        String data = buffer.toString();
+
+        System.out.println(data.getClass());
 
         final ShoppingCart shoppingCart = Optional
                 .ofNullable(session.getAttribute("cart"))
@@ -40,8 +54,9 @@ public class CartController extends HttpServlet {
                     return cart;
                 });
 
-        Product product = productDataStore.find(Integer.parseInt(req.getParameterValues("prod-id")[0]));
+        Product product = productDataStore.find(Integer.parseInt(data));
         shoppingCart.add(product);
+        System.out.println("working");
     }
 }
 

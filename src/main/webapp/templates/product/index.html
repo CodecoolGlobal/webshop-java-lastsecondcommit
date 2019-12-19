@@ -28,7 +28,7 @@
     <!-- End of Bootstrap components -->
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
-    <script th:src="|/static/js/reload_filter.js|" defer></script>
+    <script type="module"  th:src="|/static/js/main.js|" defer></script>
 </head>
 
 <body>
@@ -83,10 +83,8 @@
                                 <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                             </div>
                             <div class="card-text">
-                                <form method="post" action="/cart">
-                                    <input type="hidden" name="prod-id" th:value="${prod.id}">
-                                    <input class="btn btn-success" type="submit" value="Add to cart">
-                                </form>
+                                <input type="hidden" name="prod-id" th:value="${prod.id}">
+                                <input class="btn btn-success" type="submit" th:attr="data-product-id=${prod.id}" value="Add to cart">
                             </div>
                         </div>
                     </div>
