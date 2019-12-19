@@ -33,13 +33,28 @@
 
 <body>
 
-<div class="jumbotron text-center">
-    <h1>Codecool Shop</h1>
+<div class="header">
+    <img id="header-pic" th:src="|static/img/mycover.png|" alt="Plants header picture">
+    <nav class="navbar navbar-expand-lg navbar-light  bg-light shadow-sm">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">My Cart</a>
+                </li>
+            </ul>
+            <span class="navbar-text">
+      Navbar text with an inline element</span>
+        </div>
+    </nav>
 </div>
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 filters-container">
+        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-light filters-container">
             <form id="filter" method="get" action="/search">
                 <h4>Categories</h4>
                 <div th:each="category: ${allCategories}">
@@ -75,7 +90,7 @@
                         <img class="" src="http://placehold.it/400x250/000/fff"
                              th:attr="src='/static/img/'+ ${prod.id} + '.jpg'" alt=""/>
                         <div class="card-header">
-                            <h4 class="card-title" th:text="${prod.name}">Product name</h4>
+                            <h4 class="card-title product-name" th:text="${prod.name}">Product name</h4>
                             <p class="card-text" th:text="${prod.description}">Product description... </p>
                         </div>
                         <div class="card-body">

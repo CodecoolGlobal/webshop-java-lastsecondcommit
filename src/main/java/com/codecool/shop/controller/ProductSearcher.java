@@ -70,4 +70,6 @@ public class ProductSearcher extends HttpServlet {
         engine.process("product/index.html", context, resp.getWriter());
     }
 
+
+
 }

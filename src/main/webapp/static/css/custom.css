@@ -71,6 +71,7 @@
 
 body {
     font-size: 14px;
+    background:  #53a053;
 }
 
 .product-card {
@@ -78,10 +79,25 @@ body {
 }
 
 .product-card img {
-    height: 260px;
+    height: 250px;
+    object-fit: contain;
+
 }
 
 .product-card .card-header {
     height: 220px;
+}
+
+.header {
+    margin-bottom: 20px;
+}
+
+
+#header-pic {
+    width: 100%;
+}
+
+.product-name {
+    color: #53a053;
 }
 
