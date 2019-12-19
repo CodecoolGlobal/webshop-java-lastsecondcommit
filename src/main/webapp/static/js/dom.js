@@ -3,7 +3,6 @@ import { dataHandler } from "./data_handler.js";
 export let dom = {
 
     init: function () {
-        console.log("Hello");
         dom.addEventListenerToFilterCheckbox();
         dom.addEventListenerToCartButtons();
     },
@@ -13,22 +12,14 @@ export let dom = {
 
         addToCartButtons.forEach((button) => {
             let productId = button.dataset.productId;
-
-            console.log(productId);
-
             button.addEventListener('click', function () {
                 dataHandler.addToCart(productId, dom.increaseNumOfItemsInCart())
             });
         });
     },
     increaseNumOfItemsInCart: function () {
-        console.log("in callback");
         let itemsInCart = parseInt(document.querySelector("#cart-info").innerHTML);
-        console.log("itemsInCart:");
-        console.log(itemsInCart);
         itemsInCart += 1;
-        console.log(itemsInCart);
-
         document.querySelector("#cart-info").innerHTML = itemsInCart.toString();
     },
     addEventListenerToFilterCheckbox :function () {
