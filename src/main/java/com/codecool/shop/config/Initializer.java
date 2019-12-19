@@ -2,12 +2,15 @@ package com.codecool.shop.config;
 
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
+import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.model.ShoppingCart;
 import com.codecool.shop.model.Supplier;
 
 import javax.servlet.ServletContextEvent;
@@ -20,6 +23,7 @@ public class Initializer implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         ProductDao productDataStore = ProductDaoMem.getInstance();
+        ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
 
@@ -36,7 +40,7 @@ public class Initializer implements ServletContextListener {
         productCategoryDataStore.add(cactus);
         ProductCategory flower = new ProductCategory("Flower", "Plant", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.");
         productCategoryDataStore.add(flower);
-        ProductCategory littlePlant = new ProductCategory("Little_Plant", "Plant", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.");
+        ProductCategory littlePlant = new ProductCategory("Little plant", "Plant", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.");
         productCategoryDataStore.add(littlePlant);
         ProductCategory palm = new ProductCategory("Palm", "Plant", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.");
         productCategoryDataStore.add(palm);
@@ -70,5 +74,7 @@ public class Initializer implements ServletContextListener {
         productDataStore.add(new Product("Dracaenat", 25, "USD", "You may recognize it from cartoon network shows. It was often used as the hair of many iconic characters", palm, bigFlowerBusiness));
         productDataStore.add(new Product("Pygmy Date Palm", 120, "USD", "Maugli envies you if your choice fall upon thee.", palm, bigFlowerBusiness));
         productDataStore.add(new Product("Ficus", 35, "USD", "The crown of Caesar.", palm, bigFlowerBusiness));
+
+        shoppingCartDataStore.add(new ShoppingCart());
     }
 }

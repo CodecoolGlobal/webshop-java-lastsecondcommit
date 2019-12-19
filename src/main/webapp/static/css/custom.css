@@ -68,3 +68,48 @@
 .product {
     padding: 2%;
 }
+
+body {
+    font-size: 14px;
+    background:  #53a053;
+}
+
+.product-card {
+    height: 550px;
+}
+
+.product-card img {
+    height: 250px;
+    object-fit: contain;
+
+}
+
+.product-card .card-header {
+    height: 220px;
+}
+
+.header {
+    margin-bottom: 20px;
+}
+
+#header-pic {
+    width: 100%;
+}
+
+.product-name {
+    color: #53a053;
+}
+
+#shopping-cart {
+    height: 30px;
+    object-fit: contain;
+    padding: 0 5px;
+}
+
+.filters-container {
+    margin-bottom: 10px;
+}
+
+.filter {
+    margin-bottom: 20px;
+}
