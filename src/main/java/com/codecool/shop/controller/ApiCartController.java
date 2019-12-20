@@ -18,8 +18,10 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = {"/api/cart"})
 public class ApiCartController extends HttpServlet {
-
-    public static final String ID_NAME = "product_id";
+    private ProductDao productDataStore = ProductDaoMem.getInstance();
+    private ShoppingCartDao cartDataStore = ShoppingCartDaoMem.getInstance();
+    private static final String ID_NAME = "product_id";
+    private static final int CART_ID = 1;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,10 +30,7 @@ public class ApiCartController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ShoppingCartDao cartDataStore = ShoppingCartDaoMem.getInstance();
-
-        ShoppingCart shoppingCart = cartDataStore.find(1);
+        ShoppingCart shoppingCart = cartDataStore.find(CART_ID);
 
         StringBuilder buffer = new StringBuilder();
         BufferedReader reader = req.getReader();

@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 @WebServlet(urlPatterns = {"/cart"})
 public class CartController extends HttpServlet {
-    private int CART_ID = 1;
+    private  static final int CART_ID = 1;
     private ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
     private ShoppingCart shoppingCart = shoppingCartDataStore.find(CART_ID);
 
