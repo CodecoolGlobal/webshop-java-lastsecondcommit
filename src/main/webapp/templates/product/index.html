@@ -47,9 +47,9 @@
                     <a class="nav-link" href="/cart">Shopping Cart</a>
                 </li>
             </ul>
-            <span class="navbar-text">Products in your cart: <strong id="cart-info"
-                                                                     th:text="${shoppingCart.getProducts().size()}"></strong><img
-                    id="shopping-cart-img" th:src="|static/img/extra_items/shopping_cart.png|" alt="Shopping cart icon">
+            <span class="navbar-text">Products in your cart:
+                <strong id="cart-info" th:text="${shoppingCart.getProducts().size()}"></strong>
+                <img id="shopping-cart-img" th:src="|static/img/extra_items/shopping_cart.png|" alt="Shopping cart icon">
             </span>
         </div>
     </nav>
@@ -58,21 +58,25 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-light filters-container">
-            <form id="filter" method="get" action="/search">
+            <form id="filters" method="get" action="/search">
                 <div class="filter">
                     <h4>Categories</h4>
                     <div th:each="category: ${allCategories}">
+                        <label>
                         <input type="checkbox" name="categoryId" th:attr="value=${category.id}"
                                th:text="${category.name}"
                                th:checked="${selectedCategories.contains(category)}">
+                        </label>
                     </div>
                 </div>
                 <div class="filter">
                     <h4>Suppliers</h4>
                     <div th:each="supplier: ${allSuppliers}">
+                        <label>
                         <input type="checkbox" name="supplierId" th:attr="value=${supplier.id}"
                                th:text="${supplier.name}"
                                th:checked="${selectedSuppliers.contains(supplier)}">
+                        </label>
                     </div>
                 </div>
             </form>

@@ -26,7 +26,7 @@ export let dom = {
 
     addEventListenerToFilterCheckbox :function () {
 
-        let filterForm = document.querySelector('#filter');
+        let filterForm = document.querySelector('#filters');
         let checkboxes = filterForm.querySelectorAll("input");
 
         for (let checkbox of checkboxes) {

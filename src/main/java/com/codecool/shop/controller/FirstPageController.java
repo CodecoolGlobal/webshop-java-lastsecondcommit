@@ -25,16 +25,16 @@ import java.util.List;
 
 public abstract class FirstPageController extends HttpServlet {
     private int CART_ID = 1;
-    protected ProductDao productDataStore = ProductDaoMem.getInstance();
-    protected ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-    protected SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+    ProductDao productDataStore = ProductDaoMem.getInstance();
+    ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+    SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
     private ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
     private ShoppingCart shoppingCart = shoppingCartDataStore.find(CART_ID);
     private List<ProductCategory> allCategory = productCategoryDataStore.getAll();
     private List<Supplier> allSupplier = supplierDataStore.getAll();
-    protected List<ProductCategory> selectedCategories;
-    protected List<Product> selectedProducts;
-    protected List<Supplier> selectedSuppliers;
+    List<ProductCategory> selectedCategories;
+    List<Product> selectedProducts;
+    List<Supplier> selectedSuppliers;
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());

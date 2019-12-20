@@ -116,6 +116,10 @@ body {
     margin-bottom: 20px;
 }
 
+#filters label input {
+    margin-right: 5px;
+}
+
 .filter-conditions strong {
     font-size: 14px;
     color: #53a053;
