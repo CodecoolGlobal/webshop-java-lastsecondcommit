@@ -32,17 +32,29 @@ public class ApiCartController extends HttpServlet {
 
         ShoppingCart shoppingCart = cartDataStore.find(CART_ID);
 
+        StringBuilder buffer = getStringBuilder(req);
+        int productId = getProductId(buffer);
+        Product product = productDataStore.find(productId);
+        shoppingCart.add(product);
+    }
+
+    private StringBuilder getStringBuilder(HttpServletRequest req) throws IOException {
         StringBuilder buffer = new StringBuilder();
         BufferedReader reader = req.getReader();
         String line;
         while ((line = reader.readLine()) != null) {
             buffer.append(line);
         }
+        return buffer;
+    }
+
+    private int getProductId(StringBuilder buffer) {
 
         String data = buffer.toString();
         JsonParser jsonParser = new JsonParser();
         JsonElement jsonElement = jsonParser.parse(data);
         String productId = "invalid";
+
         if (jsonElement.isJsonObject()) {
             JsonObject partialProduct = jsonElement.getAsJsonObject();
             if (partialProduct.has(ID_NAME)) {
@@ -54,8 +66,7 @@ public class ApiCartController extends HttpServlet {
             // TODO client error
         }
         // TODO: try/catch  (client error)
-        Product product = productDataStore.find(Integer.parseInt(productId));
-        shoppingCart.add(product);
+        return Integer.parseInt(productId);
     }
 }
 
