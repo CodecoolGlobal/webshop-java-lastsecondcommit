@@ -27,13 +27,8 @@ public class CartController extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        List<Product> products = shoppingCart.getProducts();
-        int numberOfProducts = products.size();
-        Map<Product, Long> productsInCart = products.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
 
-        context.setVariable("productsInCart", productsInCart);
-        context.setVariable("numberOfProducts", numberOfProducts);
-
+        context.setVariable("shoppingCart", shoppingCart);
         engine.process("product/cart.html", context, resp.getWriter());
 
     }
