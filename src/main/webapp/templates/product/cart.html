@@ -28,6 +28,7 @@
     <!-- End of Bootstrap components -->
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Schoolbell&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -71,7 +72,7 @@
                     <tbody>
                     <tr th:each="instance, iterStat : ${ shoppingCart.getProductsStat() }">
                         <th scope="row" th:text="${iterStat.index + 1}">Index</th>
-                        <td scope="row" th:text="${instance.key.name}">Prod name</td>
+                        <td scope="row" class="product-name" th:text="${instance.key.name}">Prod name</td>
                         <td scope="row">
                             <span th:text="${instance.key.defaultPrice} + ' USD / '
                             + ${instance.key.defaultPrice * instance.value} + ' USD'">Prod price</span>

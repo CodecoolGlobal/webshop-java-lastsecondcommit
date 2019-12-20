@@ -1,63 +1,60 @@
 .glyphicon {
-    margin-right:5px;
+    margin-right: 5px;
 }
-.thumbnail
-{
+
+.thumbnail {
     margin-bottom: 20px;
     padding: 0px;
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
     border-radius: 0px;
 }
-.thumbnail img
-{
+
+.thumbnail img {
     margin-top: 10px;
 }
-.item.list-group-item
-{
+
+.item.list-group-item {
     float: none;
     width: 100%;
     background-color: #fff;
     margin-bottom: 10px;
 }
-.item.list-group-item:nth-of-type(odd):hover,.item.list-group-item:hover
-{
+
+.item.list-group-item:nth-of-type(odd):hover, .item.list-group-item:hover {
     background: #428bca;
 }
 
-.item.list-group-item .list-group-image
-{
+.item.list-group-item .list-group-image {
     margin-right: 10px;
 }
-.item.list-group-item .thumbnail
-{
+
+.item.list-group-item .thumbnail {
     margin-bottom: 0px;
 }
-.item.list-group-item .caption
-{
+
+.item.list-group-item .caption {
     padding: 9px 9px 0px 9px;
 }
-.item.list-group-item:nth-of-type(odd)
-{
+
+.item.list-group-item:nth-of-type(odd) {
     background: #eeeeee;
 }
 
-.item.list-group-item:before, .item.list-group-item:after
-{
+.item.list-group-item:before, .item.list-group-item:after {
     display: table;
     content: " ";
 }
 
-.item.list-group-item img
-{
+.item.list-group-item img {
     float: left;
 }
-.item.list-group-item:after
-{
+
+.item.list-group-item:after {
     clear: both;
 }
-.list-group-item-text
-{
+
+.list-group-item-text {
     margin: 0 0 11px;
 }
 
@@ -70,12 +67,13 @@
 }
 
 body {
-    font-size: 14px;
+    font-family: 'Schoolbell', cursive;
+    font-size: 18px;
     background: #73a873;
 }
 
 .product-card {
-    height: 550px;
+    height: 560px;
 }
 
 .product-card-img {
@@ -85,7 +83,11 @@ body {
 }
 
 .product-card .card-header {
-    height: 220px;
+    height: 230px;
+}
+
+.product-card .card-text {
+    font-size: 14px;
 }
 
 .header {
@@ -115,6 +117,7 @@ body {
 }
 
 .filter-conditions strong {
+    font-size: 14px;
     color: #53a053;
 }
 
@@ -128,7 +131,12 @@ body {
 }
 
 .cart-table {
+    vertical-align: center;
     background: white;
-    font-size: 14px;
+    font-size: 16px;
     text-align: center;
+}
+
+.cart-table .product-name {
+    font-weight: bold;
 }
