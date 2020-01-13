@@ -9,7 +9,6 @@ export let dom = {
     addEventListenerToCartButtons: function () {
         let addToCartButtons = document.querySelectorAll(".btn-success");
 
-
         addToCartButtons.forEach((button) => {
             let productId = button.dataset.productId;
             button.addEventListener('click', function () {
@@ -23,7 +22,6 @@ export let dom = {
         document.querySelector("#cart-info").innerHTML = itemsInCart.toString();
     },
     addEventListenerToFilterCheckbox :function () {
-
         let filterForm = document.querySelector('#filter');
         let checkboxes = filterForm.querySelectorAll("input");
 

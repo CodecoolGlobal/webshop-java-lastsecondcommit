@@ -24,7 +24,7 @@ import java.util.Optional;
 public class CartController extends HttpServlet {
 
 
-    public static final String ID_NAME = "product_id";
+    private static final String ID_NAME = "product_id";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
