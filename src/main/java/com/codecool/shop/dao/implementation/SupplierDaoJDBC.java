@@ -5,7 +5,7 @@ import com.codecool.shop.model.Supplier;
 
 import java.util.List;
 
-public class SupplierDaoJDBC implements SupplierDao {
+public class SupplierDaoJDBC extends JDBC implements SupplierDao {
     @Override
     public void add(Supplier supplier) {
 

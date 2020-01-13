@@ -7,7 +7,7 @@ import com.codecool.shop.model.Supplier;
 
 import java.util.List;
 
-public class ProductDaoJDBC implements ProductDao {
+public class ProductDaoJDBC extends JDBC implements ProductDao {
     @Override
     public void add(Product product) {
 
