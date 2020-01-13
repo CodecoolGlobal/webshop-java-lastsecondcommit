@@ -30,8 +30,19 @@ CREATE TABLE supplier
     description text
 );
 
-INSERT INTO product (name, description, default_price, default_currency, product_category, supplier_id, product_category_id)
-VALUES ("")
+
+CREATE TABLE product
+(
+    id serial PRIMARY KEY,
+    name varchar(40),
+    description text,
+    default_price float,
+    default_currency varchar(3),
+    product_category varchar(40),
+    supplier_id integer REFERENCES supplier(id) not null,
+    product_category_id integer REFERENCES product_category(id) not null
+
+);
 
 INSERT INTO product_category (name, description, department )
 VALUES  ('Cactus', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','Plant'),
