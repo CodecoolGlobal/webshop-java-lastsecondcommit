@@ -69,7 +69,7 @@ public class Initializer implements ServletContextListener {
         productDataStore.add(new Product("Pothos", 25, "USD", "It spreads like gossip.", littlePlant, bigFlowerBusiness));
         productDataStore.add(new Product("Lady Palm", 45, "USD", "Spectacular plant.", palm, bigFlowerBusiness));
         productDataStore.add(new Product("Parlor Palm", 40, "USD", "Best to place in spacious areas, it fills the room.", palm, bigFlowerBusiness));
-        productDataStore.add(new Product("Florida Silver Palm", 30, "USD", "Palm tree from India..", palm, bigFlowerBusiness));
+        productDataStore.add(new Product("Florida Silver Palm", 30, "USD", "Palm tree from India.", palm, bigFlowerBusiness));
         productDataStore.add(new Product("Yucca", 20, "USD", "No big leaves but rather strong trunk.", palm, bigFlowerBusiness));
         productDataStore.add(new Product("Dracaenat", 25, "USD", "You may recognize it from cartoon network shows. It was often used as the hair of many iconic characters", palm, bigFlowerBusiness));
         productDataStore.add(new Product("Pygmy Date Palm", 120, "USD", "Maugli envies you if your choice fall upon thee.", palm, bigFlowerBusiness));
