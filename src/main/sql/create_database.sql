@@ -38,3 +38,8 @@ VALUES  ('Cactus', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
         ('Little plant','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','Plant'),
         ('Palm','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','Plant');
 
+INSERT INTO supplier (name, description)
+VALUES ('Super Flowers Kft.', 'Small family business with quality plants'),
+('King Of Cactus Kft.', 'Main priority is cacti, but also sell other plants'),
+('Big Flower Business Zrt.', 'Industry leader big company'),
+('Green Future Kft.', 'Selling wide range of plants grown in the country');
