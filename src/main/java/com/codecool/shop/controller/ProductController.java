@@ -27,13 +27,16 @@ import java.util.List;
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends HttpServlet {
     private static final int CART_ID = 1;
-    private ProductDao productDataStore = ProductDaoMem.getInstance();
-    private ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-    private SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+
+    private ProductDao productDao = ProductDaoMem.getInstance();
+    private ProductCategoryDao productCategoryDao = ProductCategoryDaoMem.getInstance();
+    private SupplierDao supplierDao = SupplierDaoMem.getInstance();
+
     private ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
     private ShoppingCart shoppingCart = shoppingCartDataStore.find(CART_ID);
-    private List<ProductCategory> allCategory = productCategoryDataStore.getAll();
-    private List<Supplier> allSupplier = supplierDataStore.getAll();
+
+    private List<ProductCategory> allCategory = productCategoryDao.getAll();
+    private List<Supplier> allSupplier = supplierDao.getAll();
     private List<ProductCategory> selectedCategories;
     private List<Product> selectedProducts;
     private List<Supplier> selectedSuppliers;
@@ -68,11 +71,11 @@ public class ProductController extends HttpServlet {
         int DEFAULT_CATEGORY_ID = 1;
 
         selectedCategories = new ArrayList<>();
-        ProductCategory defaultProductCategory = productCategoryDataStore.find(DEFAULT_CATEGORY_ID);
+        ProductCategory defaultProductCategory = productCategoryDao.find(DEFAULT_CATEGORY_ID);
 
         selectedCategories.add(defaultProductCategory);
-        selectedProducts = productDataStore.getBy(defaultProductCategory);
-        selectedSuppliers = supplierDataStore.getAll();
+        selectedProducts = productDao.getBy(defaultProductCategory);
+        selectedSuppliers = supplierDao.getAll();
     }
 
     private void setUserFilter(String[] selectedCategoryIds, String[] selectedSupplierIds) {
@@ -90,7 +93,7 @@ public class ProductController extends HttpServlet {
         if (selectedSupplierIds != null) {
             for (String id : selectedSupplierIds) {
                 int supplierId = Integer.parseInt(id);
-                Supplier supplier = supplierDataStore.find(supplierId);
+                Supplier supplier = supplierDao.find(supplierId);
                 selectedSuppliers.add(supplier);
             }
         }
@@ -100,7 +103,7 @@ public class ProductController extends HttpServlet {
         if (selectedCategoryIds != null) {
             for (String id : selectedCategoryIds) {
                 int categoryId = Integer.parseInt(id);
-                ProductCategory selectedCategory = productCategoryDataStore.find(categoryId);
+                ProductCategory selectedCategory = productCategoryDao.find(categoryId);
                 selectedCategories.add(selectedCategory);
             }
         }
@@ -108,7 +111,7 @@ public class ProductController extends HttpServlet {
 
     private void fillInSelectedProducts() {
         for (ProductCategory selectedCategory : selectedCategories) {
-            productDataStore.getBy(selectedCategory).stream().filter(x -> selectedSuppliers.
+            productDao.getBy(selectedCategory).stream().filter(x -> selectedSuppliers.
                     contains(x.getSupplier())).forEach(selectedProducts::add);
         }
     }

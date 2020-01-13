@@ -18,7 +18,7 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = {"/api/cart"})
 public class ApiCartController extends HttpServlet {
-    private ProductDao productDataStore = ProductDaoMem.getInstance();
+    private ProductDao productDao = ProductDaoMem.getInstance();
     private ShoppingCartDao cartDataStore = ShoppingCartDaoMem.getInstance();
     private static final String ID_NAME = "product_id";
     private static final int CART_ID = 1;
@@ -34,7 +34,7 @@ public class ApiCartController extends HttpServlet {
 
         StringBuilder buffer = getStringBuilder(req);
         int productId = getProductId(buffer);
-        Product product = productDataStore.find(productId);
+        Product product = productDao.find(productId);
         shoppingCart.add(product);
     }
 
