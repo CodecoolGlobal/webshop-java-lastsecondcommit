@@ -48,6 +48,7 @@ public class SupplierDaoJDBC extends JDBC implements SupplierDao {
                 result = new Supplier(
                         resultSet.getString("name"),
                         resultSet.getString("description"));
+                result.setId(resultSet.getInt("id"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -85,6 +86,7 @@ public class SupplierDaoJDBC extends JDBC implements SupplierDao {
                 Supplier supplier = new Supplier(
                         resultSet.getString("name"),
                         resultSet.getString("description"));
+                supplier.setId(resultSet.getInt("id"));
                 resultList.add(supplier);
             }
         } catch (SQLException e) {

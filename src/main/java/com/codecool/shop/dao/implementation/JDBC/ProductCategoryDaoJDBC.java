@@ -48,6 +48,7 @@ public class ProductCategoryDaoJDBC extends JDBC implements ProductCategoryDao {
                         resultSet.getString("name"),
                         resultSet.getString("department"),
                         resultSet.getString("description"));
+                result.setId(resultSet.getInt("id"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -90,6 +91,7 @@ public class ProductCategoryDaoJDBC extends JDBC implements ProductCategoryDao {
                         resultSet.getString("department"),
                         resultSet.getString("description")
                        );
+                productCategory.setId(resultSet.getInt("id"));
                 resultList.add(productCategory);
             }
         } catch (SQLException e) {

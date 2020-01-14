@@ -65,6 +65,7 @@ public class ProductDaoJDBC extends JDBC implements ProductDao {
                         productCategoryDao.find(resultSet.getInt("product_category_id")),
                         supplierDaoJDBC.find(resultSet.getInt("supplier_id"))
                         );
+                result.setId(resultSet.getInt("id"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -107,6 +108,7 @@ public class ProductDaoJDBC extends JDBC implements ProductDao {
                         resultSet.getString("description"),
                         productCategoryDao.find(resultSet.getInt("product_category_id")),
                         supplierDaoJDBC.find(resultSet.getInt("supplier_id")));
+                product.setId(resultSet.getInt("id"));
                 resultList.add(product);
             }
         } catch (SQLException e) {
@@ -133,6 +135,7 @@ public class ProductDaoJDBC extends JDBC implements ProductDao {
                         resultSet.getString("description"),
                         productCategoryDao.find(resultSet.getInt("product_category_id")),
                         supplier);
+                product.setId(resultSet.getInt("id"));
                 resultList.add(product);
             }
         } catch (SQLException e) {
@@ -167,6 +170,7 @@ public class ProductDaoJDBC extends JDBC implements ProductDao {
                         resultSet.getString("description"),
                         productCategory,
                         supplierDaoJDBC.find(resultSet.getInt("supplier_id")));
+                product.setId(resultSet.getInt("id"));
                 resultList.add(product);
             }
         } catch (SQLException e) {
