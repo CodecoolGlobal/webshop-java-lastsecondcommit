@@ -11,6 +11,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SupplierDaoJDBC extends JDBC implements SupplierDao {
+
+    private static SupplierDaoJDBC instance = null;
+
+    private SupplierDaoJDBC() {
+    }
+
+    public static SupplierDaoJDBC getInstance() {
+        if (instance == null) {
+            instance = new SupplierDaoJDBC();
+        }
+        return instance;
+    }
+
     @Override
     public void add(Supplier supplier) {
         String query = "INSERT INTO supplier (name, description) VALUES (?, ?)";

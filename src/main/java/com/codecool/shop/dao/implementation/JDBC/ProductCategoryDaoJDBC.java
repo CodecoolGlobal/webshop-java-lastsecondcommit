@@ -9,6 +9,18 @@ import java.util.List;
 
 public class ProductCategoryDaoJDBC extends JDBC implements ProductCategoryDao {
 
+    private static ProductCategoryDaoJDBC instance = null;
+
+    private ProductCategoryDaoJDBC() {
+    }
+
+    public static ProductCategoryDaoJDBC getInstance() {
+        if (instance == null) {
+            instance = new ProductCategoryDaoJDBC();
+        }
+        return instance;
+    }
+
     @Override
     public void add(ProductCategory category) {
         String query = "INSERT INTO product_category (name, description, department) VALUES (?, ?, ?)";

@@ -2,6 +2,7 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.ShoppingCartDao;
+import com.codecool.shop.dao.implementation.JDBC.ProductDaoJDBC;
 import com.codecool.shop.dao.implementation.Mem.ProductDaoMem;
 import com.codecool.shop.dao.implementation.Mem.ShoppingCartDaoMem;
 import com.codecool.shop.model.Product;
@@ -18,7 +19,7 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = {"/api/cart"})
 public class ApiCartController extends HttpServlet {
-    private ProductDao productDao = ProductDaoMem.getInstance();
+    private ProductDao productDao = ProductDaoJDBC.getInstance();
     private ShoppingCartDao cartDataStore = ShoppingCartDaoMem.getInstance();
     private static final String ID_NAME = "product_id";
     private static final int CART_ID = 1;

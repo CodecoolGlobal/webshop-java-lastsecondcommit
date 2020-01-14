@@ -4,10 +4,10 @@ import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.implementation.Mem.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.Mem.ProductDaoMem;
+import com.codecool.shop.dao.implementation.JDBC.ProductCategoryDaoJDBC;
+import com.codecool.shop.dao.implementation.JDBC.ProductDaoJDBC;
+import com.codecool.shop.dao.implementation.JDBC.SupplierDaoJDBC;
 import com.codecool.shop.dao.implementation.Mem.ShoppingCartDaoMem;
-import com.codecool.shop.dao.implementation.Mem.SupplierDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.ShoppingCart;
@@ -28,9 +28,9 @@ import java.util.List;
 public class ProductController extends HttpServlet {
     private static final int CART_ID = 1;
 
-    private ProductDao productDao = ProductDaoMem.getInstance();
-    private ProductCategoryDao productCategoryDao = ProductCategoryDaoMem.getInstance();
-    private SupplierDao supplierDao = SupplierDaoMem.getInstance();
+    private ProductDao productDao = ProductDaoJDBC.getInstance();
+    private ProductCategoryDao productCategoryDao = ProductCategoryDaoJDBC.getInstance();
+    private SupplierDao supplierDao = SupplierDaoJDBC.getInstance();
 
     private ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
     private ShoppingCart shoppingCart = shoppingCartDataStore.find(CART_ID);

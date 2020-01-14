@@ -15,8 +15,20 @@ import java.util.List;
 
 public class ProductDaoJDBC extends JDBC implements ProductDao {
 
-    SupplierDaoJDBC supplierDaoJDBC = new SupplierDaoJDBC();
-    ProductCategoryDao productCategoryDao = new ProductCategoryDaoJDBC();
+    private static ProductDaoJDBC instance = null;
+
+    private ProductDaoJDBC() {
+    }
+
+    public static ProductDaoJDBC getInstance() {
+        if (instance == null) {
+            instance = new ProductDaoJDBC();
+        }
+        return instance;
+    }
+
+    SupplierDaoJDBC supplierDaoJDBC = SupplierDaoJDBC.getInstance();
+    ProductCategoryDao productCategoryDao = ProductCategoryDaoJDBC.getInstance();
 
     @Override
     public void add(Product product) {

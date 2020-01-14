@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class JDBCHelper {
 
     private static final String DATABASE_NAME = System.getenv("PSQL_DB_NAME");
-    private static final String DATABASE_URL = "jdbc:postgresql://localhost:5432" + DATABASE_NAME;
+    private static final String DATABASE_URL = "jdbc:postgresql://localhost:5432/" + DATABASE_NAME;
     private static final String DB_USER = System.getenv("PSQL_USER");
     private static final String DB_PASSWORD = System.getenv("PSQL_PASSWORD");
     private static Connection connection;
