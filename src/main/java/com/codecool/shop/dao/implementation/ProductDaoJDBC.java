@@ -38,7 +38,7 @@ public class ProductDaoJDBC extends JDBC implements ProductDao {
 
     @Override
     public Product find(int id) {
-        String query = "SELECT * WHERE id = ? ";
+        String query = "SELECT * FROM product WHERE id = ? ";
         ResultSet resultSet = null;
         Product result = null;
         try (PreparedStatement statement = connection.prepareStatement(query)){
