@@ -121,7 +121,7 @@ public class ProductDaoJDBC extends JDBC implements ProductDao {
     public List<Product> getBy(Supplier supplier) {
         ResultSet resultSet = null;
         int supplierId = supplier.getId();
-        String query = "SELECT * FROM product WHERE id = ?;";
+        String query = "SELECT * FROM product WHERE supplier_id = ?;";
         List<Product> resultList = new ArrayList<>();
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
@@ -156,7 +156,7 @@ public class ProductDaoJDBC extends JDBC implements ProductDao {
     public List<Product> getBy(ProductCategory productCategory) {
         ResultSet resultSet = null;
         int productCategoryId = productCategory.getId();
-        String query = "SELECT * FROM product WHERE id = ?;";
+        String query = "SELECT * FROM product WHERE product_category_id = ?;";
         List<Product> resultList = new ArrayList<>();
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
