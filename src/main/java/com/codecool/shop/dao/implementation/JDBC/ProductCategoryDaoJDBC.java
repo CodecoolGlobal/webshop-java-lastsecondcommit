@@ -28,7 +28,7 @@ public class ProductCategoryDaoJDBC extends JDBC implements ProductCategoryDao {
             statement.setString(1, category.getName());
             statement.setString(2, category.getDescription());
             statement.setString(3, category.getDepartment());
-            statement.executeQuery();
+            statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -66,7 +66,7 @@ public class ProductCategoryDaoJDBC extends JDBC implements ProductCategoryDao {
     @Override
     public void remove(int id) {
 
-        String query = "DELETE FROM product_category WHERE id = ?;";
+        String query = "DELETE FROM product_category WHERE id = ?";
 
         try (PreparedStatement statement = connection.prepareStatement(query)){
             statement.setInt(1, id);
@@ -75,6 +75,19 @@ public class ProductCategoryDaoJDBC extends JDBC implements ProductCategoryDao {
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public void removeAll() {
+        String query = "DELETE FROM product_category;" +
+                "ALTER SEQUENCE product_category_id_seq RESTART WITH 1;";
+
+        try (Statement statement = connection.createStatement())
+        {
+            statement.executeUpdate(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
