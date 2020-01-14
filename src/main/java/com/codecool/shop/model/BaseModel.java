@@ -74,4 +74,5 @@ public class BaseModel {
     public int hashCode() {
         return Objects.hash(getId());
     }
+
 }
