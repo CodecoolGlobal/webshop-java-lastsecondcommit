@@ -87,8 +87,9 @@ public class ProductCategoryDaoJDBC extends JDBC implements ProductCategoryDao {
             while (resultSet.next()) {
                 ProductCategory productCategory = new ProductCategory(
                         resultSet.getString("name"),
-                        resultSet.getString("description"),
-                       resultSet.getString("department"));
+                        resultSet.getString("department"),
+                        resultSet.getString("description")
+                       );
                 resultList.add(productCategory);
             }
         } catch (SQLException e) {
