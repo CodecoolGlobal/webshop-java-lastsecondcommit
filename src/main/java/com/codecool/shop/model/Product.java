@@ -1,7 +1,6 @@
 package com.codecool.shop.model;
 
 import java.util.Currency;
-import java.util.Objects;
 
 public class Product extends BaseModel {
 
@@ -59,23 +58,6 @@ public class Product extends BaseModel {
     public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
         this.supplier.addProduct(this);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Product product = (Product) o;
-        return Float.compare(product.defaultPrice, defaultPrice) == 0 &&
-                defaultCurrency.equals(product.defaultCurrency) &&
-                productCategory.equals(product.productCategory) &&
-                supplier.equals(product.supplier);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), defaultPrice, defaultCurrency, productCategory, supplier);
     }
 
     @Override
