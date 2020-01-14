@@ -6,6 +6,7 @@ import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -31,12 +32,32 @@ public class ProductDaoJDBC extends JDBC implements ProductDao {
     @Override
     public Product find(int id) {
         String query = "SELECT * WHERE id = ? ";
+        ResultSet resultSet = null;
+        Product result = null;
         try (PreparedStatement statement = connection.prepareStatement(query)){
+
+
             statement.setInt(1, id);
+            resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                result = new Product(
+                        resultSet.getString("name"),
+                        resultSet.getString("department"),
+                        resultSet.getString("description"));
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            try {
+                if (resultSet != null)
+                    resultSet.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
-        return null;
+        return result;
+
     }
 
     @Override
