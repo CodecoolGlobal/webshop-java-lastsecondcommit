@@ -1,21 +1,22 @@
-package com.codecool.shop.dao.implementation;
+package com.codecool.shop.dao.implementation.JDBC;
 
-import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.model.Supplier;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductCategoryDaoJDBC extends JDBC implements ProductCategoryDao {
-
+public class SupplierDaoJDBC extends JDBC implements SupplierDao {
     @Override
-    public void add(ProductCategory category) {
-        String query = "INSERT INTO product_category (name, description, department) VALUES (?, ?, ?)";
+    public void add(Supplier supplier) {
+        String query = "INSERT INTO supplier (name, description) VALUES (?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, category.getName());
-            statement.setString(2, category.getDescription());
-            statement.setString(3, category.getDepartment());
+            statement.setString(1, supplier.getName());
+            statement.setString(2, supplier.getDescription());
             statement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -23,18 +24,16 @@ public class ProductCategoryDaoJDBC extends JDBC implements ProductCategoryDao {
     }
 
     @Override
-    public ProductCategory find(int id) {
-
-        String query = "SELECT * FROM product_category WHERE id = ? ;";
+    public Supplier find(int id) {
+        String query = "SELECT * FROM supplier WHERE id = ? ;";
         ResultSet resultSet = null;
-        ProductCategory result = null;
+        Supplier result = null;
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, id);
             resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                result = new ProductCategory(
+                result = new Supplier(
                         resultSet.getString("name"),
-                        resultSet.getString("department"),
                         resultSet.getString("description"));
             }
         } catch (SQLException e) {
@@ -52,36 +51,33 @@ public class ProductCategoryDaoJDBC extends JDBC implements ProductCategoryDao {
 
     @Override
     public void remove(int id) {
-
-        String query = "DELETE FROM product_category WHERE id = ?;";
-
-        try (PreparedStatement statement = connection.prepareStatement(query)){
+        String query = "DELETE FROM supplier WHERE id = ?;";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, id);
             statement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
-    public List<ProductCategory> getAll() {
-        String query = "SELECT * FROM product_category;";
+    public List<Supplier> getAll() {
 
-        List<ProductCategory> resultList = new ArrayList<>();
+        String query = "SELECT * FROM supplier;";
+        List<Supplier> resultList = new ArrayList<>();
 
         try (Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query)) {
             while (resultSet.next()) {
-                ProductCategory productCategory = new ProductCategory(
+                Supplier supplier = new Supplier(
                         resultSet.getString("name"),
-                        resultSet.getString("description"),
-                       resultSet.getString("department"));
-                resultList.add(productCategory);
+                        resultSet.getString("description"));
+                resultList.add(supplier);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return resultList;
     }
+
 }

@@ -1,4 +1,4 @@
-package com.codecool.shop.dao.implementation;
+package com.codecool.shop.dao.implementation.JDBC;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
