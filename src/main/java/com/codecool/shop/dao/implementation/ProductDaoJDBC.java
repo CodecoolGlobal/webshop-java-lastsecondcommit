@@ -42,8 +42,11 @@ public class ProductDaoJDBC extends JDBC implements ProductDao {
             if (resultSet.next()) {
                 result = new Product(
                         resultSet.getString("name"),
-                        resultSet.getString("department"),
-                        resultSet.getString("description"));
+                        resultSet.getFloat("default_price"),
+                        resultSet.getString("default_currency"),
+                        resultSet.getString("description"),
+                        resultSet.getString("product_category"),
+                        );
             }
 
         } catch (SQLException e) {
