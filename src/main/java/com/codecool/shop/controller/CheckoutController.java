@@ -14,8 +14,10 @@ import java.io.IOException;
 public class CheckoutController extends CartController {
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        setupShoppingCart(req);
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
+        context.setVariable("shoppingCart", shoppingCart);
         engine.process("product/checkout.html", context, resp.getWriter());
 
     }
