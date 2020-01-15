@@ -3,11 +3,11 @@ package com.codecool.shop.config;
 import java.util.Properties;
 
 public class Config {
-
     Properties configFile;
 
     public Config() {
-        configFile = new java.util.Properties();
+        configFile = new Properties();
+
         try {
             configFile.load(this.getClass().getClassLoader().
                     getResourceAsStream("connection.properties.cfg"));
