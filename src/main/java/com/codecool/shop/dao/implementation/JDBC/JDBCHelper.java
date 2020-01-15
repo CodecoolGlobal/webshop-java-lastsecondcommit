@@ -1,15 +1,23 @@
 package com.codecool.shop.dao.implementation.JDBC;
 
+import com.codecool.shop.config.Config;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class JDBCHelper {
 
-    private static final String DATABASE_NAME = System.getenv("PSQL_DB_NAME");
-    private static final String DATABASE_URL = "jdbc:postgresql://localhost:5432/" + DATABASE_NAME;
-    private static final String DB_USER = System.getenv("PSQL_USER");
-    private static final String DB_PASSWORD = System.getenv("PSQL_PASSWORD");
+    private static final Config cfg = new Config();
+    private static final String user = cfg.getProperty("user");
+    private static final String database = cfg.getProperty("database");
+    private static final String password = cfg.getProperty("password");
+    private static final String url = cfg.getProperty("url");
+
+    private static final String DATABASE_NAME = database;
+    private static final String DATABASE_URL = "jdbc:postgresql://"+ url + "/" + database;
+    private static final String DB_USER = user;
+    private static final String DB_PASSWORD = password;
     private static Connection connection;
 
     private static Connection generateConnection() {
