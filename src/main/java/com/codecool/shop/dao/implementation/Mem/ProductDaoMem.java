@@ -1,4 +1,4 @@
-package com.codecool.shop.dao.implementation;
+package com.codecool.shop.dao.implementation.Mem;
 
 
 import com.codecool.shop.dao.ProductDao;
@@ -41,6 +41,11 @@ public class ProductDaoMem implements ProductDao {
     @Override
     public void remove(int id) {
         data.remove(find(id));
+    }
+
+    @Override
+    public void removeAll() {
+        data.clear();
     }
 
     @Override

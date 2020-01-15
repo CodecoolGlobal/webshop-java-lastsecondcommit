@@ -5,7 +5,7 @@
     <meta name="author" content="Codecool"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-    <title>Codecool Shop</title>
+    <title>Our Best PlanTs</title>
 
     <!-- Bootstrap components -->
     <!-- Latest compiled and minified Jquery -->
@@ -29,6 +29,7 @@
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
     <script type="module"  th:src="|/static/js/main.js|" defer></script>
+    <link href="https://fonts.googleapis.com/css?family=Schoolbell&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -43,12 +44,12 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">My Cart</a>
+                    <a class="nav-link" href="/cart">Shopping Cart</a>
                 </li>
             </ul>
-            <span class="navbar-text">Products in your cart: <strong id="cart-info"
-                                                                     th:text="${shoppingCart.getProducts().size()}"></strong><img
-                    id="shopping-cart" th:src="|static/img/extra_items/shopping_cart.png|" alt="Shopping cart icon">
+            <span class="navbar-text">Products in your cart:
+                <strong id="cart-info" th:text="${shoppingCart.getProducts().size()}"></strong>
+                <img id="shopping-cart-img" th:src="|static/img/extra_items/shopping_cart.png|" alt="Shopping cart icon">
             </span>
         </div>
     </nav>
@@ -57,27 +58,31 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-light filters-container">
-            <form id="filter" method="get" action="/search">
+            <form id="filters" method="get" action="/search">
                 <div class="filter">
                     <h4>Categories</h4>
                     <div th:each="category: ${allCategories}">
+                        <label>
                         <input type="checkbox" name="categoryId" th:attr="value=${category.id}"
                                th:text="${category.name}"
                                th:checked="${selectedCategories.contains(category)}">
+                        </label>
                     </div>
                 </div>
                 <div class="filter">
                     <h4>Suppliers</h4>
                     <div th:each="supplier: ${allSuppliers}">
+                        <label>
                         <input type="checkbox" name="supplierId" th:attr="value=${supplier.id}"
                                th:text="${supplier.name}"
                                th:checked="${selectedSuppliers.contains(supplier)}">
+                        </label>
                     </div>
                 </div>
             </form>
         </div>
         <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 container">
-            <div class="card shadow-sm">
+            <div class="card filter-conditions shadow-sm">
                 <div class="card-body">
                     <div class="card-text">Category:
                         <strong th:text="${iterStat.index}==0 ? ${category.name} : ', ' + ${category.name}"
@@ -87,7 +92,7 @@
                         <strong th:text="${iterStat.index}==0 ? ${supplier.name} : ', ' + ${supplier.name}"
                                 th:each="supplier, iterStat : ${selectedSuppliers}">Category Title</strong>
                     </div>
-                    <div class="card-text" th:text="${products.size()} + ' products'">Product number</div>
+                    <div class="card-text" th:text="${products.size()} + ' products found'">Product number</div>
 
                 </div>
             </div>
@@ -95,7 +100,7 @@
             <div id="products" class="row">
                 <div class="col col-sm-12 col-md-6 col-lg-4 product" th:each="prod,iterStat : ${products}">
                     <div class="card product-card shadow-sm">
-                        <img class="" src="http://placehold.it/400x250/000/fff"
+                        <img class="product-card-img" src="http://placehold.it/400x250/000/fff"
                              th:attr="src='/static/img/'+ ${prod.id} + '.jpg'" alt=""/>
                         <div class="card-header">
                             <h4 class="card-title product-name" th:text="${prod.name}">Product name</h4>

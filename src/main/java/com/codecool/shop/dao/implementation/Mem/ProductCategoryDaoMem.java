@@ -1,4 +1,4 @@
-package com.codecool.shop.dao.implementation;
+package com.codecool.shop.dao.implementation.Mem;
 
 
 import com.codecool.shop.dao.ProductCategoryDao;
@@ -38,6 +38,11 @@ public class ProductCategoryDaoMem implements ProductCategoryDao {
     @Override
     public void remove(int id) {
         data.remove(find(id));
+    }
+
+    @Override
+    public void removeAll() {
+        data.clear();
     }
 
     @Override

@@ -6,6 +6,7 @@ export let dom = {
         dom.addEventListenerToFilterCheckbox();
         dom.addEventListenerToCartButtons();
     },
+
     addEventListenerToCartButtons: function () {
         let addToCartButtons = document.querySelectorAll(".btn-success");
 
@@ -16,13 +17,15 @@ export let dom = {
             });
         });
     },
+
     increaseNumOfItemsInCart: function () {
         let itemsInCart = parseInt(document.querySelector("#cart-info").innerHTML);
         itemsInCart += 1;
         document.querySelector("#cart-info").innerHTML = itemsInCart.toString();
     },
+
     addEventListenerToFilterCheckbox :function () {
-        let filterForm = document.querySelector('#filter');
+        let filterForm = document.querySelector('#filters');
         let checkboxes = filterForm.querySelectorAll("input");
 
         for (let checkbox of checkboxes) {

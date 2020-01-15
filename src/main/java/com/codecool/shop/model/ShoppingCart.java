@@ -1,7 +1,6 @@
 package com.codecool.shop.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class ShoppingCart {
     protected int id;
@@ -22,4 +21,27 @@ public class ShoppingCart {
     public int getId() {
         return id;
     }
+
+    public Map<Product, Integer> getProductsStat() {
+        Map<Product, Integer> productsStat = new LinkedHashMap<>();
+        for (Product product : products) {
+            Integer count = productsStat.get(product);
+            if (count == null) {
+                productsStat.put(product, 1);
+            }
+            else {
+                productsStat.put(product, count + 1);
+            }
+        }
+        return productsStat;
+    }
+
+    public float getSumOfPrices() {
+        float sumOfPrices = 0;
+        for (Product product : products) {
+           sumOfPrices += product.getDefaultPrice();
+        }
+        return sumOfPrices;
+    }
+
 }
