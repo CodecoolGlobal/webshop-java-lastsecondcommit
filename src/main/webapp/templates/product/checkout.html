@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="author" content="Codecool"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <title>Our Best PlanTs</title>
+
+    <!-- Bootstrap components -->
+    <!-- Latest compiled and minified Jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <!--Latest compiled and minified Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- End of Bootstrap components -->
+
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Schoolbell&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="header">
+    <img id="header-pic" th:src="|static/img/extra_items/index_cover.png|" alt="Plants header picture">
+    <nav class="navbar navbar-expand-lg navbar-light  bg-light shadow-sm">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+            </ul>
+            <span class="navbar-text">Products in your cart: <strong id="cart-info"
+                                                                     th:text="${shoppingCart.getProducts().size()}"></strong><img
+                    id="shopping-cart-img" th:src="|static/img/extra_items/shopping_cart.png|" alt="Shopping cart icon">
+            </span>
+        </div>
+    </nav>
+</div>
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 container">
+            <form>
+                <div class="card m-2">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="inputName">Name</label>
+                            <input type="text" class="form-control" id="inputName" placeholder="John Smith">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputPhone">Phone number</label>
+                                <input type="text" class="form-control" id="inputPhone" placeholder="+3630....">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail">Email address</label>
+                                <input type="email" class="form-control" id="inputEmail" placeholder="name@example.com">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card m-2">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <h5>Billing Adress</h5>
+                            <label for="inputBillingAddress">Address</label>
+                            <input type="text" class="form-control" id="inputBillingAddress" placeholder="1234 Main St">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputBillingCity">City</label>
+                                <input type="text" class="form-control" id="inputBillingCity">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputBillingCountry">Country</label>
+                                <input type="text" class="form-control" id="inputBillingCountry">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="inputBillingZip">Zip</label>
+                                <input type="text" class="form-control" id="inputBillingZip">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card m-2">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <h5>Shipping Adress</h5>
+                            <label for="inputShippingAddress">Address</label>
+                            <input type="text" class="form-control" id="inputShippingAddress"
+                                   placeholder="1234 Main St">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputShippingCity">City</label>
+                                <input type="text" class="form-control" id="inputShippingCity">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputShippingCountry">Country</label>
+                                <input type="text" class="form-control" id="inputShippingCountry">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="inputShippingZip">Zip</label>
+                                <input type="text" class="form-control" id="inputShippingZip">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn m-2">Payment</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<div th:replace="footer.html :: copy"></div>
+
+</body>
+</html>
