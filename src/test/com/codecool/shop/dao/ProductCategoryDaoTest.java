@@ -1,4 +1,4 @@
-package com.codecool.shop.dao;
+//package com.codecool.shop.dao;
 
 import org.junit.jupiter.api.Test;
 
