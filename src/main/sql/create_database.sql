@@ -1,6 +1,9 @@
-DROP TABLE IF EXISTS product;
-DROP TABLE IF EXISTS product_category;
-DROP TABLE IF EXISTS supplier;
+DROP TABLE IF EXISTS product CASCADE;
+DROP TABLE IF EXISTS product_category CASCADE;
+DROP TABLE IF EXISTS supplier CASCADE;
+DROP TABLE IF EXISTS location CASCADE;
+DROP TABLE IF EXISTS user_order CASCADE;
+DROP TABLE IF EXISTS ordered_products CASCADE;
 
 CREATE TABLE product_category
 (
@@ -28,6 +31,33 @@ CREATE TABLE product
     default_currency varchar(3),
     supplier_id integer REFERENCES supplier(id) not null,
     product_category_id integer REFERENCES product_category(id) not null
+);
+
+CREATE TABLE location
+(
+    id serial PRIMARY KEY,
+    country varchar(50),
+    city varchar(50),
+    zip_code varchar(9),
+    address varchar(100)
+);
+
+CREATE TABLE user_order
+(
+    id serial PRIMARY KEY,
+    name varchar(50),
+    email varchar(50),
+    phone_number varchar(15),
+    billing_address_id integer REFERENCES location(id),
+    shipping_address_id integer  REFERENCES location(id),
+    order_status varchar(9)
+);
+
+CREATE TABLE ordered_products(
+    order_id integer REFERENCES user_order(id),
+    product_id integer REFERENCES product(id),
+    quantity integer
+
 );
 
 INSERT INTO product_category (name, description, department )
