@@ -19,21 +19,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
 @WebServlet(urlPatterns = {"/"})
-public class ProductController extends HttpServlet {
-    private static final int CART_ID = 1;
+public class ProductListController extends CartController {
 
     private ProductDao productDao = ProductDaoJDBC.getInstance();
     private ProductCategoryDao productCategoryDao = ProductCategoryDaoJDBC.getInstance();
     private SupplierDao supplierDao = SupplierDaoJDBC.getInstance();
-
-    private ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
-    private ShoppingCart shoppingCart = shoppingCartDataStore.find(CART_ID);
 
     private List<ProductCategory> allCategory = productCategoryDao.getAll();
     private List<Supplier> allSupplier = supplierDao.getAll();
@@ -42,6 +40,8 @@ public class ProductController extends HttpServlet {
     private List<Supplier> selectedSuppliers;
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        setupShoppingCart(req);
+
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
