@@ -39,6 +39,10 @@ public class SupplierDaoMem implements SupplierDao {
         data.remove(find(id));
     }
 
+    public void removeAll(){
+        data.clear();
+    }
+
     @Override
     public List<Supplier> getAll() {
         return data;

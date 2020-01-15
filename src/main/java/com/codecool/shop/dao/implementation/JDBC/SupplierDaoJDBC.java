@@ -95,4 +95,17 @@ public class SupplierDaoJDBC extends JDBC implements SupplierDao {
         return resultList;
     }
 
+    @Override
+    public void removeAll() {
+        String query = "DELETE FROM supplier;" +
+                "ALTER SEQUENCE supplier_id_seq RESTART WITH 1;";
+
+        try (Statement statement = connection.createStatement())
+        {
+            statement.executeUpdate(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
