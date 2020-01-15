@@ -30,7 +30,7 @@ public class SupplierDaoJDBC extends JDBC implements SupplierDao {
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, supplier.getName());
             statement.setString(2, supplier.getDescription());
-            statement.executeQuery();
+            statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -68,7 +68,7 @@ public class SupplierDaoJDBC extends JDBC implements SupplierDao {
         String query = "DELETE FROM supplier WHERE id = ?;";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, id);
-            statement.executeQuery();
+            statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
