@@ -1,5 +1,6 @@
 package com.codecool.shop.config;
 
+import java.util.*;
 import java.util.Properties;
 
 public class MyConfig {
