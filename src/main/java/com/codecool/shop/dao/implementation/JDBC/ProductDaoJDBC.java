@@ -42,7 +42,7 @@ public class ProductDaoJDBC extends JDBC implements ProductDao {
             statement.setString(4, product.getDefaultCurrency().toString());
             statement.setInt(5, product.getSupplier().getId());
             statement.setInt(6, product.getProductCategory().getId());
-            statement.executeQuery();
+            statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -86,7 +86,20 @@ public class ProductDaoJDBC extends JDBC implements ProductDao {
 
         try (PreparedStatement statement = connection.prepareStatement(query)){
             statement.setInt(1, id);
-            statement.executeQuery();
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void removeAll() {
+        String query = "DELETE FROM product;" +
+                "ALTER SEQUENCE product_id_seq RESTART WITH 1;";
+
+        try (Statement statement = connection.createStatement())
+        {
+            statement.executeUpdate(query);
         } catch (SQLException e) {
             e.printStackTrace();
         }

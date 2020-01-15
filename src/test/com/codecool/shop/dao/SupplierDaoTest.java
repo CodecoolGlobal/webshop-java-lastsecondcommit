@@ -1,16 +1,9 @@
 package com.codecool.shop.dao;
-
-import com.codecool.shop.dao.implementation.JDBC.JDBCHelper;
 import com.codecool.shop.dao.implementation.JDBC.SupplierDaoJDBC;
-import com.codecool.shop.dao.implementation.Mem.SupplierDaoMem;
 import com.codecool.shop.model.Supplier;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
