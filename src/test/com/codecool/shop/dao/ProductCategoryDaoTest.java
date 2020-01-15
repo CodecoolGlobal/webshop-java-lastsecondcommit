@@ -1,6 +1,8 @@
 package com.codecool.shop.dao;
 
 import com.codecool.shop.dao.implementation.JDBC.ProductCategoryDaoJDBC;
+import com.codecool.shop.dao.implementation.JDBC.ProductDaoJDBC;
+import com.codecool.shop.dao.implementation.JDBC.SupplierDaoJDBC;
 import com.codecool.shop.dao.implementation.Mem.ProductCategoryDaoMem;
 import com.codecool.shop.model.ProductCategory;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,6 +16,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class ProductCategoryDaoTest {
     // ProductCategoryDaoMem.getInstance() OR ProductCategoryDaoJDBC.getInstance()
     private ProductCategoryDao productCategoryDao = ProductCategoryDaoJDBC.getInstance();
+    private ProductDao productDao = ProductDaoJDBC.getInstance();
+    private SupplierDao supplierDao = SupplierDaoJDBC.getInstance();
+
+
     private ProductCategory testProductCategory1 = new ProductCategory(
             "Cactus",
             "Plant",
@@ -28,7 +34,9 @@ class ProductCategoryDaoTest {
 
     @BeforeEach
     void clearDataBase() {
+        productDao.removeAll();
         productCategoryDao.removeAll();
+        supplierDao.removeAll();
     }
 
     @Test

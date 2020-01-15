@@ -121,9 +121,9 @@ class ProductDaoTest {
         testProductCategory1.setId(1);
         testSupplier1.setId(1);
         testProductDao.add(testProduct1);
-        testProductDao.add(testProduct2);
         testProductCategory2.setId(2);
         testSupplier2.setId(2);
+        testProductDao.add(testProduct2);
         testProduct1.setId(1);
         assertEquals(new ArrayList<>(Arrays.asList(testProduct1)), testProductDao.getBy(testSupplier1));
     }
