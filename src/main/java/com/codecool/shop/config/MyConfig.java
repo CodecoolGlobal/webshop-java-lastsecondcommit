@@ -2,10 +2,10 @@ package com.codecool.shop.config;
 
 import java.util.Properties;
 
-public class Config {
+public class MyConfig {
     Properties configFile;
 
-    public Config() {
+    public MyConfig() {
         configFile = new Properties();
 
         try {

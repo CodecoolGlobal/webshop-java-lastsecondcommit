@@ -1,12 +1,18 @@
 package com.codecool.shop.dao.implementation.JDBC;
 
-import com.codecool.shop.config.Config;
+import com.codecool.shop.config.MyConfig;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class JDBCHelper {
+
+    private static final MyConfig cfg = new MyConfig();
+    private static final String user = cfg.getProperty("user");
+    private static final String password = cfg.getProperty("password");
+    private static final String url = cfg.getProperty("url");
+    private static final String database = cfg.getProperty("database");
 
     private static final Config cfg = new Config();
     private static final String user = cfg.getProperty("user");
