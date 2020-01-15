@@ -1,4 +1,4 @@
-//package com.codecool.shop.dao;
+package com.codecool.shop.dao;
 
 import com.codecool.shop.dao.implementation.JDBC.ProductCategoryDaoJDBC;
 import com.codecool.shop.dao.implementation.Mem.ProductCategoryDaoMem;
