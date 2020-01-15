@@ -70,7 +70,7 @@ public class ProductCategoryDaoJDBC extends JDBC implements ProductCategoryDao {
 
         try (PreparedStatement statement = connection.prepareStatement(query)){
             statement.setInt(1, id);
-            statement.executeQuery();
+            statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

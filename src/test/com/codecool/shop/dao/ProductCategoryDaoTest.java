@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ProductCategoryDaoTest {
     // ProductCategoryDaoMem.getInstance() OR ProductCategoryDaoJDBC.getInstance()
-    private ProductCategoryDao productCategoryDao = ProductCategoryDaoMem.getInstance();
+    private ProductCategoryDao productCategoryDao = ProductCategoryDaoJDBC.getInstance();
     private ProductCategory testProductCategory1 = new ProductCategory(
             "Cactus",
             "Plant",
