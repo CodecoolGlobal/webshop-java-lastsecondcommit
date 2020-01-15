@@ -46,10 +46,9 @@
                     <a class="nav-link" href="/">Home</a>
                 </li>
             </ul>
-            <span class="navbar-text">Products in your cart: <strong id="cart-info"
-                                                                     th:text="${shoppingCart.getProducts().size()}"></strong><img
+            <span class="navbar-text">Products in your cart: <strong id="cart-info">NOT IMP</strong><img
                     id="shopping-cart-img" th:src="|static/img/extra_items/shopping_cart.png|" alt="Shopping cart icon">
-            </span>
+</span>
         </div>
     </nav>
 </div>
@@ -58,6 +57,7 @@
     <div class="row">
 
         <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 container">
+            <h5 class="text-center m-3 text-light"><strong>Order data</strong></h5>
             <form>
                 <div class="card m-2">
                     <div class="card-body">
@@ -82,7 +82,7 @@
                 <div class="card m-2">
                     <div class="card-body">
                         <div class="form-group">
-                            <h5>Billing Adress</h5>
+                            <h5 class="text-center">Billing Adress</h5>
                             <label for="inputBillingAddress">Address</label>
                             <input type="text" class="form-control" id="inputBillingAddress" placeholder="1234 Main St">
                         </div>
@@ -106,7 +106,7 @@
                 <div class="card m-2">
                     <div class="card-body">
                         <div class="form-group">
-                            <h5>Shipping Adress</h5>
+                            <h5 class="text-center">Shipping Adress</h5>
                             <label for="inputShippingAddress">Address</label>
                             <input type="text" class="form-control" id="inputShippingAddress"
                                    placeholder="1234 Main St">
