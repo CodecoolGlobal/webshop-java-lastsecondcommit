@@ -3,7 +3,9 @@ package com.codecool.shop.controller;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementation.JDBC.ProductDaoJDBC;
 import com.codecool.shop.model.Product;
-import com.google.gson.*;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,14 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/api/cart"})
-public class ApiCartController extends CartController {
+@WebServlet(urlPatterns = {"/api/cart/delete"})
+public class ApiRemoveFromCartController extends CartController {
     private ProductDao productDao = ProductDaoJDBC.getInstance();
     private static final String ID_NAME = "product_id";
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,12 +26,12 @@ public class ApiCartController extends CartController {
         int productId = getProductId(buffer);
         Product product = productDao.find(productId);
 
-        addProductToSession(req, product);
+        deleteProductFromSession(req, product);
     }
 
-    private void addProductToSession(HttpServletRequest req, Product product) {
+    private void deleteProductFromSession(HttpServletRequest req, Product product) {
         setupShoppingCart(req);
-        shoppingCart.add(product);
+        shoppingCart.remove(product);
     }
 
     private StringBuilder getStringBuilder(HttpServletRequest req) throws IOException {
@@ -67,4 +65,3 @@ public class ApiCartController extends CartController {
         return Integer.parseInt(productId);
     }
 }
-

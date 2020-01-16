@@ -63,7 +63,7 @@
                     <h4>Categories</h4>
                     <div th:each="category: ${allCategories}">
                         <label>
-                        <input type="checkbox" name="categoryId" th:attr="value=${category.id}"
+                        <input class="checkbox" type="checkbox" name="categoryId" th:attr="value=${category.id}"
                                th:text="${category.name}"
                                th:checked="${selectedCategories.contains(category)}">
                         </label>
@@ -73,7 +73,7 @@
                     <h4>Suppliers</h4>
                     <div th:each="supplier: ${allSuppliers}">
                         <label>
-                        <input type="checkbox" name="supplierId" th:attr="value=${supplier.id}"
+                        <input class="checkbox" type="checkbox" name="supplierId" th:attr="value=${supplier.id}"
                                th:text="${supplier.name}"
                                th:checked="${selectedSuppliers.contains(supplier)}">
                         </label>
@@ -112,7 +112,7 @@
                             </div>
                             <div class="card-text">
                                 <input type="hidden" name="prod-id" th:value="${prod.id}">
-                                <input class="btn btn-success" type="submit" th:attr="data-product-id=${prod.id}" value="Add to cart">
+                                <input class="btn btn-success add-cart" type="submit" th:attr="data-product-id=${prod.id}" value="Add to cart">
                             </div>
                         </div>
                     </div>

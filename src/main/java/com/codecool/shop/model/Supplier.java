@@ -33,5 +33,4 @@ public class Supplier extends BaseModel {
                 this.description
         );
     }
-
 }

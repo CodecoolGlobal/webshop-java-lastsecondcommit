@@ -28,6 +28,7 @@
     <!-- End of Bootstrap components -->
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
+    <script type="module"  th:src="|/static/js/main.js|" defer></script>
     <link href="https://fonts.googleapis.com/css?family=Schoolbell&display=swap" rel="stylesheet">
 </head>
 
@@ -46,8 +47,8 @@
                     <a class="nav-link" href="/">Home</a>
                 </li>
             </ul>
-            <span class="navbar-text">Products in your cart: <strong id="cart-info"
-                                                                     th:text="${shoppingCart.getProducts().size()}"></strong><img
+            <span class="navbar-text">Products in your cart:
+                <strong id="cart-info" th:text="${shoppingCart.getProducts().size()}"></strong><img
                     id="shopping-cart-img" th:src="|static/img/extra_items/shopping_cart.png|" alt="Shopping cart icon">
             </span>
         </div>
@@ -67,19 +68,24 @@
                         <th scope="col"> Unit price / Subtotal price</th>
                         <th scope="col">Quantity</th>
                         <th scope="col">Image</th>
+                        <th scope="col">Change</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="instance, iterStat : ${ shoppingCart.getProductsStat() }">
+                    <tr class="product-row" th:each="product, iterStat : ${ shoppingCart.getProductsStat() }">
                         <th scope="row" th:text="${iterStat.index + 1}">Index</th>
-                        <td scope="row" class="product-name" th:text="${instance.key.name}">Prod name</td>
+                        <td scope="row" class="product-name" th:text="${product.key.name}">Prod name</td>
                         <td scope="row">
-                            <span th:text="${instance.key.defaultPrice} + ' USD / '
-                            + ${instance.key.defaultPrice * instance.value} + ' USD'">Prod price</span>
+                            <span class="price" th:attr="data-product-price=${product.key.defaultPrice}" th:text="${product.key.defaultPrice} + ' USD / '
+                            + ${product.key.defaultPrice * product.value} + ' USD'">Prod price</span>
                         </td>
-                        <td th:text="${instance.value}">Quantity</td>
+                        <td class="quantity" th:text="${product.value}" th:attr="data-product-quantity=${product.value}">Quantity</td>
                         <td><img class="image-in-cart" src="http://placehold.it/400x250/000/fff"
-                                 th:attr="src='/static/img/'+ ${instance.key.id} + '.jpg'" alt=""/></td>
+                                 th:attr="src='/static/img/'+ ${product.key.id} + '.jpg'" alt=""/></td>
+                        <td>
+                            <input class="btn btn-success btn-plus" type="submit" th:attr="data-product-id=${product.key.id}" value="+">
+                            <input class="btn btn-success btn-minus" type="submit" th:attr="data-product-id=${product.key.id}" value="-">
+                        </td>
                     </tr>
                     </tbody>
                     <tfoot th:if="${shoppingCart.getProducts().size() != 0}">
@@ -87,7 +93,7 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <th th:text="${shoppingCart.getSumOfPrices()} + ' USD'">SumPrice</th>
+                    <td id="total-sum" th:text="${shoppingCart.getSumOfPrices()} + ' USD'">SumPrice</td>
                     </tfoot>
                 </table>
                 <p th:if="${shoppingCart.getProducts().size() == 0}" class="text-light">Shopping cart is empty.</p>
