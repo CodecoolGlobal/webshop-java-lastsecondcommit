@@ -37,4 +37,5 @@ public class Location {
         this.country = country;
         this.zip = zip;
     }
+
 }
