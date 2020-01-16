@@ -98,7 +98,7 @@ body {
     width: 100%;
 }
 
-.product-name {
+.product-name, .next-button {
     color: #53a053;
 }
 
@@ -141,6 +141,6 @@ body {
     text-align: center;
 }
 
-.cart-table .product-name {
+.cart-table .product-name, .next-button {
     font-weight: bold;
 }
