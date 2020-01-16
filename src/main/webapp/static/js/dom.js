@@ -67,7 +67,9 @@ export let dom = {
         quantityNode.innerHTML = quantity.toString();
         dom.changeNumOfItemsInCart(changeValue);
         if (quantity < 1) {
+            let productId = button.dataset.productId;
             rowNode.innerHTML = null
+            dataHandler.deleteFromCart(productId)
         }
     }
 };
