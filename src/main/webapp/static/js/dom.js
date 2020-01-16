@@ -3,7 +3,7 @@ import { dataHandler } from "./data_handler.js";
 export let dom = {
 
     init: function () {
-        // dom.addEventListenerToFilterCheckbox();
+        dom.addEventListenerToFilterCheckbox();
         dom.addEventListenerToCartButtons();
         dom.addEventListenerToMinusButtons();
         dom.addEventListenerToPlusButtons();
@@ -26,16 +26,18 @@ export let dom = {
         document.querySelector("#cart-info").innerHTML = itemsInCart.toString();
     },
 
-    /*addEventListenerToFilterCheckbox :function () {
-        let filterForm = document.querySelector('#filters');
-        let checkboxes = filterForm.querySelectorAll("input");
+    addEventListenerToFilterCheckbox :function () {
+        if (document.querySelector('#filters') != null) {
+            let filterForm = document.querySelector('#filters');
+            let checkboxes = filterForm.querySelectorAll("input");
 
-        for (let checkbox of checkboxes) {
-            checkbox.addEventListener('change', function () {
-                filterForm.submit();
-            })
+            for (let checkbox of checkboxes) {
+                checkbox.addEventListener('change', function () {
+                    filterForm.submit();
+                })
+            }
         }
-    },*/
+    },
 
     addEventListenerToMinusButtons: function () {
         let quantityChangeButtons = document.querySelectorAll(".btn-minus");
