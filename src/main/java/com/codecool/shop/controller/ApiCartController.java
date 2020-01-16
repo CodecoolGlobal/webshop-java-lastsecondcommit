@@ -1,28 +1,21 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.dao.implementation.JDBC.ProductDaoJDBC;
-import com.codecool.shop.dao.implementation.Mem.ProductDaoMem;
-import com.codecool.shop.dao.implementation.Mem.ShoppingCartDaoMem;
 import com.codecool.shop.model.Product;
-import com.codecool.shop.model.ShoppingCart;
 import com.google.gson.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 
 @WebServlet(urlPatterns = {"/api/cart"})
-public class ApiCartController extends HttpServlet {
+public class ApiCartController extends CartController {
     private ProductDao productDao = ProductDaoJDBC.getInstance();
-    private ShoppingCartDao cartDataStore = ShoppingCartDaoMem.getInstance();
     private static final String ID_NAME = "product_id";
-    private static final int CART_ID = 1;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,11 +24,15 @@ public class ApiCartController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        ShoppingCart shoppingCart = cartDataStore.find(CART_ID);
-
         StringBuilder buffer = getStringBuilder(req);
         int productId = getProductId(buffer);
         Product product = productDao.find(productId);
+
+        addProductToSession(req, product);
+    }
+
+    private void addProductToSession(HttpServletRequest req, Product product) {
+        setupShoppingCart(req);
         shoppingCart.add(product);
     }
 

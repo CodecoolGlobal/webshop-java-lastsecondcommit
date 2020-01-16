@@ -2,38 +2,29 @@ package com.codecool.shop.controller;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.JDBC.ProductCategoryDaoJDBC;
 import com.codecool.shop.dao.implementation.JDBC.ProductDaoJDBC;
 import com.codecool.shop.dao.implementation.JDBC.SupplierDaoJDBC;
-import com.codecool.shop.dao.implementation.Mem.ShoppingCartDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
-import com.codecool.shop.model.ShoppingCart;
 import com.codecool.shop.model.Supplier;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @WebServlet(urlPatterns = {"/"})
-public class ProductController extends HttpServlet {
-    private static final int CART_ID = 1;
+public class ProductListController extends CartController {
 
     private ProductDao productDao = ProductDaoJDBC.getInstance();
     private ProductCategoryDao productCategoryDao = ProductCategoryDaoJDBC.getInstance();
     private SupplierDao supplierDao = SupplierDaoJDBC.getInstance();
-
-    private ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
-    private ShoppingCart shoppingCart = shoppingCartDataStore.find(CART_ID);
 
     private List<ProductCategory> allCategory = productCategoryDao.getAll();
     private List<Supplier> allSupplier = supplierDao.getAll();
@@ -42,17 +33,20 @@ public class ProductController extends HttpServlet {
     private List<Supplier> selectedSuppliers;
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        setupShoppingCart(req);
+
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
         makeFiltering(req);
+        int itemNumberInShoppingCart = shoppingCart.getItemNumberInCart();
 
         context.setVariable("allCategories", allCategory);
         context.setVariable("allSuppliers", allSupplier);
         context.setVariable("products", selectedProducts);
         context.setVariable("selectedCategories", selectedCategories);
         context.setVariable("selectedSuppliers", selectedSuppliers);
-        context.setVariable("shoppingCart", shoppingCart);
+        context.setVariable("itemNumberInShoppingCart", itemNumberInShoppingCart);
 
         engine.process("product/index.html", context, resp.getWriter());
     }
