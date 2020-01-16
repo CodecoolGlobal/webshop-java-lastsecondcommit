@@ -61,10 +61,13 @@ export let dom = {
 
     changeQuantity: function (button, changeValue) {
         let rowNode = button.closest(".product-row");
-        let quantityNode = rowNode.querySelector("#quantity");
+        let quantityNode = rowNode.querySelector(".quantity");
         let quantity = parseInt(quantityNode.innerHTML);
         quantity += changeValue;
         quantityNode.innerHTML = quantity.toString();
-        dom.changeNumOfItemsInCart(changeValue)
+        dom.changeNumOfItemsInCart(changeValue);
+        if (quantity < 1) {
+            rowNode.innerHTML = null
+        }
     }
 };

@@ -79,11 +79,13 @@
                             <span th:text="${product.key.defaultPrice} + ' USD / '
                             + ${product.key.defaultPrice * product.value} + ' USD'">Prod price</span>
                         </td>
-                        <td id="quantity" th:text="${product.value}" th:attr="data-product-quantity=${product.value}">Quantity</td>
+                        <td class="quantity" th:text="${product.value}" th:attr="data-product-quantity=${product.value}">Quantity</td>
                         <td><img class="image-in-cart" src="http://placehold.it/400x250/000/fff"
                                  th:attr="src='/static/img/'+ ${product.key.id} + '.jpg'" alt=""/></td>
                         <td>
+                            <input type="hidden" name="prod-id" th:value="${product.value}">
                             <input class="btn btn-success btn-minus" type="submit" th:attr="data-product-quantity=${product.value}" value="-">
+                            <input type="hidden" name="prod-id" th:value="${product.value}">
                             <input class="btn btn-success btn-plus" type="submit" th:attr="data-product-quantity=${product.value}" value="+">
                         </td>
                     </tr>
