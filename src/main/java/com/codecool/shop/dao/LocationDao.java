@@ -4,5 +4,5 @@ import com.codecool.shop.model.Location;
 
 public interface LocationDao {
     void addNewLocation(Location location);
-    Location getById(int id);
+    Location find(int id);
 }

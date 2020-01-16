@@ -2,8 +2,10 @@ package com.codecool.shop.dao.implementation.JDBC;
 
 import com.codecool.shop.dao.LocationDao;
 import com.codecool.shop.model.Location;
+import com.codecool.shop.model.ProductCategory;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class LocationDaoJDBC extends JDBC implements LocationDao {
@@ -21,32 +23,52 @@ public class LocationDaoJDBC extends JDBC implements LocationDao {
 
     @Override
     public void addNewLocation(Location location) {
-
-        insert into tablename (code) values ('1448523')
-        WHERE not exists(select * from tablename where code='1448523')
-
             String query =
                 "INSERT INTO location (country, city, zip_code, address) VALUES (?,?,?,?)"+
                 "NOT EXIST (SELECT * FROM location" +
                 "WHERE country = ? AND city = ? AND zip_code = ? AND address = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, location.ge);
-            statement.setString(2, );
-            statement.setString(3, );
-            statement.setString(4, );
-            statement.setString(5, );
-            statement.setString(6, );
-            statement.setString(7, );
-            statement.setString(8, );
+            statement.setString(1, location.getCountry());
+            statement.setString(2, location.getCity());
+            statement.setString(3, location.getZip());
+            statement.setString(4, location.getAddress());
+            statement.setString(5, location.getCountry());
+            statement.setString(6, location.getCity());
+            statement.setString(7, location.getZip());
+            statement.setString(8, location.getAddress());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
     }
-
+    
     @Override
-    public Location getById(int id) {
-        return null;
+    public Location find(int id) {
+        String query = "SELECT * FROM location WHERE id = ? ;";
+        ResultSet resultSet = null;
+        Location result = null;
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, id);
+            resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                result = new Location(
+                        resultSet.getString("address"),
+                        resultSet.getString("city"),
+                        resultSet.getString("country"),
+                        resultSet.getString("zip"));
+                result.setId(resultSet.getInt("id"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (resultSet != null)
+                    resultSet.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
     }
 }
