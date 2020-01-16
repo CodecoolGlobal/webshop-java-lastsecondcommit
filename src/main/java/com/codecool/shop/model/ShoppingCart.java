@@ -3,7 +3,7 @@ package com.codecool.shop.model;
 import java.util.*;
 
 public class ShoppingCart {
-    protected int id;
+    private int orderId;
     private List<Product> products = new ArrayList<>();
 
     public List<Product> getProducts() {
@@ -15,14 +15,6 @@ public class ShoppingCart {
     }
 
     public void remove(Product product) {products.remove(product); }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
-    }
 
     public int getItemNumberInCart() {
         return products.size();
@@ -50,4 +42,11 @@ public class ShoppingCart {
         return sumOfPrices;
     }
 
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
 }

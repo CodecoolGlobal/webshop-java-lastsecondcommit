@@ -7,9 +7,16 @@ public class Order {
     String email;
     Location billingAddress;
     Location shippingAddress;
+    ShoppingCart shoppingCart;
     Enum orderStatus;
 
-    public Order(String name, String phone, String email, Location billingAddress, Location shippingAddress, Enum orderStatus) {
+    public Order(String name,
+                 String phone,
+                 String email,
+                 Location billingAddress,
+                 Location shippingAddress,
+                 ShoppingCart shoppingCart,
+                 Enum orderStatus) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -48,5 +55,9 @@ public class Order {
 
     public Enum getOrderStatus() {
         return orderStatus;
+    }
+
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
     }
 }

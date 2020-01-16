@@ -1,6 +1,8 @@
 package com.codecool.shop.dao.implementation.JDBC;
 
+import com.codecool.shop.dao.LocationDao;
 import com.codecool.shop.dao.OrderDao;
+import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.orderStatus;
 
@@ -12,7 +14,8 @@ import java.util.List;
 public class OrderDaoJDBC extends JDBC implements OrderDao {
 
     private static OrderDaoJDBC instance = null;
-    LocationDaoJDBC locationDaoJDBC = LocationDaoJDBC.getInstance();
+    LocationDao locationDao = LocationDaoJDBC.getInstance();
+    ShoppingCartDao shoppingCartDao = ShoppingCartJDBC.getInstance();
 
     private OrderDaoJDBC() {
     }
@@ -25,10 +28,11 @@ public class OrderDaoJDBC extends JDBC implements OrderDao {
     }
 
     @Override
-    public void add(Order order) {
+    public int add(Order order) {
+        ResultSet resultSet = null;
         String query = "INSERT INTO user_order " +
                 "(name, email, phone_number, billing_address_id, shipping_address_id, order_status) " +
-                "VALUES (?, ?, ?, ?, ?, ?)";
+                "VALUES (?, ?, ?, ?, ?, ?) RETURNING id";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, order.getName());
             statement.setString(2, order.getEmail());
@@ -36,10 +40,22 @@ public class OrderDaoJDBC extends JDBC implements OrderDao {
             statement.setInt(4, order.getBillingAddress().getId());
             statement.setInt(5, order.getShippingAddress().getId());
             statement.setString(6, order.getOrderStatus().toString());
-            statement.executeUpdate();
+            resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                return id;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (resultSet != null)
+                    resultSet.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
+        return 0;
     }
 
     @Override
@@ -56,8 +72,9 @@ public class OrderDaoJDBC extends JDBC implements OrderDao {
                         resultSet.getString("name"),
                         resultSet.getString("email"),
                         resultSet.getString("phone_number"),
-                        locationDaoJDBC.find(resultSet.getInt("billing_adress_id")),
-                        locationDaoJDBC.find(resultSet.getInt("shipping_adress_id")),
+                        locationDao.find(resultSet.getInt("billing_adress_id")),
+                        locationDao.find(resultSet.getInt("shipping_adress_id")),
+                        shoppingCartDao.findByOrderId(id),
                         orderStatus.valueOf(resultSet.getString("order_status")));
                 result.setId(resultSet.getInt("id"));
             }

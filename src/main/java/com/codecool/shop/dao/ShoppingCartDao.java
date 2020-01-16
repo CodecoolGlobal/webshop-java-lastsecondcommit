@@ -6,7 +6,7 @@ import java.util.List;
 public interface ShoppingCartDao {
 
         void add(ShoppingCart shoppingCart);
-        ShoppingCart find(int id);
-        List<ShoppingCart> getAll();
+        ShoppingCart findByOrderId(int OrderId);
+
 
 }
