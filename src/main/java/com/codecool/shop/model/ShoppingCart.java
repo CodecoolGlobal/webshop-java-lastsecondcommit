@@ -14,6 +14,8 @@ public class ShoppingCart {
         products.add(product);
     }
 
+    public void remove(Product product) {products.remove(product); }
+
     public void setId(int id) {
         this.id = id;
     }

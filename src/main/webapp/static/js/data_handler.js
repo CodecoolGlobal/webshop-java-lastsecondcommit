@@ -27,6 +27,12 @@ export let dataHandler = {
     addToCart : function (id, callback) {
 
         let data = {'product_id': id};
-        this._api_post(`/api/cart`, data, callback);
+        this._api_post(`/api/cart/add`, data, callback);
+    },
+
+    deleteFromCart : function (id, callback) {
+
+        let data = {'product_id': id};
+        this._api_post(`/api/cart/delete`, data, callback);
     }
 };
