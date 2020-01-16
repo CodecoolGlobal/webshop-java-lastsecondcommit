@@ -24,18 +24,12 @@ public class LocationDaoJDBC extends JDBC implements LocationDao {
     @Override
     public void addNewLocation(Location location) {
             String query =
-                "INSERT INTO location (country, city, zip_code, address) VALUES (?,?,?,?)"+
-                "NOT EXIST (SELECT * FROM location" +
-                "WHERE country = ? AND city = ? AND zip_code = ? AND address = ?";
+                "INSERT INTO location (country, city, zip_code, address) VALUES (?,?,?,?)";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, location.getCountry());
             statement.setString(2, location.getCity());
             statement.setString(3, location.getZip());
             statement.setString(4, location.getAddress());
-            statement.setString(5, location.getCountry());
-            statement.setString(6, location.getCity());
-            statement.setString(7, location.getZip());
-            statement.setString(8, location.getAddress());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

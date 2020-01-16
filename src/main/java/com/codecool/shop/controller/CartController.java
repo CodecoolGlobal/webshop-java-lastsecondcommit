@@ -20,13 +20,4 @@ public abstract class CartController extends HttpServlet {
         shoppingCart = (ShoppingCart) httpSession.getAttribute("shoppingCart");
         }
 
-    protected StringBuilder getStringBuilder(HttpServletRequest req) throws IOException {
-        StringBuilder buffer = new StringBuilder();
-        BufferedReader reader = req.getReader();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            buffer.append(line);
-        }
-        return buffer;
-    }
     }

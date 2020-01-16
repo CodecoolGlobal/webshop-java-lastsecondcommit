@@ -7,15 +7,15 @@ public class Order {
     String email;
     Location billingAddress;
     Location shippingAddress;
-    String orderstatus;
+    Enum orderStatus;
 
-    public Order(String name, String phone, String email, Location billingAddress, Location shippingAddress, String orderStatus) {
+    public Order(String name, String phone, String email, Location billingAddress, Location shippingAddress, Enum orderStatus) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.billingAddress = billingAddress;
         this.shippingAddress = shippingAddress;
-        this.orderstatus = orderStatus;
+        this.orderStatus = orderStatus;
     }
 
     public int getId() {
@@ -46,7 +46,7 @@ public class Order {
         return shippingAddress;
     }
 
-    public String getOrderstatus() {
-        return orderstatus;
+    public Enum getOrderStatus() {
+        return orderStatus;
     }
 }

@@ -2,6 +2,7 @@ package com.codecool.shop.dao.implementation.JDBC;
 
 import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.model.Order;
+import com.codecool.shop.model.orderStatus;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,17 +25,17 @@ public class OrderDaoJDBC extends JDBC implements OrderDao {
     }
 
     @Override
-    public void add(Order category) {
+    public void add(Order order) {
         String query = "INSERT INTO user_order " +
                 "(name, email, phone_number, billing_address_id, shipping_address_id, order_status) " +
                 "VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, category.getName());
-            statement.setString(2, category.getEmail());
-            statement.setString(3, category.getPhone());
-            statement.setInt(3, category.getBillingAddress().getId());
-            statement.setInt(3, category.getShippingAddress().getId());
-            statement.setString(3, category.getOrderstatus());
+            statement.setString(1, order.getName());
+            statement.setString(2, order.getEmail());
+            statement.setString(3, order.getPhone());
+            statement.setInt(4, order.getBillingAddress().getId());
+            statement.setInt(5, order.getShippingAddress().getId());
+            statement.setString(6, order.getOrderStatus().toString());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -57,7 +58,7 @@ public class OrderDaoJDBC extends JDBC implements OrderDao {
                         resultSet.getString("phone_number"),
                         locationDaoJDBC.find(resultSet.getInt("billing_adress_id")),
                         locationDaoJDBC.find(resultSet.getInt("shipping_adress_id")),
-                        resultSet.getString("order_status"));
+                        orderStatus.valueOf(resultSet.getString("order_status")));
                 result.setId(resultSet.getInt("id"));
             }
         } catch (SQLException e) {
