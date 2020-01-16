@@ -2,24 +2,39 @@ package com.codecool.shop.model;
 
 public class Location {
     int id;
+    String address;
+    String city;
+    String country;
+    String zip;
 
     public int getId() {
         return id;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getZip() {
+        return zip;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    String shippingAddress;
-    String shippingCity;
-    String shippingCountry;
-    String shippingZip;
-
-    public Location(String shippingAddress, String shippingCity, String shippingCountry, String shippingZip) {
-        this.shippingAddress = shippingAddress;
-        this.shippingCity = shippingCity;
-        this.shippingCountry = shippingCountry;
-        this.shippingZip = shippingZip;
+    public Location(String address, String city, String country, String zip) {
+        this.address = address;
+        this.city = city;
+        this.country = country;
+        this.zip = zip;
     }
 }
