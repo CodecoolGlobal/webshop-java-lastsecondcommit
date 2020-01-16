@@ -58,7 +58,7 @@
     <div class="row">
 
         <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 container">
-            <div id="products" class="row">
+            <div id="products" class="row justify-content-center">
                 <table class="cart-table table table-striped">
                     <thead>
                     <tr>
@@ -91,8 +91,10 @@
                     </tfoot>
                 </table>
                 <p th:if="${shoppingCart.getProducts().size() == 0}" class="text-light">Shopping cart is empty.</p>
-                <div class="text-center" th:if="${shoppingCart.getProducts().size() != 0}" >
-                    <a href="/checkout"><button type="submit" class="btn-light btn m-2">Checkout</button></a>
+                <div th:unless="${shoppingCart.getProducts().size() == 0}">
+                    <a href="/checkout">
+                        <button type="submit" class="btn-light btn m-2">Checkout</button>
+                    </a>
                 </div>
             </div>
         </div>
