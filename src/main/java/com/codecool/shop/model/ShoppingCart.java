@@ -22,6 +22,10 @@ public class ShoppingCart {
         return id;
     }
 
+    public int getItemNumberInCart() {
+        return products.size();
+    }
+
     public Map<Product, Integer> getProductsStat() {
         Map<Product, Integer> productsStat = new LinkedHashMap<>();
         for (Product product : products) {

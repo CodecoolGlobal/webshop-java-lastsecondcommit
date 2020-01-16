@@ -46,18 +46,4 @@ public class ProductCategory extends BaseModel {
                 this.description);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof ProductCategory)) return false;
-        if (!super.equals(o)) return false;
-        ProductCategory that = (ProductCategory) o;
-        return Objects.equals(getDepartment(), that.getDepartment()) &&
-                Objects.equals(getProducts(), that.getProducts());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), getDepartment(), getProducts());
-    }
 }
