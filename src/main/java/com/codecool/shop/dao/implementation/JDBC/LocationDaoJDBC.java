@@ -22,18 +22,32 @@ public class LocationDaoJDBC extends JDBC implements LocationDao {
     }
 
     @Override
-    public void addNewLocation(Location location) {
+    public int addNewLocation(Location location) {
+        ResultSet resultSet = null;
             String query =
-                "INSERT INTO location (country, city, zip_code, address) VALUES (?,?,?,?)";
+                "INSERT INTO location (country, city, zip_code, address) VALUES (?,?,?,?)" +
+                        "RETURNING id";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, location.getCountry());
             statement.setString(2, location.getCity());
             statement.setString(3, location.getZip());
             statement.setString(4, location.getAddress());
-            statement.executeUpdate();
+            resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                return id;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (resultSet != null)
+                    resultSet.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
+        return 0;
 
     }
     
