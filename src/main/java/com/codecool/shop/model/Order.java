@@ -9,13 +9,13 @@ public class Order {
     Location shippingAddress;
     String orderstatus;
 
-    public Order(String name, String phone, String email, Location billingAddress, Location shippingAddress, String orderstatus) {
+    public Order(String name, String phone, String email, Location billingAddress, Location shippingAddress, String orderStatus) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.billingAddress = billingAddress;
         this.shippingAddress = shippingAddress;
-        this.orderstatus = orderstatus;
+        this.orderstatus = orderStatus;
     }
 
     public int getId() {

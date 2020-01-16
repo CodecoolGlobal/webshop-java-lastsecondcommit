@@ -2,7 +2,6 @@ package com.codecool.shop.dao.implementation.JDBC;
 
 import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.model.Order;
-import com.codecool.shop.model.ProductCategory;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +11,7 @@ import java.util.List;
 public class OrderDaoJDBC extends JDBC implements OrderDao {
 
     private static OrderDaoJDBC instance = null;
-    SupplierDaoJDBC LocationDaoJDBC = LocationDaoJDBC.getInstance();
+    LocationDaoJDBC locationDaoJDBC = LocationDaoJDBC.getInstance();
 
     private OrderDaoJDBC() {
     }
@@ -55,10 +54,10 @@ public class OrderDaoJDBC extends JDBC implements OrderDao {
                 result = new Order(
                         resultSet.getString("name"),
                         resultSet.getString("email"),
-                        resultSet.getString("phone_number")),
-                        resultSet.getString("billing_adress_id")),
-                        resultSet.getString("shipping_adress_id")),
-                        resultSet.getString("order_status")),
+                        resultSet.getString("phone_number"),
+                        locationDaoJDBC.find(resultSet.getInt("billing_adress_id")),
+                        locationDaoJDBC.find(resultSet.getInt("shipping_adress_id")),
+                        resultSet.getString("order_status"));
                 result.setId(resultSet.getInt("id"));
             }
         } catch (SQLException e) {
