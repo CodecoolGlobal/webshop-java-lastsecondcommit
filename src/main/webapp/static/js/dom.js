@@ -60,16 +60,40 @@ export let dom = {
     },
 
     changeQuantity: function (button, changeValue) {
+        let productId = button.dataset.productId;
+
         let rowNode = button.closest(".product-row");
         let quantityNode = rowNode.querySelector(".quantity");
+
+        let price = parseInt(rowNode.querySelector(".price").dataset.productPrice);
         let quantity = parseInt(quantityNode.innerHTML);
-        quantity += changeValue;
-        quantityNode.innerHTML = quantity.toString();
-        dom.changeNumOfItemsInCart(changeValue);
-        if (quantity < 1) {
-            let productId = button.dataset.productId;
-            rowNode.innerHTML = null
-            dataHandler.deleteFromCart(productId)
+
+        let newQuantity = quantity + changeValue;
+
+        if (changeValue > 0) {
+            dataHandler.addToCart(productId, dom.changeNumOfItemsInCart(changeValue));
+            dom.changeTotalSum(price);
+            quantityNode.innerHTML = newQuantity.toString();
+
+        } else if (changeValue < 0) {
+            dataHandler.deleteFromCart(productId, dom.changeNumOfItemsInCart(changeValue));
+            dom.changeTotalSum(price*(-1));
+            quantityNode.innerHTML = newQuantity.toString();
         }
+        if (newQuantity < 1) {
+            rowNode.innerHTML = null;
+            dataHandler.deleteFromCart(productId, dom.deleteProductRow(rowNode));
+        }
+    },
+
+    changeTotalSum: function(price) {
+        let totalSumNode = document.querySelector("#total-sum");
+        let totalSum = parseInt(totalSumNode.innerHTML);
+        let newTotalSum = totalSum + price;
+        totalSumNode.innerHTML = newTotalSum.toString() + '.0 USD';
+    },
+
+    deleteProductRow: function (productRow) {
+        productRow.innerHTML = null;
     }
 };

@@ -76,7 +76,7 @@
                         <th scope="row" th:text="${iterStat.index + 1}">Index</th>
                         <td scope="row" class="product-name" th:text="${product.key.name}">Prod name</td>
                         <td scope="row">
-                            <span th:text="${product.key.defaultPrice} + ' USD / '
+                            <span class="price" th:attr="data-product-price=${product.key.defaultPrice}" th:text="${product.key.defaultPrice} + ' USD / '
                             + ${product.key.defaultPrice * product.value} + ' USD'">Prod price</span>
                         </td>
                         <td class="quantity" th:text="${product.value}" th:attr="data-product-quantity=${product.value}">Quantity</td>
@@ -95,7 +95,7 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <th th:text="${shoppingCart.getSumOfPrices()} + ' USD'">SumPrice</th>
+                    <td id="total-sum" th:text="${shoppingCart.getSumOfPrices()} + ' USD'">SumPrice</td>
                     </tfoot>
                 </table>
                 <p th:if="${shoppingCart.getProducts().size() == 0}" class="text-light">Shopping cart is empty.</p>

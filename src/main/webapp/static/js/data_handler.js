@@ -30,9 +30,9 @@ export let dataHandler = {
         this._api_post(`/api/cart/add`, data, callback);
     },
 
-    deleteFromCart : function (id) {
+    deleteFromCart : function (id, callback) {
 
         let data = {'product_id': id};
-        this._api_post(`/api/cart/delete`, data);
+        this._api_post(`/api/cart/delete`, data, callback);
     }
 };
