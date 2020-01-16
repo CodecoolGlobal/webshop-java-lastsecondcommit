@@ -7,13 +7,15 @@ public class Order {
     String email;
     Location billingAddress;
     Location shippingAddress;
+    String orderstatus;
 
-    public Order(String name, String phone, String email, Location billingAddress, Location shippingAddress) {
+    public Order(String name, String phone, String email, Location billingAddress, Location shippingAddress, String orderstatus) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.billingAddress = billingAddress;
         this.shippingAddress = shippingAddress;
+        this.orderstatus = orderstatus;
     }
 
     public int getId() {
@@ -42,5 +44,9 @@ public class Order {
 
     public Location getShippingAddress() {
         return shippingAddress;
+    }
+
+    public String getOrderstatus() {
+        return orderstatus;
     }
 }
