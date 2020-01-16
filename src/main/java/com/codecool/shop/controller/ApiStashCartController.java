@@ -17,9 +17,6 @@ public class ApiStashCartController extends CartController {
     private ProductDao productDao = ProductDaoJDBC.getInstance();
     private static final String ID_NAME = "product_id";
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

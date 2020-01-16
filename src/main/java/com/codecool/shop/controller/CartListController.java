@@ -24,4 +24,8 @@ public class CartListController extends CartController {
 
     }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    };
+
 }
