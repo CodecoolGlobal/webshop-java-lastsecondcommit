@@ -15,9 +15,10 @@ public class CheckoutController extends CartController {
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         setupShoppingCart(req);
+        int itemNumberInShoppingCart = shoppingCart.getItemNumberInCart();
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        context.setVariable("shoppingCart", shoppingCart);
+        context.setVariable("itemNumberInShoppingCart", itemNumberInShoppingCart);
         engine.process("product/checkout.html", context, resp.getWriter());
 
     }
