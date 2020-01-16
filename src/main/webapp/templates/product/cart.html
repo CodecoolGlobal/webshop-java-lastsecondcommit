@@ -92,8 +92,7 @@
                 </table>
                 <p th:if="${shoppingCart.getProducts().size() == 0}" class="text-light">Shopping cart is empty.</p>
                 <div class="text-center" th:if="${shoppingCart.getProducts().size() != 0}" >
-                    <button type="submit" class="btn-light btn m-2">Checkout
-                    </button>
+                    <a href="/checkout"><button type="submit" class="btn-light btn m-2">Checkout</button></a>
                 </div>
             </div>
         </div>
