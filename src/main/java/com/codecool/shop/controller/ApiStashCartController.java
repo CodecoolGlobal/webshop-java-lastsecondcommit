@@ -33,15 +33,6 @@ public class ApiStashCartController extends CartController {
         shoppingCart.add(product);
     }
 
-    private StringBuilder getStringBuilder(HttpServletRequest req) throws IOException {
-        StringBuilder buffer = new StringBuilder();
-        BufferedReader reader = req.getReader();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            buffer.append(line);
-        }
-        return buffer;
-    }
 
     private int getProductId(StringBuilder buffer) {
 
