@@ -39,12 +39,16 @@ public class PaymentController extends CartController {
 
         Location billingLocation = new Location(billingAddress, billingCity, billingCountry, billingZip);
         Location shippingLocation = new Location(shippingAddress, shippingCity, shippingCountry, shippingZip);
+
         int billingLocationId = locationDao.addNewLocation(billingLocation);
         billingLocation.setId(billingLocationId);
+
         int shippingLocationId = locationDao.addNewLocation(shippingLocation);
         shippingLocation.setId(shippingLocationId);
+
         Order order = new Order(name, phone, email, billingLocation, shippingLocation, shoppingCart, orderStatus.CONFIRMED);
         int orderId = orderDao.add(order);
+
         setupShoppingCart(req);
         shoppingCart.setOrderId(orderId);
         shoppingCartDao.add(shoppingCart);
