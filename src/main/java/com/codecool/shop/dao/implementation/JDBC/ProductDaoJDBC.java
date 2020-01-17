@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDaoJDBC extends JDBC implements ProductDao {
+    String ADD_QUERY = "INSERT INTO product (name, description, default_price, default_currency, supplier_id, product_category_id)" +
+            " VALUES (?,?,?,?,?,?)";
+
 
     private static ProductDaoJDBC instance = null;
 
@@ -32,10 +35,7 @@ public class ProductDaoJDBC extends JDBC implements ProductDao {
 
     @Override
     public void add(Product product) {
-        String query = "INSERT INTO product (name, description, default_price, default_currency, supplier_id, product_category_id)" +
-                " VALUES (?,?,?,?,?,?)";
-
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
+        try (PreparedStatement statement = connection.prepareStatement(ADD_QUERY)) {
             statement.setString(1, product.getName());
             statement.setString(2, product.getDescription());
             statement.setFloat(3, product.getDefaultPrice());

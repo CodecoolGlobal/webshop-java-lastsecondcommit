@@ -56,21 +56,12 @@ class ProductDaoTest {
     }
 
     @Test
-    void testAddIncreasesDataStoreSizeByOne() {
-        int size = testProductDao.getAll().size();
+    void testAdd() {
         testProductCategory1.setId(1);
         testSupplier1.setId(1);
         testProduct1.setId(1);
         testProductDao.add(testProduct1);
-        assertTrue(testProductDao.getAll().size() == size + 1);
-    }
-
-    @Test
-    void testAddProductsMatching() {
-        testProductCategory1.setId(1);
-        testSupplier1.setId(1);
-        testProduct1.setId(1);
-        testProductDao.add(testProduct1);
+        assertTrue(testProductDao.getAll().size() == 1);
         assertTrue(testProductDao.getAll().contains(testProduct1));
     }
 
