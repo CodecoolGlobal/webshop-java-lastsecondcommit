@@ -26,7 +26,7 @@
                         <th scope="row" th:text="${iterStat.index + 1}">Index</th>
                         <td scope="row" class="product-name" th:text="${lineItem.product.name}">Prod name</td>
                         <td scope="row">
-                            <span class="price" th:attr="data-product-price=${lineItem.product.price}" th:text="${lineItem.product.price} + ' USD / '
+                            <span class="price" th:attr="data-product-price=${lineItem.product.defaultPrice}" th:text="${lineItem.product.defaultPrice} + ' USD / '
                             + ${lineItem.getPrice()} + ' USD'">Prod price</span>
                         </td>
                         <td class="quantity" th:text="${lineItem.quantity}" th:attr="data-product-quantity=${lineItem.quantity}">Quantity</td>

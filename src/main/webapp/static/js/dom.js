@@ -96,5 +96,8 @@ export let dom = {
 
     deleteProductRow: function (productRow) {
         productRow.remove();
+        if (document.querySelector(".cart-table .product-row") == null ) {
+            document.querySelector(".cart-table tbody").remove();
+        }
     }
 };

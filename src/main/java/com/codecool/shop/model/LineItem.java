@@ -5,12 +5,10 @@ import java.util.Objects;
 public class LineItem {
     private Product product;
     private int quantity;
-    private float price;
 
     public LineItem(Product product, int quantity) {
         this.product = product;
         this.quantity = quantity;
-        this.price = product.getDefaultPrice() * quantity;
     }
 
     public Product getProduct() {
@@ -25,16 +23,8 @@ public class LineItem {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
+        return product.getDefaultPrice() * quantity;
     }
 
     public void changeQuantityBy(int i) {
