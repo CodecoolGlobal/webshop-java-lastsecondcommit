@@ -7,6 +7,15 @@ export let dom = {
         dom.addEventListenerToCartButtons();
         dom.addEventListenerToMinusButtons();
         dom.addEventListenerToPlusButtons();
+        dom.addEventListenerToPaymentSelector();
+        dom.setDefaultPaymentTemplate();
+    },
+
+    setDefaultPaymentTemplate: function(){
+        const creditCardTemplate = document.querySelector("#card-payment-template");
+        const creditCardClone = document.importNode(creditCardTemplate.content, true);
+        let paymentContainer = document.querySelector("#payment-container");
+        paymentContainer.appendChild(creditCardClone);
     },
 
     addEventListenerToCartButtons: function () {
@@ -96,5 +105,31 @@ export let dom = {
 
     deleteProductRow: function (productRow) {
         productRow.remove();
+    },
+
+    addEventListenerToPaymentSelector: function () {
+        let paymentSelector = document.querySelector("#payment-type");
+        paymentSelector.addEventListener("change", function() {
+            dom.changePaymentType(paymentSelector);
+        });
+    },
+    changePaymentType: function (paymentSelector){
+        const creditCardTemplate = document.querySelector("#card-payment-template");
+        const paypalTemplate = document.querySelector("#paypal-payment-template");
+        const creditCardClone = document.importNode(creditCardTemplate.content, true);
+        const paypalClone = document.importNode(paypalTemplate.content, true);
+
+        let paymentContainer = document.querySelector("#payment-container");
+
+        if (paymentSelector.value==="card"){
+            let paypalTemplateContent = document.querySelector("#paypal-template-content");
+            paypalTemplateContent.remove();
+            paymentContainer.appendChild(creditCardClone);
+        }
+        else if (paymentSelector.value==="paypal"){
+            let cardTemplateContent = document.querySelector("#card-template-content");
+            cardTemplateContent.remove();
+            paymentContainer.appendChild(paypalClone);
+        }
     }
 };

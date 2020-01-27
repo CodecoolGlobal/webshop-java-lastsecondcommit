@@ -1,5 +1,6 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.LocationDao;
 import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.dao.ShoppingCartDao;
@@ -7,6 +8,8 @@ import com.codecool.shop.dao.implementation.JDBC.LocationDaoJDBC;
 import com.codecool.shop.dao.implementation.JDBC.OrderDaoJDBC;
 import com.codecool.shop.dao.implementation.JDBC.ShoppingCartJDBC;
 import com.codecool.shop.model.*;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.WebContext;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -52,6 +55,23 @@ public class PaymentController extends CartController {
         setupShoppingCart(req);
         shoppingCart.setOrderId(orderId);
         shoppingCartDao.add(shoppingCart);
+
+        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
+        WebContext context = new WebContext(req, resp, req.getServletContext());
+        context.setVariable("shoppingCart", shoppingCart);
+        engine.process("product/payment.html", context, resp.getWriter());
+
+
+
+    }
+
+    @Override
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        setupShoppingCart(req);
+        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
+        WebContext context = new WebContext(req, resp, req.getServletContext());
+        context.setVariable("shoppingCart", shoppingCart);
+        engine.process("product/payment.html", context, resp.getWriter());
 
     }
 
