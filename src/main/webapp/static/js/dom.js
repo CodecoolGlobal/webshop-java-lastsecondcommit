@@ -66,24 +66,28 @@ export let dom = {
 
         let rowNode = button.closest(".product-row");
         let quantityNode = rowNode.querySelector(".quantity");
+        let priceNode = rowNode.querySelector(".price");
 
         let price = parseInt(rowNode.querySelector(".price").dataset.productPrice);
         let quantity = parseInt(quantityNode.innerHTML);
 
         let newQuantity = quantity + changeValue;
+        let newSubtotalPrice =  newQuantity * price;
 
         if (changeValue > 0) {
             dataHandler.addToCart(productId, dom.changeNumOfItemsInCart(changeValue));
             dom.changeTotalSum(price);
-            quantityNode.innerHTML = newQuantity.toString();
 
         } else if (changeValue < 0) {
             dataHandler.deleteFromCart(productId, dom.changeNumOfItemsInCart(changeValue));
             dom.changeTotalSum(price*(-1));
-            quantityNode.innerHTML = newQuantity.toString();
         }
+
         if (newQuantity < 1) {
             dataHandler.deleteFromCart(productId, dom.deleteProductRow(rowNode));
+        } else {
+            quantityNode.innerHTML = newQuantity.toString();
+            priceNode.innerHTML = `${price}.0 USD / ${newSubtotalPrice}.0 USD`;
         }
     },
 
