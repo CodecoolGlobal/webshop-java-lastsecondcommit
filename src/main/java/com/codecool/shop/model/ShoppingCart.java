@@ -39,4 +39,8 @@ public class ShoppingCart {
         }
         return sum;
     }
+
+    public boolean isEmpty() {
+        return lineItems.isEmpty();
+    }
 }

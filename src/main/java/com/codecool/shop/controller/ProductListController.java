@@ -39,14 +39,13 @@ public class ProductListController extends CartController {
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
         makeFiltering(req);
-        int itemNumberInShoppingCart = shoppingCart.getItemNumberInCart();
 
         context.setVariable("allCategories", allCategory);
         context.setVariable("allSuppliers", allSupplier);
         context.setVariable("products", selectedProducts);
         context.setVariable("selectedCategories", selectedCategories);
         context.setVariable("selectedSuppliers", selectedSuppliers);
-        context.setVariable("itemNumberInShoppingCart", itemNumberInShoppingCart);
+        context.setVariable("shoppingCart", shoppingCart);
 
         engine.process("product/index.html", context, resp.getWriter());
     }

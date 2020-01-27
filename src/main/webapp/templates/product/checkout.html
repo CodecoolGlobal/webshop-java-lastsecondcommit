@@ -54,7 +54,7 @@
                 </li>
             </ul>
             <span class="navbar-text">Products in your cart: <strong id="cart-info"
-                                                                     th:text="${itemNumberInShoppingCart}">
+                                                                     th:text="${shoppingCart.itemNumberInCart}">
             </strong><img id="shopping-cart-img" th:src="|static/img/extra_items/shopping_cart.png|"
                           alt="Shopping cart icon">
 </span>
@@ -66,10 +66,10 @@
     <div class="row">
 
         <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 container">
-            <div class="text-light" th:if="${itemNumberInShoppingCart == 0}">
+            <div class="text-light" th:if="${shoppingCart.isEmpty()}">
                 Shopping cart is empty.
             </div>
-            <div th:unless="${itemNumberInShoppingCart == 0}">
+            <div th:unless="${shoppingCart.isEmpty()}">
 
                 <h5 class="text-center m-3 text-light"><strong>Order data</strong></h5>
                 <form method="post" action="/payment">
