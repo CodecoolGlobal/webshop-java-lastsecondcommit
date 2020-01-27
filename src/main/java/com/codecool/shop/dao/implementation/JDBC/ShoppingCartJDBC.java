@@ -2,6 +2,7 @@ package com.codecool.shop.dao.implementation.JDBC;
 
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.ShoppingCartDao;
+import com.codecool.shop.model.LineItem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ShoppingCart;
 
@@ -27,12 +28,12 @@ public class ShoppingCartJDBC extends JDBC implements ShoppingCartDao {
 
     @Override
     public void add(ShoppingCart shoppingCart) {
-        String query = "INSERT INTO ordered_products (order_id, product_id, quantity) VALUES (?,?,?)";
-        for (Map.Entry<Product,Integer> entry : shoppingCart.getProductsStat().entrySet()) {
+        String query = "INSERT INTO line_item (order_id, product_id, quantity) VALUES (?,?,?)";
+        for (LineItem lineitem : shoppingCart.getLineItems()) {
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, shoppingCart.getOrderId());
-                statement.setInt(2, entry.getKey().getId());
-                statement.setInt(3, entry.getValue());
+                statement.setInt(2, lineitem.getProduct().getId());
+                statement.setInt(3, lineitem.getQuantity());
                 statement.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -42,15 +43,21 @@ public class ShoppingCartJDBC extends JDBC implements ShoppingCartDao {
 
     @Override
     public ShoppingCart findByOrderId(int orderId) {
-        String query = "SELECT * FROM ordered_products WHERE order_id = ? ";
+        String query = "SELECT * FROM line_item WHERE order_id = ? ";
         ResultSet resultSet = null;
         ShoppingCart shoppingCart = new ShoppingCart();
         shoppingCart.setOrderId(orderId);
+
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, orderId);
             resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                shoppingCart.addProduct(productDao.find(resultSet.getInt("product_id")));
+
+            while (resultSet.next()) {
+                LineItem lineItem = new LineItem(
+                        productDao.find(resultSet.getInt("product_id")),
+                        resultSet.getInt("quantity")
+                );
+                shoppingCart.addLineItem(lineItem);
             }
         } catch (SQLException e) {
             e.printStackTrace();

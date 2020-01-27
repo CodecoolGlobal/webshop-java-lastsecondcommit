@@ -22,6 +22,7 @@ public class Order {
         this.email = email;
         this.billingAddress = billingAddress;
         this.shippingAddress = shippingAddress;
+        this.shoppingCart = shoppingCart;
         this.orderStatus = orderStatus;
     }
 

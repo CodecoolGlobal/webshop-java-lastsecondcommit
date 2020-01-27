@@ -11,7 +11,7 @@ import java.io.IOException;
 public abstract class CartController extends HttpServlet {
     ShoppingCart shoppingCart;
 
-    public void setupShoppingCart(HttpServletRequest request) {
+    protected void setupShoppingCart(HttpServletRequest request) {
         HttpSession httpSession = request.getSession();
         if (httpSession.getAttribute("shoppingCart") == null) {
             shoppingCart = new ShoppingCart();

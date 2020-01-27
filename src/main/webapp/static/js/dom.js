@@ -83,7 +83,6 @@ export let dom = {
             quantityNode.innerHTML = newQuantity.toString();
         }
         if (newQuantity < 1) {
-            rowNode.innerHTML = null;
             dataHandler.deleteFromCart(productId, dom.deleteProductRow(rowNode));
         }
     },
@@ -96,6 +95,6 @@ export let dom = {
     },
 
     deleteProductRow: function (productRow) {
-        productRow.innerHTML = null;
+        productRow.remove();
     }
 };

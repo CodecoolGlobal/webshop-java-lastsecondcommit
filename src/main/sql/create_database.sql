@@ -53,7 +53,7 @@ CREATE TABLE user_order
     order_status varchar(9)
 );
 
-CREATE TABLE ordered_products(
+CREATE TABLE line_item(
     order_id integer REFERENCES user_order(id),
     product_id integer REFERENCES product(id),
     quantity integer

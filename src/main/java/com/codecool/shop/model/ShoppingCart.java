@@ -29,6 +29,7 @@ public class ShoppingCart {
                 break;
             } else {
                 LineItem newLineItem = new LineItem(product, 1);
+                lineItems.add(newLineItem);
             }
         }
     }
