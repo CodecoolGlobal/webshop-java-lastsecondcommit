@@ -23,15 +23,17 @@ public class ShoppingCart {
     }
 
     public void addProduct(Product product) {
+        if (lineItems.isEmpty()) {
+            addLineItemWithNewProduct(product);
+            return;
+        }
         for (LineItem lineItem : lineItems) {
             if (lineItem.getProduct().equals(product)) {
                 lineItem.changeQuantityBy(1);
-                break;
-            } else {
-                LineItem newLineItem = new LineItem(product, 1);
-                lineItems.add(newLineItem);
+                return;
             }
         }
+        addLineItemWithNewProduct(product);
     }
 
     public void removeLineItem(LineItem lineItem) {lineItems.remove(lineItem); }
@@ -66,5 +68,10 @@ public class ShoppingCart {
 
     public boolean isEmpty() {
         return lineItems.isEmpty();
+    }
+
+    private void addLineItemWithNewProduct(Product product) {
+        LineItem newLineItem = new LineItem(product, 1);
+        lineItems.add(newLineItem);
     }
 }
