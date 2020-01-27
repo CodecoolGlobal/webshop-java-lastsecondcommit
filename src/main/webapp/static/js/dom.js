@@ -1,4 +1,18 @@
-import { dataHandler } from "./data_handler.js";
+import {dataHandler} from "./data_handler.js";
+
+function showProductTableIsEmpty() {
+    document.querySelector(".cart-table tfoot").remove();
+    document.querySelector(".next-button").remove();
+    let parag = document.createElement("p");
+    let node = document.createTextNode("Shopping cart is empty.");
+    parag.appendChild(node);
+    parag.classList.add("text-light");
+    document.querySelector("#products").append(parag);
+}
+
+function isProductTableEmpty() {
+    return document.querySelector(".cart-table .product-row") == null;
+}
 
 export let dom = {
 
@@ -26,7 +40,7 @@ export let dom = {
         document.querySelector("#cart-info").innerHTML = itemsInCart.toString();
     },
 
-    addEventListenerToFilterCheckbox :function () {
+    addEventListenerToFilterCheckbox: function () {
         if (document.querySelector('#filters') != null) {
             let filterForm = document.querySelector('#filters');
             let checkboxes = filterForm.querySelectorAll("input");
@@ -72,7 +86,7 @@ export let dom = {
         let quantity = parseInt(quantityNode.innerHTML);
 
         let newQuantity = quantity + changeValue;
-        let newSubtotalPrice =  newQuantity * price;
+        let newSubtotalPrice = newQuantity * price;
 
         if (changeValue > 0) {
             dataHandler.addToCart(productId, dom.changeNumOfItemsInCart(changeValue));
@@ -80,7 +94,7 @@ export let dom = {
 
         } else if (changeValue < 0) {
             dataHandler.deleteFromCart(productId, dom.changeNumOfItemsInCart(changeValue));
-            dom.changeTotalSum(price*(-1));
+            dom.changeTotalSum(price * (-1));
         }
 
         if (newQuantity < 1) {
@@ -91,7 +105,7 @@ export let dom = {
         }
     },
 
-    changeTotalSum: function(price) {
+    changeTotalSum: function (price) {
         let totalSumNode = document.querySelector("#total-sum");
         let totalSum = parseInt(totalSumNode.innerHTML);
         let newTotalSum = totalSum + price;
@@ -100,8 +114,8 @@ export let dom = {
 
     deleteProductRow: function (productRow) {
         productRow.remove();
-        if (document.querySelector(".cart-table .product-row") == null ) {
-            document.querySelector(".cart-table tbody").remove();
+        if (isProductTableEmpty()) {
+            showProductTableIsEmpty();
         }
     }
 };
