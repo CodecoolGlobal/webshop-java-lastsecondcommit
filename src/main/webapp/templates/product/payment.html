@@ -8,47 +8,68 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 container">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 container">
             <h5 class="text-center m-3 text-light"><strong>Payment</strong></h5>
             <form method="post" action="/confirmation">
                 <div class="card m-2">
-                    <h5  class="text-center"><span th:text="'Total amount: ' + ${shoppingCart.getSumOfPrices()} + ' USD'"></span></h5>
+                    <h5 class="text-center mt-1"><span
+                            th:text="'Total amount: ' + ${shoppingCart.getSumOfPrices()} + ' USD'"></span></h5>
                 </div>
                 <div class="card m-2">
-                    <div class="card-body">
-                        <select name="payment-type" id="payment-type">
-                            <options>
-                                <option value="card">card</option>
-                                <option value="paypal">paypal</option>
-                            </options>
-                        </select>
+                    <div class="card-body px-5">
+                        <div class="form-group">
+                            <select name="payment-type" id="payment-type" class="form-control">
+                                <options>
+                                    <option value="card">card</option>
+                                    <option value="paypal">paypal</option>
+                                </options>
+                            </select>
+                        </div>
                         <div id="payment-container">
 
                         </div>
                         <template id="card-payment-template" class>
                             <div id="card-template-content">
-                                <label for="input-card-number">Card number</label>
-                                <input type="text" class="form-control" id="input-card-number" placeholder="1234567890123456" required minlength="16" maxlength="16">
-                                <label for="input-card-holder">Card holder</label>
-                                <input type="text" class="form-control" id="input-card-holder" placeholder="John Smith" required minlength="4" maxlength="50">
-                                <label for="input-expiry-date">Expiry date</label>
-                                <input type="month" class="form-control" id="input-expiry-date" required>
-                                <label for="input-code">CVV</label>
-                                <input type="text" class="form-control" id="input-code" placeholder="222" required minlength="3" maxlength="3">
+                                <div class="form-group">
+                                    <label for="input-card-number">Card number</label>
+                                    <input type="text" class="form-control" id="input-card-number"
+                                           placeholder="1234567890123456" required minlength="16" maxlength="16">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-card-holder">Card holder</label>
+                                    <input type="text" class="form-control" id="input-card-holder"
+                                           placeholder="John Smith" required minlength="4" maxlength="50">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-expiry-date">Expiry date</label>
+                                    <input type="month" class="form-control" id="input-expiry-date" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-code">CVV</label>
+                                    <input type="text" class="form-control" id="input-code" placeholder="222"
+                                           required minlength="3" maxlength="3">
+                                </div>
                             </div>
                         </template>
                         <template id="paypal-payment-template">
                             <div id="paypal-template-content">
-                                <label for="input-paypal-username">Username</label>
-                                <input type="text" class="form-control" id="input-paypal-username" required>
-                                <label for="input-paypal-password">Password</label>
-                                <input type="password" class="form-control" id="input-paypal-password" required minlength="8">
+                                <div class="form-group">
+                                    <label for="input-paypal-username">Username</label>
+                                    <input type="text" class="form-control" id="input-paypal-username" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-paypal-password">Password</label>
+                                    <input type="password" class="form-control" id="input-paypal-password" required
+                                           minlength="8">
+                                </div>
                             </div>
                         </template>
                     </div>
                 </div>
                 <div class="text-center">
-                    <a href="/confirmation"><button type="submit" class="next-button btn-light btn m-2">Pay</button></a>
+                    <a href="/confirmation">
+                        <button type="submit" class="next-button btn-light btn m-2">Pay</button>
+                    </a>
                 </div>
             </form>
         </div>
