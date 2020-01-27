@@ -44,7 +44,7 @@ public class LineItem {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass().getName() != o.getClass().getName()) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         LineItem lineItem = (LineItem) o;
         return Objects.equals(product, lineItem.product);
     }

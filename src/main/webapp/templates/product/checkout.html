@@ -97,6 +97,81 @@
                     <div class="card m-2">
                         <div class="card-body">
                             <div class="form-group">
+                                <h5 class="text-center">Shipping Adress</h5>
+                                <label for="inputShippingAddress">Address</label>
+                                <input type="text" class="form-control" id="inputShippingAddress" name="shippingAddress"
+                                       placeholder="Main St 5/b" required maxlength="100">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputShippingCity">City</label>
+                                    <input type="text" class="form-control" id="inputShippingCity" name="shippingCity" required maxlength="50">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="inputShippingCountry">Country</label>
+                                    <select class="form-control" id="inputShippingCountry" name="shippingCountry" required maxlength="50">
+                                        <option value="GB">United Kingdom</option>
+                                        <option value="AL">Albania</option>
+                                        <option value="AD">Andorra</option>
+                                        <option value="AT">Austria</option>
+                                        <option value="BY">Belarus</option>
+                                        <option value="BE">Belgium</option>
+                                        <option value="BA">Bosnia and Herzegovina</option>
+                                        <option value="BG">Bulgaria</option>
+                                        <option value="HR">Croatia (Hrvatska)</option>
+                                        <option value="CY">Cyprus</option>
+                                        <option value="CZ">Czech Republic</option>
+                                        <option value="FR">France</option>
+                                        <option value="GI">Gibraltar</option>
+                                        <option value="DE">Germany</option>
+                                        <option value="GR">Greece</option>
+                                        <option value="VA">Holy See (Vatican City State)</option>
+                                        <option value="HU">Hungary</option>
+                                        <option value="IT">Italy</option>
+                                        <option value="LI">Liechtenstein</option>
+                                        <option value="LU">Luxembourg</option>
+                                        <option value="MK">Macedonia</option>
+                                        <option value="MT">Malta</option>
+                                        <option value="MD">Moldova</option>
+                                        <option value="MC">Monaco</option>
+                                        <option value="ME">Montenegro</option>
+                                        <option value="NL">Netherlands</option>
+                                        <option value="PL">Poland</option>
+                                        <option value="PT">Portugal</option>
+                                        <option value="RO">Romania</option>
+                                        <option value="SM">San Marino</option>
+                                        <option value="RS">Serbia</option>
+                                        <option value="SK">Slovakia</option>
+                                        <option value="SI">Slovenia</option>
+                                        <option value="ES">Spain</option>
+                                        <option value="UA">Ukraine</option>
+                                        <option value="DK">Denmark</option>
+                                        <option value="EE">Estonia</option>
+                                        <option value="FO">Faroe Islands</option>
+                                        <option value="FI">Finland</option>
+                                        <option value="GL">Greenland</option>
+                                        <option value="IS">Iceland</option>
+                                        <option value="IE">Ireland</option>
+                                        <option value="LV">Latvia</option>
+                                        <option value="LT">Lithuania</option>
+                                        <option value="NO">Norway</option>
+                                        <option value="SJ">Svalbard and Jan Mayen Islands</option>
+                                        <option value="SE">Sweden</option>
+                                        <option value="CH">Switzerland</option>
+                                        <option value="TR">Turkey</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="inputShippingZip">Zip</label>
+                                    <input type="text" class="form-control" id="inputShippingZip" name="shippingZip" required maxlength="9" minlength="4">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card m-2">
+                        <div class="card-body">
+                            <div class="form-group">
                                 <h5 class="text-center">Billing Adress</h5>
                                 <label for="inputBillingAddress">Address</label>
                                 <input type="text" class="form-control" id="inputBillingAddress" name="billingAddress"
@@ -164,81 +239,6 @@
                                 <div class="form-group col-md-2">
                                     <label for="inputBillingZip">Zip</label>
                                     <input type="text" class="form-control" id="inputBillingZip" name="billingZip" required maxlength="9" minlength="4">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card m-2">
-                        <div class="card-body">
-                            <div class="form-group">
-                                <h5 class="text-center">Shipping Adress</h5>
-                                <label for="inputShippingAddress">Address</label>
-                                <input type="text" class="form-control" id="inputShippingAddress" name="shippingAddress"
-                                       placeholder="Main St 5/b" required maxlength="100">
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="inputShippingCity">City</label>
-                                    <input type="text" class="form-control" id="inputShippingCity" name="shippingCity" required maxlength="50">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="inputShippingCountry">Country</label>
-                                    <select class="form-control" id="inputShippingCountry" name="shippingCountry" required maxlength="50">
-                                        <option value="GB">United Kingdom</option>
-                                        <option value="AL">Albania</option>
-                                        <option value="AD">Andorra</option>
-                                        <option value="AT">Austria</option>
-                                        <option value="BY">Belarus</option>
-                                        <option value="BE">Belgium</option>
-                                        <option value="BA">Bosnia and Herzegovina</option>
-                                        <option value="BG">Bulgaria</option>
-                                        <option value="HR">Croatia (Hrvatska)</option>
-                                        <option value="CY">Cyprus</option>
-                                        <option value="CZ">Czech Republic</option>
-                                        <option value="FR">France</option>
-                                        <option value="GI">Gibraltar</option>
-                                        <option value="DE">Germany</option>
-                                        <option value="GR">Greece</option>
-                                        <option value="VA">Holy See (Vatican City State)</option>
-                                        <option value="HU">Hungary</option>
-                                        <option value="IT">Italy</option>
-                                        <option value="LI">Liechtenstein</option>
-                                        <option value="LU">Luxembourg</option>
-                                        <option value="MK">Macedonia</option>
-                                        <option value="MT">Malta</option>
-                                        <option value="MD">Moldova</option>
-                                        <option value="MC">Monaco</option>
-                                        <option value="ME">Montenegro</option>
-                                        <option value="NL">Netherlands</option>
-                                        <option value="PL">Poland</option>
-                                        <option value="PT">Portugal</option>
-                                        <option value="RO">Romania</option>
-                                        <option value="SM">San Marino</option>
-                                        <option value="RS">Serbia</option>
-                                        <option value="SK">Slovakia</option>
-                                        <option value="SI">Slovenia</option>
-                                        <option value="ES">Spain</option>
-                                        <option value="UA">Ukraine</option>
-                                        <option value="DK">Denmark</option>
-                                        <option value="EE">Estonia</option>
-                                        <option value="FO">Faroe Islands</option>
-                                        <option value="FI">Finland</option>
-                                        <option value="GL">Greenland</option>
-                                        <option value="IS">Iceland</option>
-                                        <option value="IE">Ireland</option>
-                                        <option value="LV">Latvia</option>
-                                        <option value="LT">Lithuania</option>
-                                        <option value="NO">Norway</option>
-                                        <option value="SJ">Svalbard and Jan Mayen Islands</option>
-                                        <option value="SE">Sweden</option>
-                                        <option value="CH">Switzerland</option>
-                                        <option value="TR">Turkey</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label for="inputShippingZip">Zip</label>
-                                    <input type="text" class="form-control" id="inputShippingZip" name="shippingZip" required maxlength="9">
                                 </div>
                             </div>
                         </div>
