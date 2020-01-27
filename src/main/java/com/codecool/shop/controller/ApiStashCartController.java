@@ -30,7 +30,7 @@ public class ApiStashCartController extends CartController {
 
     private void addProductToSession(HttpServletRequest req, Product product) {
         setupShoppingCart(req);
-        shoppingCart.add(product);
+        shoppingCart.addProduct(product);
     }
 
     private StringBuilder getStringBuilder(HttpServletRequest req) throws IOException {

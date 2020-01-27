@@ -8,7 +8,6 @@ import com.codecool.shop.model.ShoppingCart;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Map;
 
 public class ShoppingCartJDBC extends JDBC implements ShoppingCartDao {
@@ -51,7 +50,7 @@ public class ShoppingCartJDBC extends JDBC implements ShoppingCartDao {
             statement.setInt(1, orderId);
             resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                shoppingCart.add(productDao.find(resultSet.getInt("product_id")));
+                shoppingCart.addProduct(productDao.find(resultSet.getInt("product_id")));
             }
         } catch (SQLException e) {
             e.printStackTrace();

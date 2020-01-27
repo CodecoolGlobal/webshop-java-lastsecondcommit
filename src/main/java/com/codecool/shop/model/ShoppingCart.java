@@ -18,11 +18,34 @@ public class ShoppingCart {
         this.orderId = orderId;
     }
 
-    public void add(LineItem lineItem) {
+    public void addLineItem(LineItem lineItem) {
         lineItems.add(lineItem);
     }
 
-    public void remove(LineItem lineItem) {lineItems.remove(lineItem); }
+    public void addProduct(Product product) {
+        for (LineItem lineItem : lineItems) {
+            if (lineItem.getProduct().equals(product)) {
+                lineItem.changeQuantityBy(1);
+                break;
+            } else {
+                LineItem newLineItem = new LineItem(product, 1);
+            }
+        }
+    }
+
+    public void removeLineItem(LineItem lineItem) {lineItems.remove(lineItem); }
+
+    public void removeOneProduct(Product product) {
+        for (LineItem lineItem : lineItems) {
+            if (lineItem.getProduct().equals(product)) {
+                if (lineItem.getQuantity() == 1) {
+                    removeLineItem(lineItem);
+                } else {
+                    lineItem.changeQuantityBy(-1);
+                }
+            }
+        }
+    }
 
     public int getItemNumberInCart() {
         int itemNumber = 0;

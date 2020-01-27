@@ -34,4 +34,8 @@ public class LineItem {
     public void setPrice(float price) {
         this.price = price;
     }
+
+    public void changeQuantityBy(int i) {
+        this.quantity += i;
+    }
 }

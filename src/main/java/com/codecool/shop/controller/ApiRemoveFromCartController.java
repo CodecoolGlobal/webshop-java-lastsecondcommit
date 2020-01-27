@@ -31,7 +31,7 @@ public class ApiRemoveFromCartController extends CartController {
 
     private void deleteProductFromSession(HttpServletRequest req, Product product) {
         setupShoppingCart(req);
-        shoppingCart.remove(product);
+        shoppingCart.removeOneProduct(product);
     }
 
     private StringBuilder getStringBuilder(HttpServletRequest req) throws IOException {
