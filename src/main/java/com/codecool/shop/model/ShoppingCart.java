@@ -1,5 +1,6 @@
 package com.codecool.shop.model;
 
+import javax.sound.sampled.Line;
 import java.util.*;
 
 public class ShoppingCart {
@@ -39,10 +40,12 @@ public class ShoppingCart {
     public void removeLineItem(LineItem lineItem) {lineItems.remove(lineItem); }
 
     public void removeOneProduct(Product product) {
-        for (LineItem lineItem : lineItems) {
+        Iterator<LineItem> iterator = lineItems.iterator();
+        while (iterator.hasNext()) {
+            LineItem lineItem = iterator.next();
             if (lineItem.getProduct().equals(product)) {
                 if (lineItem.getQuantity() == 1) {
-                    removeLineItem(lineItem);
+                    iterator.remove();
                 } else {
                     lineItem.changeQuantityBy(-1);
                 }
