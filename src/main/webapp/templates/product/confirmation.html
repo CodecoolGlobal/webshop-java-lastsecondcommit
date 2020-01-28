@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html :: head"></head>
+
+<body>
+
+<div class="header" th:replace="fragments.html :: header-not-home"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 container">
+            <h5 class="text-center m-3 text-light"><strong>Payment</strong></h5>
+                <div class="card m-2">
+                    <h5 class="text-center mt-1"><span
+                            th:text="'Total amount: ' + ${shoppingCart.getSumOfPrices()} + ' USD'"></span></h5>
+                </div>
+
+                            <table class="cart-table table table-striped">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col"> Unit price / Subtotal price</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Image</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="product-row" th:each="lineItem, iterStat : ${ shoppingCart.lineItems }">
+                                    <th scope="row" th:text="${iterStat.index + 1}">Index</th>
+                                    <td scope="row" class="product-name" th:text="${lineItem.product.name}">Prod name</td>
+                                    <td scope="row">
+                            <span class="price" th:attr="data-product-price=${lineItem.product.defaultPrice}" th:text="${lineItem.product.defaultPrice} + ' USD / '
+                            + ${lineItem.getPrice()} + ' USD'">Prod price</span>
+                                    </td>
+                                    <td class="quantity" th:text="${lineItem.quantity}" th:attr="data-product-quantity=${lineItem.quantity}">Quantity</td>
+                                    <td><img class="image-in-cart" src="http://placehold.it/400x250/000/fff"
+                                             th:attr="src='/static/img/'+ ${lineItem.product.id} + '.jpg'" alt=""/></td>
+                                </tr>
+                                </tbody>
+                                <tfoot th:if="${!shoppingCart.isEmpty()}">
+                                <th>Total sum:</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                 <td id="total-sum" th:text="${shoppingCart.getSumOfPrices()} + ' USD'">SumPrice</td>
+                                </tfoot>
+                            </table>
+                            <p th:if="${shoppingCart.isEmpty()}" class="text-light">Shopping cart is empty.</p>
+
+
+        </div>
+    </div>
+</div>
+<div th:replace="fragments.html :: footer"></div>
