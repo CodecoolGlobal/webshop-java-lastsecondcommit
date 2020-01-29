@@ -5,8 +5,16 @@ import java.util.Properties;
 
 public class MyConfig {
     Properties configFile;
+    private static MyConfig myConfig = null;
 
-    public MyConfig() {
+    public static MyConfig getInstance(){
+        if(myConfig==null){
+            myConfig = new MyConfig();
+        }
+        return myConfig;
+    }
+
+    private MyConfig() {
         configFile = new Properties();
 
         try {

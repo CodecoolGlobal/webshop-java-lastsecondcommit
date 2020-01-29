@@ -1,5 +1,6 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.config.MyConfig;
 import com.codecool.shop.config.TemplateEngineUtil;
 import org.apache.log4j.xml.DOMConfigurator;
 import org.json.simple.JSONObject;
@@ -19,11 +20,12 @@ import java.io.IOException;
 @WebServlet(urlPatterns = {"/confirmation"})
 public class ConfirmationController extends CartController {
     private static final Logger logger = LoggerFactory.getLogger(ConfirmationController.class);
+    private static final MyConfig cfg = MyConfig.getInstance();
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         logger.info("Start to process POST request for url: '/confirmation'. session id: {}", req.getSession().getId());
         HttpSession httpSession = req.getSession();
-
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
         setupShoppingCart(req);
@@ -40,7 +42,7 @@ public class ConfirmationController extends CartController {
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("testkey", "testvalue");
-        FileWriter file = new FileWriter("/media/rootMX18.3/home/miki/codecool/oop/6th_TW/webshop-java-lastsecondcommit/orders/order"+ String.valueOf(shoppingCart.getOrderId()) +".json");
+        FileWriter file = new FileWriter(cfg.getProperty("local_storage_path")+"order"+ String.valueOf(shoppingCart.getOrderId()) +".json");
         file.write(jsonObject.toJSONString());
         file.close();
         logger.info("Finnished processing POST request for url: '/confirmation'. session id: {} order id: {}", req.getSession().getId(), String.valueOf(shoppingCart.getOrderId()));

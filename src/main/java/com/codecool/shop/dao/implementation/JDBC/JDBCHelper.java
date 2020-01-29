@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class JDBCHelper {
 
-    private static final MyConfig cfg = new MyConfig();
+    private static final MyConfig cfg = MyConfig.getInstance();
     private static final String user = cfg.getProperty("user");
     private static final String password = cfg.getProperty("password");
     private static final String url = cfg.getProperty("url");

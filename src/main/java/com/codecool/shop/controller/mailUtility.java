@@ -1,5 +1,6 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.config.MyConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,21 +13,23 @@ import javax.mail.internet.MimeMessage;
 
 public class mailUtility {
     private static final Logger logger = LoggerFactory.getLogger(ConfirmationController.class);
+    private static final MyConfig cfg = MyConfig.getInstance();
 
     public static void sendMail(String recipientList, String subject, String mailContent) {
         logger.info("Start sending mail for: {}", recipientList);
         if(recipientList.equals("")){
-            logger.warn("mailUtility working with an empty recipientlist");
+            logger.warn("mailUtility working with an empty recipient list");
         }
-        final String SENDER_EMAIL_ADDRESS = "mindentnagyonjolprogramozomiki@gmail.com";
-        final String PASSWORD = "u2mtkBRf544PLioUy";
+
+        final String SENDER_EMAIL_ADDRESS = cfg.getProperty("sender_email_address");;
+        final String PASSWORD = cfg.getProperty("mail_password");
 
         Properties prop = new Properties();
-        prop.put("mail.smtp.host", "smtp.gmail.com");
-        prop.put("mail.smtp.port", "465");
-        prop.put("mail.smtp.auth", "true");
-        prop.put("mail.smtp.socketFactory.port", "465");
-        prop.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        prop.put("mail.smtp.host", cfg.getProperty("mail_smtp_host"));
+        prop.put("mail.smtp.port", cfg.getProperty("mail_smtp_port"));
+        prop.put("mail.smtp.auth", cfg.getProperty("mail_smtp_auth"));
+        prop.put("mail.smtp.socketFactory.port", cfg.getProperty("mail_smtp_socketFactory_port"));
+        prop.put("mail.smtp.socketFactory.class", cfg.getProperty("mail_smtp_socketFactory_class"));
 
         Session session = Session.getInstance(prop,
                 new javax.mail.Authenticator() {
@@ -44,7 +47,6 @@ public class mailUtility {
                     InternetAddress.parse(recipientList)
             );
             message.setSubject(subject);
-            //message.setText(mailContent);
             message.setContent(mailContent, "text/html");
             Transport.send(message);
 
