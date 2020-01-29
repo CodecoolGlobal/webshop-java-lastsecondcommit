@@ -11,6 +11,11 @@ public class LineItem {
         this.quantity = quantity;
     }
 
+    @Override
+    public String toString() {
+        return product.getName() + " " + String.valueOf(quantity);
+    }
+
     public Product getProduct() {
         return this.product;
     }

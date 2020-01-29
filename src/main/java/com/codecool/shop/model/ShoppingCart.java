@@ -39,6 +39,16 @@ public class ShoppingCart {
 
     public void removeLineItem(LineItem lineItem) {lineItems.remove(lineItem); }
 
+    @Override
+    public String toString() {
+        String result = "";
+        for (LineItem lineItem : lineItems) {
+            result += lineItem.toString();
+            result += "<br>";
+        }
+        return result;
+    }
+
     public void removeOneProduct(Product product) {
         Iterator<LineItem> iterator = lineItems.iterator();
         while (iterator.hasNext()) {

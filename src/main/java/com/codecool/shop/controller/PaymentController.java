@@ -8,6 +8,8 @@ import com.codecool.shop.dao.implementation.JDBC.LocationDaoJDBC;
 import com.codecool.shop.dao.implementation.JDBC.OrderDaoJDBC;
 import com.codecool.shop.dao.implementation.JDBC.ShoppingCartJDBC;
 import com.codecool.shop.model.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -15,20 +17,28 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.HashMap;
 
 @WebServlet(urlPatterns = {"/payment"})
 public class PaymentController extends CartController {
     private OrderDao orderDao = OrderDaoJDBC.getInstance();
     private LocationDao locationDao = LocationDaoJDBC.getInstance();
     private ShoppingCartDao shoppingCartDao = ShoppingCartJDBC.getInstance();
+    private static final Logger logger = LoggerFactory.getLogger(PaymentController.class);
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        logger.info("Start to process POST request for url: '/payment'. session id: {}", req.getSession().getId());
+        HttpSession httpSession = req.getSession();
         String name = req.getParameter("name");
         String phone = req.getParameter("phone");
         String email = req.getParameter("email");
+        if(email == null) {
+            logger.warn("email is set to null");
+        }
+        logger.debug("variable email was set to: {}", email);
 
         String billingAddress = req.getParameter("billingAddress");
         String billingCity = req.getParameter("billingCity");
@@ -53,26 +63,34 @@ public class PaymentController extends CartController {
         int orderId = orderDao.add(order);
 
         setupShoppingCart(req);
+        httpSession.setAttribute("email", email);
+        logger.debug("payment contorller was setting email in session to: {}", httpSession.getAttribute("email"));
         shoppingCart.setOrderId(orderId);
         shoppingCartDao.add(shoppingCart);
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
         context.setVariable("shoppingCart", shoppingCart);
+        context.setVariable("email", email);
+
         engine.process("product/payment.html", context, resp.getWriter());
 
-
+        logger.info("Finnished processing POST request for url: '/payment'. session id: {}", req.getSession().getId());
 
     }
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        logger.info("Start to process GET request for url: '/payment'. session id: {}", req.getSession().getId());
         setupShoppingCart(req);
+        HttpSession httpSession = req.getSession();
+        httpSession.setAttribute("email", email);
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
         context.setVariable("shoppingCart", shoppingCart);
+        context.setVariable("email", email);
         engine.process("product/payment.html", context, resp.getWriter());
-
+        logger.info("Finnished processing GET request for url: '/payment'. session id: {}", req.getSession().getId());
     }
 
 }
