@@ -10,6 +10,9 @@
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 container">
             <h5 class="text-center m-3 text-light"><strong>Confirmation</strong></h5>
+            <div class="card m-2">
+                <h5 class="text-center mt-1"><span>Order was succesfull.</span></h5>
+            </div>
             <table class="cart-table table table-striped">
                 <thead>
                 <tr>
@@ -35,12 +38,10 @@
                 </tbody>
                 <tfoot th:if="${!shoppingCart.isEmpty()}">
                 <th>Total sum:</th>
+                <td></td>
+                <td></td>
+                <td></td>
                 <td id="total-sum" th:text="${shoppingCart.getSumOfPrices()} + ' USD'">SumPrice</td>
-                <td></td>
-                <td></td>
-                <td><a href="/confirmation">
-                    <button type="submit" class="next-button btn-light btn m-2">Confirm</button>
-                </a></td>
                 </tfoot>
             </table>
             <p th:if="${shoppingCart.isEmpty()}" class="text-light">Shopping cart is empty.</p>
