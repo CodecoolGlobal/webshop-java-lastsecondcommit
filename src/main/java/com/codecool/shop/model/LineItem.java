@@ -13,7 +13,7 @@ public class LineItem {
 
     @Override
     public String toString() {
-        return product.getName() + " " + String.valueOf(quantity);
+        return product.getName() + ": " + quantity;
     }
 
     public Product getProduct() {

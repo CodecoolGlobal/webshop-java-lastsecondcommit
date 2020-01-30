@@ -67,11 +67,14 @@ public class ConfirmationController extends CartController {
     }
 
     private void sendConfEmail(int orderId) {
+        String message = "Dear " + orderDao.find(orderId).getName()
+                +", <br><br>You successfully ordered your best plants."
+                + "<br><i> Be careful with the cactus!</i><br><br>"
+                + "Your order ID is (#" + orderId + ")<br><br>"
+                + "Your items: <br>" + shoppingCart.toString()
+                + "<br>Happy Planting!";
         MailUtility.sendMail(getEmailOfOrder(orderId),
-                "Succesfull order from ourbestplants",
-                "You succesfully ordered your best plants. <i> Be careful with the cactus!</i><br>"+
-                "Your order ID is (#" + orderId + ")<br><br>" +
-                        "Your items: <br>" + shoppingCart.toString());
+                "Successful order from ourbestplants #" + orderId, message);
     }
 
     private String getEmailOfOrder(int orderId) {
