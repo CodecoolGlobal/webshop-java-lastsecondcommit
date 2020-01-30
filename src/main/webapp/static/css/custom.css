@@ -98,7 +98,7 @@ body {
     width: 100%;
 }
 
-.product-name, .next-button {
+.product-name, .next-button, .successful-payment {
     color: #53a053;
 }
 
