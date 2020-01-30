@@ -18,7 +18,7 @@ public class OrderDaoJDBC extends JDBC implements OrderDao {
 
     private static OrderDaoJDBC instance = null;
     LocationDao locationDao = LocationDaoJDBC.getInstance();
-    ShoppingCartDao shoppingCartDao = ShoppingCartJDBC.getInstance();
+    ShoppingCartDao shoppingCartDao = LineItemJDBC.getInstance();
 
     private OrderDaoJDBC() {
     }

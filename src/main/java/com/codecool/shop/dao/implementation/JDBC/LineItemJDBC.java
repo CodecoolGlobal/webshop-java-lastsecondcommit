@@ -3,27 +3,24 @@ package com.codecool.shop.dao.implementation.JDBC;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.model.LineItem;
-import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ShoppingCart;
-import org.apache.log4j.xml.DOMConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Map;
 
-public class ShoppingCartJDBC extends JDBC implements ShoppingCartDao {
-    private static final Logger logger = LoggerFactory.getLogger(ShoppingCartJDBC.class);
-    private static ShoppingCartJDBC instance = null;
+public class LineItemJDBC extends JDBC implements ShoppingCartDao {
+    private static final Logger logger = LoggerFactory.getLogger(LineItemJDBC.class);
+    private static LineItemJDBC instance = null;
     ProductDao productDao = ProductDaoJDBC.getInstance();
-    private ShoppingCartJDBC() {
+    private LineItemJDBC() {
     }
 
-    public static ShoppingCartJDBC getInstance() {
+    public static LineItemJDBC getInstance() {
         if (instance == null) {
-            instance = new ShoppingCartJDBC();
+            instance = new LineItemJDBC();
             logger.trace("ShoppingCartJDBC instance created");
         }
         logger.debug("ShoppingCartJDBC instance is returned");

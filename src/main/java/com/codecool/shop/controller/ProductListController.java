@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(urlPatterns = {"/"})
+@WebServlet("/")
 public class ProductListController extends CartController {
 
     private ProductDao productDao = ProductDaoJDBC.getInstance();
