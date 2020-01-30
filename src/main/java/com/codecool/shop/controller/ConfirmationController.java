@@ -2,6 +2,9 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.config.MyConfig;
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.dao.OrderDao;
+import com.codecool.shop.dao.implementation.JDBC.OrderDaoJDBC;
+import com.codecool.shop.model.OrderStatus;
 import org.apache.log4j.xml.DOMConfigurator;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
@@ -19,6 +22,7 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = {"/confirmation"})
 public class ConfirmationController extends CartController {
+    private OrderDao orderDao = OrderDaoJDBC.getInstance();
     private static final Logger logger = LoggerFactory.getLogger(ConfirmationController.class);
     private static final MyConfig cfg = MyConfig.getInstance();
 
@@ -33,6 +37,9 @@ public class ConfirmationController extends CartController {
         logger.debug("email was set to in confirmation: {}",email);
         context.setVariable("shoppingCart", shoppingCart);
         context.setVariable("email", email);
+
+        ChangeOrderStatus();
+
         engine.process("product/confirmation.html", context, resp.getWriter());
         mailUtility.sendMail(email,
                 "Succesfull order from ourbestplants",
@@ -46,6 +53,11 @@ public class ConfirmationController extends CartController {
         file.write(jsonObject.toJSONString());
         file.close();
         logger.info("Finnished processing POST request for url: '/confirmation'. session id: {} order id: {}", req.getSession().getId(), String.valueOf(shoppingCart.getOrderId()));
+    }
+
+    private void ChangeOrderStatus() {
+        int orderId = shoppingCart.getOrderId();
+        orderDao.changeOrderStatus(orderId, OrderStatus.PAID);
     }
 
     @Override

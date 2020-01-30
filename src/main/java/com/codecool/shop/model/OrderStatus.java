@@ -1,6 +1,6 @@
 package com.codecool.shop.model;
 
-public enum orderStatus {
+public enum OrderStatus {
     CHECKED,
     PAID,
     CONFIRMED,

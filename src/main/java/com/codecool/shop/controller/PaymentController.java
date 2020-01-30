@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.HashMap;
 
 @WebServlet(urlPatterns = {"/payment"})
 public class PaymentController extends CartController {
@@ -59,7 +58,7 @@ public class PaymentController extends CartController {
         int shippingLocationId = locationDao.addNewLocation(shippingLocation);
         shippingLocation.setId(shippingLocationId);
 
-        Order order = new Order(name, phone, email, billingLocation, shippingLocation, shoppingCart, orderStatus.CONFIRMED);
+        Order order = new Order(name, phone, email, billingLocation, shippingLocation, shoppingCart, OrderStatus.CONFIRMED);
         int orderId = orderDao.add(order);
 
         setupShoppingCart(req);

@@ -1,6 +1,7 @@
 package com.codecool.shop.dao;
 
 import com.codecool.shop.model.Order;
+import com.codecool.shop.model.OrderStatus;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ public interface OrderDao {
     void remove(int id);
     void removeAll();
     List<Order> getAll();
+    void changeOrderStatus(int id, OrderStatus orderStatus);
 
 
 }

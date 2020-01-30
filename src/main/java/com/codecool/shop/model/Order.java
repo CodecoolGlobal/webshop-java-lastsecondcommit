@@ -8,7 +8,7 @@ public class Order {
     Location billingAddress;
     Location shippingAddress;
     ShoppingCart shoppingCart;
-    Enum orderStatus;
+    OrderStatus orderStatus;
 
     public Order(String name,
                  String phone,
@@ -16,7 +16,7 @@ public class Order {
                  Location billingAddress,
                  Location shippingAddress,
                  ShoppingCart shoppingCart,
-                 Enum orderStatus) {
+                 OrderStatus orderStatus) {
         this.name = name;
         this.phone = phone;
         this.email = email;

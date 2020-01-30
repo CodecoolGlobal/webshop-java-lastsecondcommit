@@ -23,7 +23,6 @@ public class SupplierDaoJDBC extends JDBC implements SupplierDao {
     public static SupplierDaoJDBC getInstance() {
         if (instance == null) {
             instance = new SupplierDaoJDBC();
-            DOMConfigurator.configure("log4j.xml");
             logger.trace("SupplierDaoJDBC instance created");
         }
         logger.debug("SupplierDaoJDBC instance is returned");
