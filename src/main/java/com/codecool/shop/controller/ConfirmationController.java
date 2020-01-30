@@ -67,7 +67,7 @@ public class ConfirmationController extends CartController {
     }
 
     private void sendConfEmail(int orderId) {
-        mailUtility.sendMail(getEmailOfOrder(orderId),
+        MailUtility.sendMail(getEmailOfOrder(orderId),
                 "Succesfull order from ourbestplants",
                 "You succesfully ordered your best plants. <i> Be careful with the cactus!</i><br>"+
                 "Your order ID is (#" + orderId + ")<br><br>" +

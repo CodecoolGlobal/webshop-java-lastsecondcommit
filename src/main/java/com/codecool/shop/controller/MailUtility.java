@@ -11,7 +11,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 
-public class mailUtility {
+public class MailUtility {
     private static final Logger logger = LoggerFactory.getLogger(ConfirmationController.class);
     private static final MyConfig cfg = MyConfig.getInstance();
 
