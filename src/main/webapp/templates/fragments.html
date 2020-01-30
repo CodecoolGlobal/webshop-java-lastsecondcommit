@@ -140,12 +140,20 @@
             </div>
             <div class="modal-body">
                 <form action="/sign-up" method="post">
-                    <label for="sign-up-user_name">User name: </label>
-                    <input name="sign-up-user_name" id="sign-up-user_name" minlength="5" maxlength="15" required>
-                    <label for="sign-up-password">Password: </label>
-                    <input name="sign-up-password" type="password" id="sign-up-password" minlength="8" maxlength="30" required>
-                    <label for="password_again">Password again: </label>
-                    <input name="password_again" type="password" id="password_again" minlength="8" maxlength="30" required>
+                    <div class="form-group">
+                        <label for="sign-up-user-name">User name: </label>
+                        <input name="sign-up-user_name" id="sign-up-user-name" minlength="5" maxlength="15" required>
+                        <label for="email">E-mail: </label>
+                        <input name="email" id="email" minlength="7" maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sign-up-password">Password: </label>
+                        <input name="sign-up-password" type="password" id="sign-up-password" minlength="8"
+                               maxlength="30" required>
+                        <label for="password_again">Password again: </label>
+                        <input name="password_again" type="password" id="password_again" minlength="8" maxlength="30"
+                               required>
+                    </div>
                     <button class="btn btn-success" type="submit">Sign Up</button>
                 </form>
 
