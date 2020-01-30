@@ -32,10 +32,6 @@ public class PaymentController extends CartController {
         String name = req.getParameter("name");
         String phone = req.getParameter("phone");
         String email = req.getParameter("email");
-        if(email == null) {
-            logger.warn("email is set to null");
-        }
-        logger.debug("variable email was set to: {}", email);
 
         String billingAddress = req.getParameter("billingAddress");
         String billingCity = req.getParameter("billingCity");

@@ -35,6 +35,7 @@ public class ConfirmationController extends CartController {
 
         int orderId = shoppingCart.getOrderId();
         ChangeOrderStatus(orderId);
+        String email = orderDao.find(orderId).getEmail();
 
         engine.process("product/confirmation.html", context, resp.getWriter());
         mailUtility.sendMail(email,

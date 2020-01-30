@@ -49,9 +49,10 @@ public class mailUtility {
             message.setSubject(subject);
             message.setContent(mailContent, "text/html");
             Transport.send(message);
+            logger.info("Confirmation e-mail was sent to: {}", recipientList);
 
         } catch (MessagingException e) {
-            e.printStackTrace();
+            logger.error("Failure in confirmation e-mail sending. E-mail(s):{}", recipientList, e);
         }
     }
 }

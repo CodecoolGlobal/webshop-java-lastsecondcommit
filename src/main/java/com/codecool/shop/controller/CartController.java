@@ -10,7 +10,6 @@ import java.io.IOException;
 
 public abstract class CartController extends HttpServlet {
     ShoppingCart shoppingCart;
-    String email;
 
     protected void setupShoppingCart(HttpServletRequest request) {
         HttpSession httpSession = request.getSession();

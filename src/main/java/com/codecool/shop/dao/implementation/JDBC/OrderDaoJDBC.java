@@ -73,10 +73,10 @@ public class OrderDaoJDBC extends JDBC implements OrderDao {
             if (resultSet.next()) {
                 result = new Order(
                         resultSet.getString("name"),
-                        resultSet.getString("email"),
                         resultSet.getString("phone_number"),
-                        locationDao.find(resultSet.getInt("billing_adress_id")),
-                        locationDao.find(resultSet.getInt("shipping_adress_id")),
+                        resultSet.getString("email"),
+                        locationDao.find(resultSet.getInt("billing_address_id")),
+                        locationDao.find(resultSet.getInt("shipping_address_id")),
                         shoppingCartDao.findByOrderId(id),
                         OrderStatus.valueOf(resultSet.getString("order_status")));
                 result.setId(resultSet.getInt("id"));

@@ -64,7 +64,7 @@ public class LocationDaoJDBC extends JDBC implements LocationDao {
                         resultSet.getString("address"),
                         resultSet.getString("city"),
                         resultSet.getString("country"),
-                        resultSet.getString("zip"));
+                        resultSet.getString("zip_code"));
                 result.setId(resultSet.getInt("id"));
             }
         } catch (SQLException e) {
