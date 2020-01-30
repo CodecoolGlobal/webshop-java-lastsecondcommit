@@ -3,7 +3,7 @@ package com.codecool.shop.controller;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.LocationDao;
 import com.codecool.shop.dao.OrderDao;
-import com.codecool.shop.dao.ShoppingCartDao;
+import com.codecool.shop.dao.LineItemDao;
 import com.codecool.shop.dao.implementation.JDBC.LocationDaoJDBC;
 import com.codecool.shop.dao.implementation.JDBC.OrderDaoJDBC;
 import com.codecool.shop.dao.implementation.JDBC.LineItemJDBC;
@@ -23,12 +23,38 @@ import java.io.IOException;
 public class PaymentController extends CartController {
     private OrderDao orderDao = OrderDaoJDBC.getInstance();
     private LocationDao locationDao = LocationDaoJDBC.getInstance();
-    private ShoppingCartDao shoppingCartDao = LineItemJDBC.getInstance();
+    private LineItemDao lineItemDao = LineItemJDBC.getInstance();
     private static final Logger logger = LoggerFactory.getLogger(PaymentController.class);
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         logger.info("Start to process POST request for url: '/payment'. session id: {}", req.getSession().getId());
+
+        updateDB(req);
+
+        createResponse(req, resp);
+
+        logger.info("Finnished processing POST request for url: '/payment'. session id: {}", req.getSession().getId());
+
+    }
+
+    @Override
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        logger.info("Start to process GET request for url: '/payment'. session id: {}", req.getSession().getId());
+        setupShoppingCart(req);
+        createResponse(req, resp);
+        logger.info("Finnished processing GET request for url: '/payment'. session id: {}", req.getSession().getId());
+    }
+
+    private void createResponse(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
+        WebContext context = new WebContext(req, resp, req.getServletContext());
+        context.setVariable("shoppingCart", shoppingCart);
+        engine.process("product/payment.html", context, resp.getWriter());
+    }
+
+    private void updateDB(HttpServletRequest req) {
         String name = req.getParameter("name");
         String phone = req.getParameter("phone");
         String email = req.getParameter("email");
@@ -57,26 +83,7 @@ public class PaymentController extends CartController {
 
         setupShoppingCart(req);
         shoppingCart.setOrderId(orderId);
-        shoppingCartDao.add(shoppingCart);
-
-        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
-        WebContext context = new WebContext(req, resp, req.getServletContext());
-        context.setVariable("shoppingCart", shoppingCart);
-        engine.process("product/payment.html", context, resp.getWriter());
-
-        logger.info("Finnished processing POST request for url: '/payment'. session id: {}", req.getSession().getId());
-
-    }
-
-    @Override
-    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        logger.info("Start to process GET request for url: '/payment'. session id: {}", req.getSession().getId());
-        setupShoppingCart(req);
-        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
-        WebContext context = new WebContext(req, resp, req.getServletContext());
-        context.setVariable("shoppingCart", shoppingCart);
-        engine.process("product/payment.html", context, resp.getWriter());
-        logger.info("Finnished processing GET request for url: '/payment'. session id: {}", req.getSession().getId());
+        lineItemDao.add(shoppingCart);
     }
 
 }

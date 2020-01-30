@@ -5,6 +5,7 @@ import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.dao.implementation.JDBC.OrderDaoJDBC;
 import com.codecool.shop.model.OrderStatus;
+import com.codecool.shop.model.ShoppingCart;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -29,17 +31,23 @@ public class ConfirmationController extends CartController {
 
         logger.info("Start to process POST request for url: '/confirmation'. session id: {}", req.getSession().getId());
 
-        createResponse(req, resp);
-
+        setupShoppingCart(req);
         int orderId = shoppingCart.getOrderId();
+
+        clearShoppingCart(req);
+
+        createResponse(req, resp);
 
         ChangeOrderStatus(orderId);
         sendConfEmail(orderId);
         saveOrderToJSON(orderId); // not implemented correctly
 
-        shoppingCart = null;
-
         logger.info("Finnished processing POST request for url: '/confirmation'. session id: {} order id: {}", req.getSession().getId(), orderId);
+    }
+
+    private void clearShoppingCart(HttpServletRequest req) {
+        HttpSession httpSession = req.getSession();
+        httpSession.setAttribute("shoppingCart", new ShoppingCart());
     }
 
     private void createResponse(HttpServletRequest req, HttpServletResponse resp) throws IOException {

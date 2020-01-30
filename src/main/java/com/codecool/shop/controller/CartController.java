@@ -18,6 +18,7 @@ public abstract class CartController extends HttpServlet {
             httpSession.setAttribute("shoppingCart", shoppingCart);
         }
         shoppingCart = (ShoppingCart) httpSession.getAttribute("shoppingCart");
-        }
+
+    }
 
 }

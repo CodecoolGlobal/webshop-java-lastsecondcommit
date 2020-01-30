@@ -2,7 +2,7 @@ package com.codecool.shop.dao.implementation.JDBC;
 
 import com.codecool.shop.dao.LocationDao;
 import com.codecool.shop.dao.OrderDao;
-import com.codecool.shop.dao.ShoppingCartDao;
+import com.codecool.shop.dao.LineItemDao;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.OrderStatus;
 import org.slf4j.Logger;
@@ -18,7 +18,7 @@ public class OrderDaoJDBC extends JDBC implements OrderDao {
 
     private static OrderDaoJDBC instance = null;
     LocationDao locationDao = LocationDaoJDBC.getInstance();
-    ShoppingCartDao shoppingCartDao = LineItemJDBC.getInstance();
+    LineItemDao lineItemDao = LineItemJDBC.getInstance();
 
     private OrderDaoJDBC() {
     }
@@ -77,7 +77,7 @@ public class OrderDaoJDBC extends JDBC implements OrderDao {
                         resultSet.getString("email"),
                         locationDao.find(resultSet.getInt("billing_address_id")),
                         locationDao.find(resultSet.getInt("shipping_address_id")),
-                        shoppingCartDao.findByOrderId(id),
+                        lineItemDao.findByOrderId(id),
                         OrderStatus.valueOf(resultSet.getString("order_status")));
                 result.setId(resultSet.getInt("id"));
             }

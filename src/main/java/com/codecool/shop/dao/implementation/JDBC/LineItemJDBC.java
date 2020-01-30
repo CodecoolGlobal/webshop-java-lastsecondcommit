@@ -1,7 +1,7 @@
 package com.codecool.shop.dao.implementation.JDBC;
 
 import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.ShoppingCartDao;
+import com.codecool.shop.dao.LineItemDao;
 import com.codecool.shop.model.LineItem;
 import com.codecool.shop.model.ShoppingCart;
 import org.slf4j.Logger;
@@ -11,7 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class LineItemJDBC extends JDBC implements ShoppingCartDao {
+public class LineItemJDBC extends JDBC implements LineItemDao {
     private static final Logger logger = LoggerFactory.getLogger(LineItemJDBC.class);
     private static LineItemJDBC instance = null;
     ProductDao productDao = ProductDaoJDBC.getInstance();
