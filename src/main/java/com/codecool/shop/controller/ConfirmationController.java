@@ -34,9 +34,9 @@ public class ConfirmationController extends CartController {
         setupShoppingCart(req);
         int orderId = shoppingCart.getOrderId();
 
-        clearShoppingCart(req);
 
         createResponse(req, resp);
+        clearShoppingCart(req);
 
         ChangeOrderStatus(orderId);
         sendConfEmail(orderId);
