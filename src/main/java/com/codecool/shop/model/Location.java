@@ -1,11 +1,11 @@
 package com.codecool.shop.model;
 
 public class Location {
-    int id;
-    String address;
-    String city;
-    String country;
-    String zip;
+    private int id;
+    private String address;
+    private String city;
+    private String country;
+    private String zip;
 
     public int getId() {
         return id;

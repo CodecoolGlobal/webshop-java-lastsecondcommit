@@ -5,8 +5,6 @@ import java.util.List;
 
 public interface LineItemDao {
 
-        void add(ShoppingCart shoppingCart);
-        ShoppingCart findByOrderId(int OrderId);
-
-
+    void add(ShoppingCart shoppingCart);
+    ShoppingCart findByOrderId(int OrderId);
 }

@@ -6,6 +6,15 @@ DROP TABLE IF EXISTS user_order CASCADE;
 DROP TABLE IF EXISTS ordered_products CASCADE;
 DROP TABLE IF EXISTS line_item CASCADE;
 
+CREATE TABLE users
+(
+    id                serial PRIMARY KEY,
+    username          varchar(40) UNIQUE,
+    password          text,
+    email             text UNIQUE,
+    registration_date timestamp without time zone
+);
+
 CREATE TABLE product_category
 (
 id serial PRIMARY KEY,
@@ -60,6 +69,7 @@ CREATE TABLE line_item(
     quantity integer
 
 );
+
 
 INSERT INTO product_category (name, description, department )
 VALUES  ('Cactus', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','Plant'),
