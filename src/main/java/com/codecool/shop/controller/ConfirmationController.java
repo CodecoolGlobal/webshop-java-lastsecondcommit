@@ -5,7 +5,6 @@ import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.dao.implementation.JDBC.OrderDaoJDBC;
 import com.codecool.shop.model.OrderStatus;
-import com.codecool.shop.model.ShoppingCart;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,30 +26,48 @@ public class ConfirmationController extends CartController {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         logger.info("Start to process POST request for url: '/confirmation'. session id: {}", req.getSession().getId());
+
+        createResponse(req, resp);
+
+        int orderId = shoppingCart.getOrderId();
+
+        ChangeOrderStatus(orderId);
+        sendConfEmail(orderId);
+        saveOrderToJSON(orderId); // not implemented correctly
+
+        shoppingCart = null;
+
+        logger.info("Finnished processing POST request for url: '/confirmation'. session id: {} order id: {}", req.getSession().getId(), orderId);
+    }
+
+    private void createResponse(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
         setupShoppingCart(req);
         context.setVariable("shoppingCart", shoppingCart);
-
-        int orderId = shoppingCart.getOrderId();
-        ChangeOrderStatus(orderId);
-        String email = orderDao.find(orderId).getEmail();
-
         engine.process("product/confirmation.html", context, resp.getWriter());
-        mailUtility.sendMail(email,
-                "Succesfull order from ourbestplants",
-                "You succesfully ordered your best plants. <i> Be careful with the cactus!</i><br>"+
-                "Your order ID is (#" + orderId + ")<br><br>" +
-                        "Your items: <br>" + shoppingCart.toString());
+    }
 
+    private void saveOrderToJSON(int orderId) throws IOException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("testkey", "testvalue");
         FileWriter file = new FileWriter(cfg.getProperty("local_storage_path") + "order" + orderId +".json");
         file.write(jsonObject.toJSONString());
         file.close();
-        shoppingCart = null;
-        logger.info("Finnished processing POST request for url: '/confirmation'. session id: {} order id: {}", req.getSession().getId(), orderId);
+    }
+
+    private void sendConfEmail(int orderId) {
+        mailUtility.sendMail(getEmailOfOrder(orderId),
+                "Succesfull order from ourbestplants",
+                "You succesfully ordered your best plants. <i> Be careful with the cactus!</i><br>"+
+                "Your order ID is (#" + orderId + ")<br><br>" +
+                        "Your items: <br>" + shoppingCart.toString());
+    }
+
+    private String getEmailOfOrder(int orderId) {
+        return orderDao.find(orderId).getEmail();
     }
 
     private void ChangeOrderStatus(int orderId) {
