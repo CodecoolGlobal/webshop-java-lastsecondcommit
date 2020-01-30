@@ -3,35 +3,35 @@
 <body>
 
 <head th:fragment="head">
-        <meta charset="utf-8"/>
-        <meta name="author" content="Codecool"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta charset="utf-8"/>
+    <meta name="author" content="Codecool"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-        <title>Our Best PlanTs</title>
+    <title>Our Best PlanTs</title>
 
-        <!-- Bootstrap components -->
-        <!-- Latest compiled and minified Jquery -->
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!-- Bootstrap components -->
+    <!-- Latest compiled and minified Jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
-        <!--Latest compiled and minified Popper -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-                integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-                crossorigin="anonymous"></script>
+    <!--Latest compiled and minified Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
 
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-                integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-                crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
 
-        <!-- Latest compiled and minified CSS -->
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
-              integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-        <!-- End of Bootstrap components -->
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- End of Bootstrap components -->
 
-        <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
-        <script type="module"  th:src="|/static/js/main.js|" defer></script>
-        <link href="https://fonts.googleapis.com/css?family=Schoolbell&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
+    <script type="module" th:src="|/static/js/main.js|" defer></script>
+    <link href="https://fonts.googleapis.com/css?family=Schoolbell&display=swap" rel="stylesheet">
 </head>
 
 <div th:fragment="footer">
@@ -49,6 +49,8 @@
 
 
 <div class="header" th:fragment="header-home">
+    <div th:replace="this :: login-modal"></div>
+    <div th:replace="this :: sign-up-modal"></div>
     <div th:replace="this :: header-pic"></div>
     <nav class="navbar navbar-expand-lg navbar-light  bg-light shadow-sm">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
@@ -57,6 +59,17 @@
         </button>
         <div class="collapse navbar-collapse navbarText">
             <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <span class="nav-item nav-link" data-toggle="modal" data-target="#loginModal">
+                        Login
+                    </span>
+                </li>
+                <li class="nav-item"></li>
+                <li class="nav-item">
+                    <span class="nav-item nav-link" data-toggle="modal" data-target="#signUpModal">
+                        Sign Up
+                    </span>
+                </li>
             </ul>
             <span th:replace="this :: shopping-cart-title"></span>
         </div>
@@ -90,6 +103,56 @@
     </a>
 </span>
 
+
+<div class="modal fade" th:fragment="login-modal" id="loginModal" tabindex="-1" role="dialog"
+     aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/login" method="post">
+                    <label for="login-user-name">Username: </label>
+                    <input id="login-user-name" name="login-user-name" type="text" minlength="5">
+                    <label for="login-password">Password: </label>
+                    <input id="login-password" name="login-password" type="password">
+                    <button class="btn btn-success" type="submit">Login</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" th:fragment="sign-up-modal" id="signUpModal" tabindex="-1" role="dialog"
+     aria-labelledby="signUpModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="signUpModalLabel">SignUp</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/sign-up" method="post">
+                    <label for="sign-up-user_name">User name: </label>
+                    <input name="sign-up-user_name" id="sign-up-user_name" minlength="5" maxlength="15" required>
+                    <label for="sign-up-password">Password: </label>
+                    <input name="sign-up-password" type="password" id="sign-up-password" minlength="8" maxlength="30" required>
+                    <label for="password_again">Password again: </label>
+                    <input name="password_again" type="password" id="password_again" minlength="8" maxlength="30" required>
+                    <button class="btn btn-success" type="submit">Sign Up</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
